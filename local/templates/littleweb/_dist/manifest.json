@@ -1,0 +1,57 @@
+{
+  "local/templates/littleweb/_src/fonts/Inter-Bold.woff": {
+    "file": "fonts/Inter-Bold.lR50RSoi.woff",
+    "src": "local/templates/littleweb/_src/fonts/Inter-Bold.woff"
+  },
+  "local/templates/littleweb/_src/fonts/Inter-Bold.woff2": {
+    "file": "fonts/Inter-Bold.zwRZDudv.woff2",
+    "src": "local/templates/littleweb/_src/fonts/Inter-Bold.woff2"
+  },
+  "local/templates/littleweb/_src/fonts/Inter-Medium.woff": {
+    "file": "fonts/Inter-Medium.DhC-LljY.woff",
+    "src": "local/templates/littleweb/_src/fonts/Inter-Medium.woff"
+  },
+  "local/templates/littleweb/_src/fonts/Inter-Medium.woff2": {
+    "file": "fonts/Inter-Medium.BhExgSSR.woff2",
+    "src": "local/templates/littleweb/_src/fonts/Inter-Medium.woff2"
+  },
+  "local/templates/littleweb/_src/fonts/Inter-Regular.woff": {
+    "file": "fonts/Inter-Regular.CsD2Dwqz.woff",
+    "src": "local/templates/littleweb/_src/fonts/Inter-Regular.woff"
+  },
+  "local/templates/littleweb/_src/fonts/Inter-Regular.woff2": {
+    "file": "fonts/Inter-Regular.qvK65rjz.woff2",
+    "src": "local/templates/littleweb/_src/fonts/Inter-Regular.woff2"
+  },
+  "local/templates/littleweb/_src/fonts/Inter-SemiBold.woff": {
+    "file": "fonts/Inter-SemiBold.Bebkq8sb.woff",
+    "src": "local/templates/littleweb/_src/fonts/Inter-SemiBold.woff"
+  },
+  "local/templates/littleweb/_src/fonts/Inter-SemiBold.woff2": {
+    "file": "fonts/Inter-SemiBold.KBifbP54.woff2",
+    "src": "local/templates/littleweb/_src/fonts/Inter-SemiBold.woff2"
+  },
+  "local/templates/littleweb/_src/fonts/Inter-Thin.woff": {
+    "file": "fonts/Inter-Thin.DKWrh6mH.woff",
+    "src": "local/templates/littleweb/_src/fonts/Inter-Thin.woff"
+  },
+  "local/templates/littleweb/_src/fonts/Inter-Thin.woff2": {
+    "file": "fonts/Inter-Thin.D8LugPGj.woff2",
+    "src": "local/templates/littleweb/_src/fonts/Inter-Thin.woff2"
+  },
+  "local/templates/littleweb/_src/js/index.js": {
+    "file": "template_scripts.l0sNRNKZ.js",
+    "name": "script",
+    "src": "local/templates/littleweb/_src/js/index.js",
+    "isEntry": true
+  },
+  "local/templates/littleweb/_src/scss/template.scss": {
+    "file": "template_styles.znMYdjEI.css",
+    "src": "local/templates/littleweb/_src/scss/template.scss",
+    "isEntry": true,
+    "name": "template",
+    "names": [
+      "template.css"
+    ]
+  }
+}

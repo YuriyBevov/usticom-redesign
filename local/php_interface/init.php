@@ -1,26 +1,17 @@
 <?php
 
-function debug($data) {
-    echo '<pre>' . print_r($data, 1) . '</pre>';
-};
+// use Bitrix\Main\Page\Asset;
+use Bitrix\Main\EventManager;
 
-AddEventHandler("main", "OnEndBufferContent", "ChangeMyContent");
- 
-function ChangeMyContent(&$content)
-{
- 
-    if(isset($_GET['PAGEN_1']))
-    {
-        $page=(int)$_GET['PAGEN_1'];
-        
-        $pattern = '/(.*?)<title[^>]*>(.*?)\n?\n?<\/title>(.*)/s';
-        $replacement = '$1<title>$2 &mdash; cтраница ' .$page. '</title>$3';
-        $content= preg_replace($pattern, $replacement, $content);
+// Загружаем манифест
+require_once $_SERVER['DOCUMENT_ROOT'] . '/local/php_interface/classes/ViteManifest.php';
 
-        $pattern = '/(.*?)<meta name="description" content="(.*?)\n?\n?"\s?\/>(.*)/s';
-        $replacement = '$1<meta name="description" content="$2 &mdash; cтраница ' .$page. '">$3';
-        $content= preg_replace($pattern, $replacement, $content);
-    }
- 
-}
+// Создаём глобальный объект Vite
+global $vite;
+$vite = new ViteManifest('littleweb');
 
+// Подключаем все вспомогательные файлы
+$includesPath = $_SERVER['DOCUMENT_ROOT'] . '/local/php_interface/includes/';
+require_once $includesPath . 'assets.php';
+require_once $includesPath . 'core.php';
+require_once $includesPath . 'debug.php';
