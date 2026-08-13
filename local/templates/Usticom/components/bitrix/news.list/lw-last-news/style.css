@@ -1,0 +1,14 @@
+.news-section--last-news .info-card__body-date {
+	display: inline-block;
+	margin-bottom: 12px;
+	color: var(--gray);
+}
+
+.news-section--last-news a {
+	transition: opacity var(--main-transition);
+}
+
+.news-section--last-news a:hover,
+.news-section--last-news a:focus {
+	opacity: 0.6;
+}

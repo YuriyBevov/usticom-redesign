@@ -1,0 +1,292 @@
+// CONFIG
+const baseConfig = window.translatorJsConfig || {};
+
+const config = {
+	...baseConfig,
+	storageItem: baseConfig.widget + "-widget",
+	rootDomain:
+		baseConfig.rootDomain ||
+		(function () {
+			const parts = document.location.hostname.split(".");
+			if (parts.length <= 2) return document.location.hostname;
+			if (["localhost", "local", "test"].includes(parts[parts.length - 1]))
+				return document.location.hostname;
+			return "." + parts.slice(-2).join(".");
+		})(),
+};
+
+// HELPERS
+function safeParse(json) {
+	try {
+		return JSON.parse(json);
+	} catch (e) {
+		return null;
+	}
+}
+
+function getStoredData() {
+	return safeParse(localStorage.getItem(config.storageItem)) || {};
+}
+
+function setStoredLang(lang) {
+	if (lang === null) {
+		localStorage.removeItem(config.storageItem);
+	} else {
+		localStorage.setItem(
+			config.storageItem,
+			JSON.stringify({
+				lang: lang,
+				active: true,
+			}),
+		);
+	}
+}
+
+function getLang() {
+	// Для Google Translate приоритет у cookie
+	if (config.widget === "gt") {
+		const googtrans = Cookies.get("googtrans");
+		if (googtrans && googtrans !== "null") {
+			const match = googtrans.match(/(?!^\/)[^\/]*$/gm);
+			if (match && match[0]) {
+				return match[0];
+			}
+		}
+	}
+
+	const data = getStoredData();
+	return data.lang || config.langDefault;
+}
+
+// COOKIE
+function setCookie(name, value, options = {}) {
+	const cookieOptions = {
+		path: "/",
+		domain: config.rootDomain,
+		...options,
+	};
+
+	if (value === null) {
+		Cookies.remove(name, cookieOptions);
+	} else {
+		Cookies.set(name, value, cookieOptions);
+	}
+}
+
+// Устанавливаем cookie на ВСЕХ уровнях домена
+function setGoogleCookie(lang) {
+	const value = "/" + config.langDefault + "/" + lang;
+	const currentDomain = document.domain;
+	const rootDomain = config.rootDomain.replace(/^\./, "");
+
+	// Удаляем старые cookie полностью
+	document.cookie = "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+	document.cookie =
+		"googtrans=; domain=" +
+		rootDomain +
+		"; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+	document.cookie =
+		"googtrans=; domain=." +
+		rootDomain +
+		"; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+	if (currentDomain !== rootDomain) {
+		document.cookie =
+			"googtrans=; domain=" +
+			currentDomain +
+			"; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+	}
+
+	// Устанавливаем новые cookie на всех уровнях
+	document.cookie = "googtrans=" + value + "; path=/";
+	document.cookie =
+		"googtrans=" + value + "; domain=" + rootDomain + "; path=/";
+	document.cookie =
+		"googtrans=" + value + "; domain=." + rootDomain + "; path=/";
+	if (currentDomain !== rootDomain) {
+		document.cookie =
+			"googtrans=" + value + "; domain=" + currentDomain + "; path=/";
+	}
+}
+
+// INIT
+document.addEventListener("DOMContentLoaded", () => {
+	if (config.bxPanelTranslate !== "Y") {
+		disableBitrixPanelTranslate();
+	}
+	const lang = getLang();
+	if (config.indexTranslations !== "Y") {
+		handleRobotsMeta();
+	}
+	applyHtmlState(lang);
+	if (lang !== config.langDefault) {
+		loadTranslatorWidget();
+	}
+	bindEvents();
+});
+
+// LOAD WIDGET
+let widgetInitialized = false;
+
+function loadTranslatorWidget() {
+	const script = document.createElement("script");
+
+	if (config.widget === "gt") {
+		const oldScript = document.querySelector(
+			'script[src*="translate.google.com"]',
+		);
+		if (oldScript) oldScript.remove();
+
+		window.translatorJsWidgetIsLoaded = function () {
+			if (
+				!widgetInitialized &&
+				typeof google !== "undefined" &&
+				google.translate
+			) {
+				widgetInitialized = true;
+
+				setTimeout(() => {
+					new google.translate.TranslateElement(
+						{
+							pageLanguage: config.langDefault,
+							multilanguagePage: true,
+							autoDisplay: false,
+						},
+						"google_translate_element",
+					);
+				}, 100);
+			}
+		};
+
+		script.src =
+			"https://translate.google.com/translate_a/element.js?cb=translatorJsWidgetIsLoaded";
+	} else {
+		const widgetDiv = document.createElement("div");
+		widgetDiv.id = "translatorJsWidget";
+		widgetDiv.style.display = "none";
+		document.body.prepend(widgetDiv);
+
+		script.src =
+			"https://translate.yandex.net/website-widget/v1/widget.js?widgetId=" +
+			widgetDiv.id +
+			"&pageLang=" +
+			config.langDefault +
+			"&widgetTheme=light&autoMode=false";
+
+		script.onload = () => {
+			if (typeof window.yaTranslateWidget !== "undefined") {
+				window.yaTranslateWidget.init();
+			}
+		};
+	}
+
+	document.head.appendChild(script);
+}
+
+// HTML STATE
+function applyHtmlState(lang) {
+	document.querySelectorAll("[data-translatorjs-lang]").forEach((el) => {
+		el.classList.remove("translatorjs_lang_active");
+	});
+
+	const el = document.querySelector('[data-translatorjs-lang="' + lang + '"]');
+	if (el) {
+		el.classList.add("translatorjs_lang_active");
+	}
+
+	if (
+		config.langsRtl &&
+		config.langsRtl.toLowerCase().includes(lang.toLowerCase())
+	) {
+		document.documentElement.setAttribute("dir", "rtl");
+	} else {
+		document.documentElement.removeAttribute("dir");
+	}
+
+	document.querySelectorAll("[data-translatorjs-off]").forEach((el) => {
+		el.classList.add("notranslate");
+		el.setAttribute("translate", "no");
+	});
+}
+
+function disableBitrixPanelTranslate() {
+	const bxPanel = document.getElementById("bx-panel");
+	if (!bxPanel) return;
+
+	bxPanel.setAttribute("data-translatorjs-off", "");
+}
+
+function handleRobotsMeta() {
+	const lang = getLang();
+
+	// Только если НЕ дефолтный язык
+	if (lang === config.langDefault) return;
+
+	let meta = document.querySelector('meta[name="robots"]');
+
+	if (!meta) {
+		meta = document.createElement("meta");
+		meta.setAttribute("name", "robots");
+		document.head.appendChild(meta);
+	}
+
+	meta.setAttribute("content", "noindex, follow");
+}
+
+// EVENTS
+function bindEvents() {
+	document.addEventListener("click", function (e) {
+		const el = e.target.closest("[data-translatorjs-lang]");
+		if (!el) return;
+
+		const lang = el.dataset.translatorjsLang;
+		const currentLang = getLang();
+
+		if (!lang || currentLang === lang) return;
+
+		setStoredLang(lang);
+
+		if (config.widget === "gt") {
+			setGoogleCookie(lang);
+			setTimeout(() => {
+				window.location.reload();
+			}, 200);
+		} else {
+			setCookie("widget", config.widget);
+			window.location.reload();
+		}
+	});
+}
+
+// Добавляем элемент для Google Translate
+if (
+	config.widget === "gt" &&
+	!document.getElementById("google_translate_element")
+) {
+	const gtDiv = document.createElement("div");
+	gtDiv.id = "google_translate_element";
+	gtDiv.style.display = "none";
+
+	if (document.body) {
+		document.body.appendChild(gtDiv);
+	} else {
+		document.addEventListener("DOMContentLoaded", () => {
+			document.body.appendChild(gtDiv);
+		});
+	}
+}
+
+// IMG FALLBACK
+document.addEventListener(
+	"error",
+	function (e) {
+		if (e.target.matches(".translatorjs_lang_item")) {
+			const lang = e.target.dataset.translatorjsLang;
+			const span = document.createElement("span");
+			span.className = "translatorjs_lang_item";
+			span.dataset.translatorjsLang = lang;
+			span.textContent = lang;
+			e.target.replaceWith(span);
+		}
+	},
+	true,
+);

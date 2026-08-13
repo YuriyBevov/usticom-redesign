@@ -1,0 +1,30 @@
+blockquote {
+	position: relative;
+	margin: 0;
+	padding: clamp(20px, 3.2vw, 48px);
+	background-color: var(--light);
+}
+
+blockquote::before {
+	content: "";
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 4px;
+	height: 100%;
+	background-color: var(--accent);
+}
+
+blockquote span {
+	display: block;
+	margin-bottom: 20px;
+	font-size: clamp(16px, 2.4vw, 20px);
+	font-weight: 500;
+}
+
+blockquote cite {
+	display: block;
+	font-style: normal;
+	font-size: clamp(14px, 2.4vw, 18px);
+	color: var(--accent);
+}

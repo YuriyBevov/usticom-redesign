@@ -1,0 +1,23 @@
+.lw-site-map {
+    padding-left: 15px;
+}
+
+.lw-site-map li > ul {
+    margin-bottom: 15px;
+    padding-left: 15px;
+}
+.lw-site-map li {
+    padding: 5px;
+}
+
+.lw-site-map li > ul {
+    margin: 10px 0;
+}
+
+.lw-site-map li {
+    list-style-type: square;
+}
+
+.lw-site-map li a {
+    color: var(--dark);
+}

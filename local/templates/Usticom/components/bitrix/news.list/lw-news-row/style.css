@@ -1,0 +1,11 @@
+.news-list__item {
+	height: 100%;
+	border: 1px solid #c6c6cc;
+	border-radius: 10px;
+	padding: 20px 40px;
+	background: var(--light);
+}
+.lw-section-title {
+	font-size: 30px !important;
+	font-weight: 500 !important;
+}

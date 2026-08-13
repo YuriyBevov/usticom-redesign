@@ -1,0 +1,8 @@
+.news-card .news-card__image-wrapper img {
+	height: 100%;
+	object-fit: cover;
+}
+
+.news-card .news-card__content {
+	padding: 0;
+}

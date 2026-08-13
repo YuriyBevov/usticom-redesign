@@ -1,0 +1,19 @@
+a.info-card__body-title {
+	color: var(--black);
+}
+
+.info-card__tag-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 8px;
+	margin-bottom: 12px;
+}
+
+.info-card__tag-list a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	text-transform: capitalize;
+	color: var(--accent);
+}
