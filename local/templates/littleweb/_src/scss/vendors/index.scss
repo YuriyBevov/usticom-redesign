@@ -1,0 +1,74 @@
+@use "swiper/css";
+@use "@fancyapps/ui/dist/fancybox/fancybox.css";
+
+.swiper {
+	&-navigation {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		justify-content: space-between;
+
+		&:has(.swiper-button-lock) {
+			display: none;
+		}
+	}
+
+	&-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		padding: 6px;
+		border: none;
+		cursor: pointer;
+		width: 40px;
+		height: 40px;
+		background: linear-gradient(85.1deg, #fdfdfd 0%, #e4e4e4 100%);
+		border-radius: 12px;
+
+		svg {
+			width: 24px;
+			height: auto;
+			fill: var(--color-dark);
+			transform-origin: center;
+			backface-visibility: hidden;
+			will-change: transform;
+		}
+
+		&--prev {
+			svg {
+				transform: translateZ(0) rotate(180deg);
+			}
+		}
+
+		&-disabled {
+			pointer-events: none;
+
+			svg {
+				fill: var(--color-darkgray);
+			}
+		}
+	}
+
+	&-pagination {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 6px;
+		padding: 30px 10px 0;
+
+		&-bullet {
+			width: 6px;
+			height: 6px;
+			background-color: var(--color-darkgray);
+			border-radius: 6px;
+			opacity: 1;
+			transition: width var(--main-transition);
+
+			&-active {
+				width: 24px;
+				background-color: var(--color-primary);
+			}
+		}
+	}
+}

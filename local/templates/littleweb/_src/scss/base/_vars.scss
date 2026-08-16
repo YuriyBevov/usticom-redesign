@@ -17,6 +17,7 @@
 	--color-primary: #a70a12;
 	--color-secondary: #3c3c3c;
 	--color-info: #fcf7f7;
+	--color-darkgray: #949494;
 
 	// --color-warning: #f5c542;
 	// --color-danger: #e63e3e;
@@ -26,6 +27,8 @@
 	--bg-light-gradient: linear-gradient(85.1deg, #fdfdfd 0%, #e4e4e4 100%);
 	--bg-accent-gradient: linear-gradient(86.06deg, #a70a12 0%, #da3b43 100%);
 	--section-bg-gradient: linear-gradient(90deg, #ffffff 0%, #e5e5e5 100%);
+
+	--base-border-radius: 16px;
 
 	--scrollbar-color: var(--secondary);
 	--scrollbar-width: 10px;
@@ -37,7 +40,7 @@
 	--site-base-font-family: var(--primary-font);
 	--site-base-font-weight: 400;
 	--site-base-font-size: 16px;
-	--site-base-line-height: 1.2;
+	--site-base-line-height: 1.5;
 	--site-base-letter-spacing: 0.015em;
 	--site-base-text-color: var(--dark);
 	--site-bg-color: var(--white);

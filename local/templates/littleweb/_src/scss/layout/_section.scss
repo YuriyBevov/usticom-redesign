@@ -1,1 +1,32 @@
-.section {}
+.section {
+	padding-block: clamp(24px, 4vw, 60px);
+
+	background-color: var(--color-white);
+
+	&:nth-child(odd):not(.section--bg-initial) {
+		background: linear-gradient(90deg, #ffffff 0%, #e5e5e5 100%);
+	}
+
+	&-header {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		&:has(.swiper-navigation) {
+			position: relative;
+			padding-right: 90px;
+
+			.swiper-navigation {
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+		}
+	}
+
+	&-title {
+		font-size: clamp(18px, 3vw, 26px);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+}

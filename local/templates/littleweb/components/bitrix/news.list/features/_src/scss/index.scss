@@ -1,0 +1,83 @@
+@use "@scss/base/container-queries" as *;
+
+.features {
+	&-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: clamp(16px, 2.4vw, 24px);
+
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		container: features-list / inline-size;
+
+		&__icon-wrapper {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			width: 60px;
+			height: auto;
+			aspect-ratio: 1/1;
+
+			padding: 12px;
+			background-color: var(--color-white);
+			border-radius: var(--base-border-radius);
+
+			img {
+				width: 32px;
+				height: auto;
+				object-fit: contain;
+			}
+
+			@include container-up("features-list", 768px) {
+				position: absolute;
+				top: 24px;
+				left: 24px;
+			}
+		}
+
+		li:has(.section-header) {
+			display: flex;
+			align-items: center;
+		}
+
+		li:not(:has(.section-header)) {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			padding: 24px;
+
+			background-color: var(--color-light);
+			border-radius: var(--base-border-radius);
+
+			@include container-up("features-list", 768px) {
+				position: relative;
+				padding-left: 108px;
+			}
+
+			span {
+				font-size: 16px;
+				font-weight: 600;
+			}
+
+			p {
+				font-size: 14px;
+				max-width: 320px;
+				color: var(--color-text);
+			}
+		}
+
+		li {
+			flex: 1 1 100%;
+
+			@include container-up("features-list", 480px) {
+				flex: 1 1 calc((100% - clamp(16px, 2.4vw, 24px)) / 2);
+			}
+
+			@include container-up("features-list", 960px) {
+				flex-basis: calc((100% - clamp(16px, 2.4vw, 24px) * 2) / 3);
+			}
+		}
+	}
+}

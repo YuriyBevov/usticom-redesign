@@ -1,0 +1,72 @@
+@use "@scss/base/container-queries" as *;
+
+.benefits {
+	&-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
+
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		container: benefits-list / inline-size;
+
+		&__img-wrapper {
+			position: relative;
+			padding: 16px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			&::after {
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 80px;
+				height: 2px;
+				content: "";
+				background-color: var(--color-primary);
+			}
+
+			img {
+				width: 170px;
+				height: 70px;
+				object-fit: contain;
+			}
+		}
+
+		li {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			padding: 24px;
+
+			background-color: var(--color-white);
+			border: 1px solid var(--color-light);
+			border-radius: var(--base-border-radius);
+
+			span {
+				font-size: 16px;
+				font-weight: 600;
+				text-align: center;
+			}
+		}
+
+		li {
+			flex: 1 1 100%;
+
+			@include container-up("benefits-list", 768px) {
+				flex: 1 1 calc((100% - 24px) / 2);
+			}
+
+			@include container-up("benefits-list", 960px) {
+				flex: 1 1 calc((100% - 24px * 3) / 4);
+			}
+
+			@include container-up("benefits-list", 1140px) {
+				flex-basis: calc((100% - 24px * 4) / 5);
+			}
+		}
+	}
+}
