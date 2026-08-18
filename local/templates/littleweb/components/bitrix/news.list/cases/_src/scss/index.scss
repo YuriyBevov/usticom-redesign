@@ -1,0 +1,20 @@
+@use "@scss/base/container-queries" as *;
+
+.reviews-slider-section {
+	.swiper-slide {
+		width: fit-content;
+		max-width: 260px;
+		height: auto;
+		padding: 20px;
+		border-radius: var(--base-border-radius);
+		border: 1px solid var(--color-light);
+		background-color: var(--color-white);
+
+		img {
+			width: auto;
+			height: 300px;
+			object-fit: contain;
+			object-position: center;
+		}
+	}
+}

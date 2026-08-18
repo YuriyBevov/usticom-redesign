@@ -1,0 +1,42 @@
+@use "@scss/base/container-queries" as *;
+
+.image-slider-section {
+	.swiper-slide {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		width: fit-content;
+		max-width: 260px;
+		height: auto;
+		padding: 20px;
+		border-radius: var(--base-border-radius);
+		border: 1px solid var(--color-light);
+		background-color: var(--color-white);
+
+		img {
+			width: 100%;
+			height: auto;
+			object-fit: contain;
+			object-position: center;
+		}
+	}
+
+	.base-slider.--autofill {
+		container: autofill-slider / inline-size;
+
+		.swiper-slide {
+			@include container-up("autofill-slider", 534px) {
+				max-width: 300px;
+			}
+
+			img {
+				height: 150px;
+
+				@include container-up("autofill-slider", 534px) {
+					height: 180px;
+				}
+			}
+		}
+	}
+}

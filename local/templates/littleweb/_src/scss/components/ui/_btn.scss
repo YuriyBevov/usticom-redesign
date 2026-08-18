@@ -1,0 +1,19 @@
+.main-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-size: 12px;
+	font-weight: 700;
+	text-align: center;
+
+	width: 100%;
+	max-width: fit-content;
+
+	padding: 12px 24px;
+
+	border: none;
+	border-radius: 12px;
+	color: var(--color-white);
+	background: var(--bg-accent-gradient);
+}

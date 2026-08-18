@@ -1,4 +1,37 @@
+@use "@scss/base/container-queries" as *;
 
-	@use "@scss/base/container-queries" as *;
+.footer {
+	container: footer / inline-size;
 
-	.footer {}
+	&__top {
+		background-color: var(--color-light);
+		padding-block: clamp(20px, 4.4vw, 60px);
+
+		.container {
+			display: grid;
+			grid-template-columns: 180px auto 240px;
+			gap: 20px 60px;
+		}
+
+		&-section {
+		}
+	}
+
+	&__bottom {
+		background-color: var(--color-dark);
+		padding-block: 16px;
+
+		.container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		a {
+			font-size: 14px;
+			font-weight: 400;
+			text-align: center;
+			color: var(--color-white);
+		}
+	}
+}

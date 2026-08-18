@@ -2,58 +2,65 @@
 $aMenuLinks = Array(
 	Array(
 		"Услуги", 
-		SITE_DIR."services/", 
+		"/services/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Новости", 
-		SITE_DIR."news/", 
+		"/news/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Публикации", 
-		SITE_DIR."publications/", 
+		"/publications/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Мероприятия", 
-		SITE_DIR."events/", 
+		"/events/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"О компании", 
-		SITE_DIR."about/", 
+		"/about/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Контакты", 
-		SITE_DIR."contacts/", 
+		"/contacts/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Карта сайта", 
-		SITE_DIR."sitemap/", 
+		"/sitemap/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Цены", 
-		SITE_DIR."prices/", 
+		"/prices/", 
 		Array(), 
 		Array(), 
+		"" 
+	),
+	Array(
+		"Партнерская программа", 
+		"/partnership/", 
+		Array(), 
+		Array("COLOR"=>"ACCENT"), 
 		"" 
 	)
 );

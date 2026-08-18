@@ -7,10 +7,15 @@ $this->setFrameMode(true);
 
 		<ul class="features-list">
 			<li>
-				<div class="section-header">
-					<div class="eyebrow">какие есть</div>
-					<h2 class="section-title"><?= $arResult["NAME"] ?></h2>
-				</div>
+				<? $APPLICATION->IncludeFile(
+					SITE_TEMPLATE_PATH . '/include/section-header.php',
+					array(
+						"EYEBROW_TEXT" => 'какие есть',
+						"TITLE" => $arResult["NAME"],
+						"USE_SWIPER_NAVIGATION" => $arParams["USE_SWIPER_NAVIGATION"] ??  "N"
+					),
+					array('MODE' => 'html', 'NAME' => 'шапку раздела', 'SHOW_BORDER' => true)
+				); ?>
 			</li>
 			<? foreach ($arResult["ITEMS"] as $arItem):
 				$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));

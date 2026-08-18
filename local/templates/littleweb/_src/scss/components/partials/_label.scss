@@ -1,0 +1,22 @@
+.label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+
+	width: fit-content;
+
+	font-size: 12px;
+	font-weight: 600;
+	padding: 2px 12px;
+
+	background-color: var(--color-primary);
+	color: var(--color-white);
+	border: 1px solid var(--color-primary);
+	border-radius: 30px;
+
+	&--outlined {
+		background-color: var(--color-white);
+		color: var(--color-primary);
+	}
+}

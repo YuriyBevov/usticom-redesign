@@ -1,7 +1,9 @@
+@use "@scss/base/container-queries" as *;
+
 .section {
 	padding-block: clamp(24px, 4vw, 60px);
-
 	background-color: var(--color-white);
+	container: section / inline-size;
 
 	&:nth-child(odd):not(.section--bg-initial) {
 		background: linear-gradient(90deg, #ffffff 0%, #e5e5e5 100%);
@@ -11,22 +13,31 @@
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+		margin-bottom: clamp(24px, 4vw, 32px);
 
 		&:has(.swiper-navigation) {
-			position: relative;
-			padding-right: 90px;
-
 			.swiper-navigation {
-				position: absolute;
-				top: 0;
-				right: 0;
+				display: none;
+			}
+			@include container-up("section", 640px) {
+				position: relative;
+				padding-right: 90px;
+
+				.swiper-navigation {
+					display: flex;
+					position: absolute;
+					top: 0;
+					right: 0;
+				}
 			}
 		}
 	}
 
-	&-title {
+	&-title,
+	h2 {
 		font-size: clamp(18px, 3vw, 26px);
 		font-weight: 700;
 		text-transform: uppercase;
+		margin-bottom: 0;
 	}
 }

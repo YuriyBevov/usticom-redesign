@@ -1,19 +1,20 @@
+@use "./text-truncate";
 
-	%hover-opacity {
-		transition: opacity 0.3s ease-in-out;
-		opacity: 1;
+%hover-opacity {
+	transition: opacity 0.3s ease-in-out;
+	opacity: 1;
 
-		@media (hover: hover) {
-			&:hover {
-				opacity: 0.6;
-			}
-		}
-
-		&:focus {
+	@media (hover: hover) {
+		&:hover {
 			opacity: 0.6;
 		}
-
-		&:active {
-			opacity: 0.4;
-		}
 	}
+
+	&:focus {
+		opacity: 0.6;
+	}
+
+	&:active {
+		opacity: 0.4;
+	}
+}
