@@ -6,9 +6,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 $this->setFrameMode(true);
 ?>
 
-<section class="section reviews-slider-section">
+<section class="section cases-slider-section">
 	<div class="container">
-
 		<? $APPLICATION->IncludeFile(
 			SITE_TEMPLATE_PATH . '/include/section-header.php',
 			array(
@@ -28,8 +27,17 @@ $this->setFrameMode(true);
 					$image = $arItem["PREVIEW_PICTURE"] ? $arItem["PREVIEW_PICTURE"] : $arItem["DETAIL_PICTURE"];
 					$alt = $image["ALT"] ? $image["ALT"] : $image["NAME"];
 				?>
-					<div class="swiper-slide" id="<?= $this->GetEditAreaId($arItem["ID"]) ?>">
-						<img data-fancybox="<?= $arResult["NAME"] ?>" src="<?= $image["SRC"] ?>" alt="<?= $alt ?>" width="200" height="300">
+					<div class="swiper-slide id=" <?= $this->GetEditAreaId($arItem["ID"]) ?>">
+						<div class="case-card">
+							<div class="case-card__eyebrow"><?= $arItem["PROPERTIES"]["TAG"]["VALUE"] ?></div>
+							<span class="case-card__title"><?= $arItem["NAME"] ?></span>
+							<p class="case-card__preview-text"><?= $arItem["PREVIEW_TEXT"] ?></p>
+
+							<div class="case-card__footer btn-row">
+								<a href="<?= $arItem["DETAIL_URL"] ?>" class="main-btn main-btn--outlined main-btn--size-sm">Читать полностью</a>
+								<button type="button" class="main-btn main-btn--size-sm case-card__consultation-btn">Получить консультацию</button>
+							</div>
+						</div>
 					</div>
 				<? endforeach; ?>
 			</div>

@@ -1,20 +1,57 @@
 @use "@scss/base/container-queries" as *;
+@use "@scss/extends/text-truncate" as *;
 
-.reviews-slider-section {
+.cases-slider-section {
 	.swiper-slide {
-		width: fit-content;
-		max-width: 260px;
+		width: 100%;
+		max-width: 675px;
 		height: auto;
-		padding: 20px;
-		border-radius: var(--base-border-radius);
-		border: 1px solid var(--color-light);
-		background-color: var(--color-white);
+	}
 
-		img {
-			width: auto;
-			height: 300px;
-			object-fit: contain;
-			object-position: center;
+	.case-card {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		height: 100%;
+		padding: 20px;
+		background-color: var(--color-white);
+		border-radius: var(--base-border-radius);
+		container: case-card / inline-size;
+
+		&__eyebrow {
+			text-transform: uppercase;
+			font-weight: 500;
+			font-size: 14px;
+			color: var(--color-primary);
+		}
+
+		&__title {
+			font-size: 14px;
+			font-weight: 700;
+			color: var(--color-dark);
+		}
+
+		&__preview-text {
+			font-size: 14px;
+			font-weight: 400;
+			@include text-truncate(5);
+			color: var(--color-dark);
+		}
+
+		.btn-row {
+			margin-top: auto;
+			flex-direction: column;
+
+			& > * {
+				max-width: 100%;
+			}
+
+			@include container-up("case-card", 420px) {
+				flex-direction: row;
+				& > * {
+					max-width: fit-content;
+				}
+			}
 		}
 	}
 }

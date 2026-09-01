@@ -30,12 +30,12 @@
 
 	--base-border-radius: 16px;
 
-	--scrollbar-color: var(--secondary);
+	--scrollbar-color: var(--color-secondary);
 	--scrollbar-width: 10px;
 	--scrollbar-height: 6px;
 	--scrollbar-border-radius: 0;
-	--scrollbar-thumb-color: var(--primary);
-	--scrollbar-thumb-border-radius: 0;
+	--scrollbar-thumb-color: var(--color-primary);
+	--scrollbar-thumb-border-radius: 6px;
 
 	--site-base-font-family: var(--primary-font);
 	--site-base-font-weight: 400;
