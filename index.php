@@ -4,6 +4,55 @@ $APPLICATION->SetPageProperty("description", "Услуги аутсорсинг�
 $APPLICATION->SetTitle("Услуги аутсорсинга в Москве, аутсорсинговые услуги");
 ?>
 
+<section class="hero">
+	<div class="container">
+		<div class="hero__grid">
+			<div class="hero__grid-item hero__grid-item--main">
+				<div class="eyebrow">
+					Консалтинг для бизнеса с 2003 года
+				</div>
+				<h1>Группа компаний «Юстиком»&nbsp;—&nbsp;комплексная поддержка бизнеса</h1>
+				<p>Решаем юридические, аудиторские, бухгалтерские, налоговые и финансовые задачи в едином контуре. Формируем команду под конкретный проект, снижаем риски и сопровождаем бизнес — от ежедневных процессов до сложных сделок и управленческих решений.</p>
+
+				<div class="btn-row">
+					<button class="main-btn main-btn--size-lg">Оставить заявку</button>
+					<a href="/partnership/" class="main-btn main-btn--outlined main-btn--size-lg">Партнерская программа</a>
+				</div>
+			</div>
+
+			<div class="hero__grid-item hero__grid-item--features">
+
+				<ul class="highlights">
+					<div class="highlights__item">
+						<svg width='40' height='40' role='img' aria-hidden='true' focusable='false'>
+							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-star'></use>
+						</svg>
+						<span>Занимаемся аутсорсингом кадровых услуг <strong>более 18 лет</strong></span>
+					</div>
+					<div class="highlights__item">
+						<svg width='40' height='40' role='img' aria-hidden='true' focusable='false'>
+							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-star'></use>
+						</svg>
+						<span>В нашей команде трудятся настоящие <strong>эксперты и фанаты</strong> своего дела.</span>
+					</div>
+					<div class="highlights__item">
+						<svg width='40' height='40' role='img' aria-hidden='true' focusable='false'>
+							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-star'></use>
+						</svg>
+						<span>В нашей команде трудятся настоящие <strong>эксперты и фанаты</strong> своего дела.</span>
+					</div>
+				</ul>
+
+				<div aria-hidden="true" class="hero__side-image-block">
+					<img src="<?= SITE_TEMPLATE_PATH . '/_src/images/hero-back-img.png' ?>" alt="" width="400" height="540">
+					<img src="<?= SITE_TEMPLATE_PATH . '/_src/images/hero-img.png' ?>" alt="" width="360" height="480">
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>
+
 <? $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"benefits",
@@ -137,8 +186,8 @@ $APPLICATION->SetTitle("Услуги аутсорсинга в Москве, а�
 ); ?>
 
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"cases", 
+	"bitrix:news.list",
+	"cases",
 	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",

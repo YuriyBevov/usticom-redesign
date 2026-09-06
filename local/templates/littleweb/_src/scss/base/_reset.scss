@@ -85,7 +85,9 @@ a {
 	text-decoration: none;
 	cursor: pointer;
 
-	@extend %hover-opacity;
+	&:not(.main-btn) {
+		@extend %hover-opacity;
+	}
 }
 
 address {

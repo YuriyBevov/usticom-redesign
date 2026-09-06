@@ -1,0 +1,27 @@
+.highlights {
+	&__item {
+		display: grid;
+		grid-template-columns: 40px auto;
+		gap: 20px;
+		align-items: center;
+		padding: 20px;
+		border-radius: var(--base-border-radius);
+		max-width: 320px;
+
+		background: rgba(255, 255, 255, 0.7);
+		box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
+		backdrop-filter: blur(2px);
+
+		svg {
+			fill: var(--color-primary);
+		}
+
+		font-size: 14px;
+		font-weight: 400;
+
+		strong {
+			font-weight: 700;
+			color: var(--color-primary);
+		}
+	}
+}
