@@ -4,59 +4,122 @@
 }
 
 .hero {
-	outline: 1px solid red;
+	background: linear-gradient(85.1deg, #fdfdfd 0%, #e4e4e4 100%);
+
+	container: hero / inline-size;
 
 	h1 {
 		font-size: clamp(24px, 4vw, 40px);
 		font-weight: 700;
 		margin-bottom: 8px;
+		max-width: 600px;
 	}
 
 	&__grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: clamp(12px, 8vw, 72px);
-		min-height: 520px;
+		grid-template-columns: 1fr;
+		gap: clamp(32px, 4vw, 64px);
+		align-items: flex-end;
+
+		@include container-up("hero", 768px) {
+			grid-template-columns: minmax(0, auto) minmax(0, 280px);
+		}
+
+		@include container-up("hero", 860px) {
+			grid-template-columns: minmax(0, auto) minmax(0, 420px);
+		}
+
+		@include container-up("hero", 1240px) {
+			grid-template-columns: repeat(2, 1fr);
+			gap: clamp(12px, 8vw, 72px);
+			min-height: 520px;
+		}
 
 		&-item {
-			outline: 1px solid red;
+			min-width: 0;
+
+			@include container-up("hero", 1240px) {
+				min-width: auto;
+			}
 
 			&--main {
 				display: flex;
 				flex-direction: column;
 				gap: 16px;
-				align-self: center;
+				// align-self: center;
+				padding-block: 24px;
+				container: hero-main / inline-size;
 
-				.btn-row > * {
-					min-width: 220px;
+				@include container-up("hero", 1240px) {
+					align-self: center;
+				}
+
+				.btn-row {
+					max-width: 480px;
+					& > * {
+						// flex-grow: 1;
+						min-width: 220px;
+						max-width: initial;
+
+						@include container-up("hero-main", 460px) {
+							max-width: fit-content;
+						}
+					}
 				}
 			}
 
 			&--features {
-				outline: 1px solid black;
 				position: relative;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: flex-end;
+				height: 100%;
 
 				.highlights {
-					position: absolute;
-					left: 20px;
-					top: 50%;
-					transform: translateY(-60%);
+					position: relative;
 					z-index: 1;
 
 					display: flex;
 					flex-direction: column;
-					gap: 24px;
+					gap: clamp(8px, 2.4vw, 24px);
+					width: 100%;
+					// max-width: none;
 
 					list-style: none;
 					padding: 0;
-					margin: 0;
+					margin: -32px auto 0;
 
-					&__item {
-						margin-left: -48px;
+					padding-block: 24px;
+
+					@include container-up("hero", 768px) {
 					}
 
-					&__item:nth-child(2) {
-						margin-left: -72px;
+					@include container-up("hero", 1240px) {
+						position: absolute;
+						left: 20px;
+						top: 50%;
+						transform: translateY(-60%);
+						// width: auto;
+						margin: 0;
+						padding-block: 0;
+					}
+
+					&__item {
+						width: 100%;
+						max-width: none;
+
+						@include container-up("hero", 1240px) {
+							width: auto;
+							max-width: 320px;
+							margin-left: -48px;
+						}
+
+						&:nth-child(2) {
+							@include container-up("hero", 1240px) {
+								margin-left: -72px;
+							}
+						}
 					}
 				}
 			}
@@ -64,15 +127,29 @@
 	}
 
 	&__side-image-block {
-		outline: 1px solid red;
-		position: absolute;
-		top: 0;
-		left: 0;
+		position: relative;
+		order: -1;
 
 		width: 100%;
-		max-width: 600px;
-		height: 100%;
-		z-index: -1;
+		max-width: 280px;
+		height: 180px;
+
+		@include container-up("hero", 440px) {
+			height: 280px;
+			max-width: 480px;
+		}
+
+		@include container-up("hero", 768px) {
+			max-width: 600px;
+		}
+
+		@include container-up("hero", 1240px) {
+			position: absolute;
+			top: 0;
+			left: 0;
+			order: initial;
+			height: 100%;
+		}
 
 		img {
 			position: absolute;
@@ -80,15 +157,16 @@
 			width: 100%;
 			height: 100%;
 			object-fit: contain;
-			object-position: bottom left;
 
 			&:first-child {
 				left: 0;
 				max-width: 420px;
+				object-position: bottom center;
 			}
 			&:last-child {
 				right: 0;
 				max-width: 340px;
+				object-position: bottom right;
 			}
 		}
 	}
