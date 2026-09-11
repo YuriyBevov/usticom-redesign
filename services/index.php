@@ -10,14 +10,15 @@ $APPLICATION->SetPageProperty("title", "Наши услуги — Услуги �
 	<?
 		$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section.list", 
-	"lw-catalog-section-list", 
+	"services-main",
 	array(
 		"IBLOCK_TYPE" => "usticom_site_content",
 		"IBLOCK_ID" => "5",
 		"CACHE_TYPE" => "N",
 		"CACHE_TIME" => "36000000",
 		"CACHE_GROUPS" => "Y",
-		"COMPONENT_TEMPLATE" => "lw-catalog-section-list",
+		"COMPONENT_TEMPLATE" => "services-main",
+		"EYEBROW_TEXT" => "наши услуги",
 		"SECTION_ID" => $_REQUEST["SECTION_ID"],
 		"SECTION_CODE" => "",
 		"COUNT_ELEMENTS" => "Y",

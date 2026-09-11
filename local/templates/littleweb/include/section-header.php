@@ -10,6 +10,11 @@
     <?= $arParams["TITLE"] ?>
   </h2>
 
+  <? if (!empty($arParams["TEXT"])): ?>
+    <p class="section-description">
+      <?= $arParams["TEXT"] ?>
+    </p>
+  <? endif; ?>
 
   <? if ($arParams["USE_SWIPER_NAVIGATION"] === "Y"): ?>
     <div class="swiper-navigation">

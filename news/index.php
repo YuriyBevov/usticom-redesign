@@ -6,9 +6,9 @@ $APPLICATION->SetTitle("Новости");
 ?>
 
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news",
-	"lw-news",
-	array(
+	"bitrix:news", 
+	"lw-news", 
+	[
 		"ADD_ELEMENT_CHAIN" => "Y",
 		"ADD_SECTIONS_CHAIN" => "Y",
 		"AJAX_MODE" => "N",
@@ -24,9 +24,8 @@ $APPLICATION->SetTitle("Новости");
 		"CACHE_TIME" => "36000000",
 		"CACHE_TYPE" => "N",
 		"CATEGORY_CODE" => "DOP",
-		"CATEGORY_IBLOCK" => array(
-			0 => "23",
-		),
+		"CATEGORY_IBLOCK" => [
+		],
 		"CATEGORY_ITEMS_COUNT" => "4",
 		"CATEGORY_THEME_23" => "photo",
 		"CATEGORY_THEME_5" => "photo",
@@ -37,19 +36,19 @@ $APPLICATION->SetTitle("Новости");
 		"DETAIL_ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
 		"DETAIL_DISPLAY_TOP_PAGER" => "N",
-		"DETAIL_FIELD_CODE" => array(
+		"DETAIL_FIELD_CODE" => [
 			0 => "",
 			1 => "",
-		),
+		],
 		"DETAIL_PAGER_SHOW_ALL" => "N",
 		"DETAIL_PAGER_TEMPLATE" => "arrows",
 		"DETAIL_PAGER_TITLE" => "Страница",
-		"DETAIL_PROPERTY_CODE" => array(
+		"DETAIL_PROPERTY_CODE" => [
 			0 => "",
 			1 => "NEWS_AUTHOR",
 			2 => "NEWS_NOTES",
 			3 => "",
-		),
+		],
 		"DETAIL_SET_CANONICAL_URL" => "N",
 		"DISPLAY_BOTTOM_PAGER" => "Y",
 		"DISPLAY_DATE" => "Y",
@@ -63,16 +62,16 @@ $APPLICATION->SetTitle("Новости");
 		"IBLOCK_TYPE" => "usticom_site_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
 		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"LIST_FIELD_CODE" => array(
+		"LIST_FIELD_CODE" => [
 			0 => "",
 			1 => "",
-		),
-		"LIST_PROPERTY_CODE" => array(
+		],
+		"LIST_PROPERTY_CODE" => [
 			0 => "",
 			1 => "NEWS_AUTHOR",
 			2 => "NEWS_NOTES",
 			3 => "",
-		),
+		],
 		"MESSAGE_404" => "",
 		"META_DESCRIPTION" => "-",
 		"META_KEYWORDS" => "-",
@@ -107,14 +106,14 @@ $APPLICATION->SetTitle("Новости");
 		"USE_SEARCH" => "N",
 		"USE_SHARE" => "N",
 		"YANDEX" => "N",
-		"SEF_URL_TEMPLATES" => array(
+		"SEF_URL_TEMPLATES" => [
 			"news" => "",
 			"section" => "#SECTION_CODE#/",
 			"detail" => "#ELEMENT_CODE#/",
 			"rss" => "rss/",
 			"rss_section" => "#SECTION_ID#/rss/",
-		)
-	),
+		]
+	],
 	false
 ); ?>
 

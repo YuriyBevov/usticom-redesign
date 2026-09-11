@@ -40,4 +40,8 @@
 		text-transform: uppercase;
 		margin-bottom: 0;
 	}
+
+	&:has(.section-description) .section-title {
+		margin-bottom: 32px;
+	}
 }
