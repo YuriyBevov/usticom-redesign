@@ -5,7 +5,7 @@
 	background-color: var(--color-white);
 	container: section / inline-size;
 
-	&:nth-child(odd):not(.section--bg-initial) {
+	&:nth-child(even):not(.section--bg-initial) {
 		background: linear-gradient(90deg, #ffffff 0%, #e5e5e5 100%);
 	}
 

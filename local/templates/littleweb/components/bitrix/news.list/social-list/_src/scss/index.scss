@@ -1,0 +1,29 @@
+.social {
+	&__list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+		align-items: center;
+
+		&-item {
+			a {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 8px;
+				background: var(--bg-accent-gradient);
+				border-radius: 6px;
+
+				svg {
+					width: 100%;
+					height: auto;
+					object-fit: contain;
+				}
+			}
+		}
+	}
+}

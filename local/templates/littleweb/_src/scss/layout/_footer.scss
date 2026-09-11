@@ -1,5 +1,12 @@
 @use "@scss/base/container-queries" as *;
 
+.callback {
+	background-image: url("@img/callback-bg.png");
+	background-position: center;
+	background-size: cover;
+	min-height: 485px;
+}
+
 .footer {
 	container: footer / inline-size;
 
@@ -9,7 +16,7 @@
 
 		.container {
 			display: grid;
-			grid-template-columns: 180px auto 240px;
+			grid-template-columns: 180px auto 280px;
 			gap: 20px 60px;
 		}
 
@@ -23,12 +30,20 @@
 				display: grid;
 				grid-template-columns: repeat(4, 1fr);
 				gap: 24px;
+
+				& > * {
+					outline: 1px solid red;
+				}
 			}
 
 			&--contacts-block {
 				display: flex;
 				flex-direction: column;
 				gap: 24px;
+
+				.main-btn {
+					max-width: 100%;
+				}
 			}
 		}
 	}
