@@ -22,7 +22,7 @@ if (!empty($tagValues)) {
 
 $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
-	"news-list",
+	"news-grid",
 	[
 		"SHOW_TAG_LIST" => $arParams["SHOW_TAG_LIST"],
 		"SHOW_ACTIVE_FROM" => $arParams["SHOW_ACTIVE_FROM"],

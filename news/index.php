@@ -7,7 +7,7 @@ $APPLICATION->SetTitle("Новости");
 
 <? $APPLICATION->IncludeComponent(
 	"bitrix:news", 
-	"lw-news", 
+	"news", 
 	[
 		"ADD_ELEMENT_CHAIN" => "Y",
 		"ADD_SECTIONS_CHAIN" => "Y",
@@ -32,7 +32,7 @@ $APPLICATION->SetTitle("Новости");
 		"CATEGORY_THEME_6" => "photo",
 		"CATEGORY_THEME_9" => "list",
 		"CHECK_DATES" => "Y",
-		"COMPONENT_TEMPLATE" => "lw-news",
+		"COMPONENT_TEMPLATE" => "news",
 		"DETAIL_ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
 		"DETAIL_DISPLAY_TOP_PAGER" => "N",
@@ -44,10 +44,11 @@ $APPLICATION->SetTitle("Новости");
 		"DETAIL_PAGER_TEMPLATE" => "arrows",
 		"DETAIL_PAGER_TITLE" => "Страница",
 		"DETAIL_PROPERTY_CODE" => [
-			0 => "",
-			1 => "NEWS_AUTHOR",
-			2 => "NEWS_NOTES",
-			3 => "",
+			0 => "TAG_LIST",
+			1 => "LINKED_SERVICES",
+			2 => "NEWS_AUTHOR",
+			3 => "NEWS_NOTES",
+			4 => "",
 		],
 		"DETAIL_SET_CANONICAL_URL" => "N",
 		"DISPLAY_BOTTOM_PAGER" => "Y",

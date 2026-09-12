@@ -1,6 +1,5 @@
 <?php
-if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)
-{
+if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 	die();
 }
 /** @var array $arParams */
@@ -18,7 +17,7 @@ $this->setFrameMode(true);
 
 $ElementID = $APPLICATION->IncludeComponent(
 	"bitrix:news.detail",
-	"lw-news-detail",
+	"news-detail",
 	[
 		"DISPLAY_DATE" => $arParams["DISPLAY_DATE"],
 		"DISPLAY_NAME" => $arParams["DISPLAY_NAME"],
@@ -28,8 +27,8 @@ $ElementID = $APPLICATION->IncludeComponent(
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 		"FIELD_CODE" => $arParams["DETAIL_FIELD_CODE"],
 		"PROPERTY_CODE" => $arParams["DETAIL_PROPERTY_CODE"],
-		"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["detail"],
-		"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
+		"DETAIL_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["detail"],
+		"SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
 		"META_KEYWORDS" => $arParams["META_KEYWORDS"],
 		"META_DESCRIPTION" => $arParams["META_DESCRIPTION"],
 		"BROWSER_TITLE" => $arParams["BROWSER_TITLE"],
@@ -59,7 +58,7 @@ $ElementID = $APPLICATION->IncludeComponent(
 		"ELEMENT_CODE" => $arResult["VARIABLES"]["ELEMENT_CODE"],
 		"SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"],
 		"SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"],
-		"IBLOCK_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["news"],
+		"IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
 		"USE_SHARE" => $arParams["USE_SHARE"],
 		"SHARE_HIDE" => $arParams["SHARE_HIDE"],
 		"SHARE_TEMPLATE" => $arParams["SHARE_TEMPLATE"],
@@ -71,5 +70,4 @@ $ElementID = $APPLICATION->IncludeComponent(
 	],
 	$component,
 	['HIDE_ICONS' => 'Y']
-);?>
-
+);

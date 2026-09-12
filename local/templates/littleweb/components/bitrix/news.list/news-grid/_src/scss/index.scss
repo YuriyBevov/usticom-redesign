@@ -4,7 +4,7 @@
 		margin: 0;
 		padding: 0;
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
 		gap: 16px 24px;
 	}
 
@@ -38,6 +38,20 @@
 					opacity: 0.6;
 				}
 			}
+		}
+	}
+
+	.tag-slider {
+		margin-bottom: 32px;
+
+		.tag-list--slider {
+			flex-wrap: nowrap;
+			gap: 0;
+			margin-bottom: 0;
+		}
+
+		.tag-list__item {
+			width: auto;
 		}
 	}
 }

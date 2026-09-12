@@ -482,8 +482,8 @@ $APPLICATION->SetTitle("Услуги аутсорсинга в Москве, а�
 ); ?>
 
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"news",
+	"bitrix:news.list", 
+	"news-slider", 
 	[
 		"ACTIVE_DATE_FORMAT" => "j F Y",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -547,7 +547,7 @@ $APPLICATION->SetTitle("Услуги аутсорсинга в Москве, а�
 		"SORT_ORDER1" => "DESC",
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N",
-		"COMPONENT_TEMPLATE" => "news",
+		"COMPONENT_TEMPLATE" => "news-slider",
 		"EYEBROW_TEXT" => "мероприятия",
 		"USE_PAGINATION" => "N",
 		"USE_SWIPER_NAVIGATION" => "Y",
@@ -560,8 +560,8 @@ $APPLICATION->SetTitle("Услуги аутсорсинга в Москве, а�
 ); ?>
 
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"news",
+	"bitrix:news.list", 
+	"news-slider", 
 	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -622,7 +622,7 @@ $APPLICATION->SetTitle("Услуги аутсорсинга в Москве, а�
 		"SORT_ORDER1" => "DESC",
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N",
-		"COMPONENT_TEMPLATE" => "news",
+		"COMPONENT_TEMPLATE" => "news-slider",
 		"EYEBROW_TEXT" => "статьи",
 		"USE_PAGINATION" => "N",
 		"USE_SWIPER_NAVIGATION" => "Y",

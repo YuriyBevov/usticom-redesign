@@ -18,16 +18,18 @@ $APPLICATION->AddHeadString('<meta property="og:image" content="https://' .  $_S
 		); ?>
 		<? if ($arResult["ITEMS"]): ?>
 			<? if ($arResult["TAG_LIST"]): ?>
-				<ul class="tag-list">
-					<li class="tag-list__item">
-						<a <?= (empty($arResult["CURRENT_TAG"]) ? 'class="active"' : '') ?> href="<?= $arResult["LIST_PAGE_URL"] ?>">#<?= $arResult["LIST_PAGE_TITLE"] ?></a>
-					</li>
-					<? foreach ($arResult["TAG_LIST"] as $tag): ?>
-						<li class="tag-list__item">
-							<a <?= ($arResult["CURRENT_TAG"] === $tag ? 'class="active"' : '') ?> href="<?= $arResult["LIST_PAGE_URL"] ?><?= '?tag=' . $tag ?>"><?= '#' . $tag ?></a>
+				<div class="swiper tag-slider">
+					<ul class="swiper-wrapper tag-list tag-list--slider">
+						<li class="swiper-slide tag-list__item">
+							<a <?= (empty($arResult["CURRENT_TAG"]) ? 'class="active"' : '') ?> href="<?= $arResult["LIST_PAGE_URL"] ?>">#<?= $arResult["LIST_PAGE_TITLE"] ?></a>
 						</li>
-					<? endforeach; ?>
-				</ul>
+						<? foreach ($arResult["TAG_LIST"] as $tag): ?>
+							<li class="swiper-slide tag-list__item">
+								<a <?= ($arResult["CURRENT_TAG"] === $tag ? 'class="active"' : '') ?> href="<?= $arResult["LIST_PAGE_URL"] ?><?= '?tag=' . $tag ?>"><?= '#' . $tag ?></a>
+							</li>
+						<? endforeach; ?>
+					</ul>
+				</div>
 			<? endif; ?>
 			<ul class="news-list">
 				<? foreach ($arResult["ITEMS"] as $index => $arItem):
