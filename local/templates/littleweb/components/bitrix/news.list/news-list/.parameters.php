@@ -1,25 +1,35 @@
-<?php
-if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
+<?
+if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
 $arTemplateParameters = array(
-	"DISPLAY_DATE" => Array(
-		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_DATE"),
+	"EYEBROW_TEXT" => array(
+		"PARENT" => "BASE",
+		"NAME" => "Текст над заголовком",
+		"TYPE" => "STRING",
+		"DEFAULT" => "",
+	),
+	"USE_SWIPER_NAVIGATION" => array(
+		"PARENT" => "BASE",
+		"NAME" => "Использовать навигацию в слайдере",
 		"TYPE" => "CHECKBOX",
 		"DEFAULT" => "Y",
 	),
-	"DISPLAY_NAME" => Array(
-		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_NAME"),
+	"USE_SWIPER_PAGINATION" => array(
+		"PARENT" => "BASE",
+		"NAME" => "Использовать пагинацию в слайдере",
 		"TYPE" => "CHECKBOX",
-		"DEFAULT" => "Y",
+		"DEFAULT" => "N",
 	),
-	"DISPLAY_PICTURE" => Array(
-		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_PICTURE"),
+	"SHOW_ACTIVE_FROM" => array(
+		"PARENT" => "BASE",
+		"NAME" => "Показывать дату создания",
 		"TYPE" => "CHECKBOX",
-		"DEFAULT" => "Y",
+		"DEFAULT" => "N",
 	),
-	"DISPLAY_PREVIEW_TEXT" => Array(
-		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_TEXT"),
+	"SHOW_TAG_LIST" => array(
+		"PARENT" => "BASE",
+		"NAME" => "Показывать теги",
 		"TYPE" => "CHECKBOX",
-		"DEFAULT" => "Y",
+		"DEFAULT" => "N",
 	),
 );

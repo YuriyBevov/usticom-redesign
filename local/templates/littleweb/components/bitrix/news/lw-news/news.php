@@ -24,6 +24,8 @@ $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"news-list",
 	[
+		"SHOW_TAG_LIST" => $arParams["SHOW_TAG_LIST"],
+		"SHOW_ACTIVE_FROM" => $arParams["SHOW_ACTIVE_FROM"],
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 		"FILTER_NAME" => "tagFilter",
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],

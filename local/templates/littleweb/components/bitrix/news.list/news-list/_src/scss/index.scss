@@ -1,6 +1,4 @@
 .news-section {
-	outline: 1px solid red;
-
 	.news-list {
 		list-style: none;
 		margin: 0;
@@ -8,6 +6,10 @@
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 16px 24px;
+	}
+
+	.news-card {
+		background-color: var(--color-white);
 	}
 
 	.tag-list {
@@ -30,6 +32,11 @@
 				font-size: 12px;
 				font-weight: 600;
 				color: var(--color-primary);
+
+				&.active {
+					pointer-events: none;
+					opacity: 0.6;
+				}
 			}
 		}
 	}

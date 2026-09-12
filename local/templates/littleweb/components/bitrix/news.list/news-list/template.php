@@ -1,41 +1,17 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
-/** @var array $arParams */
-/** @var array $arResult */
-/** @global CMain $APPLICATION */
-/** @global CUser $USER */
-/** @global CDatabase $DB */
-/** @var CBitrixComponentTemplate $this */
-/** @var string $templateName */
-/** @var string $templateFile */
-/** @var string $templateFolder */
-/** @var string $componentPath */
-/** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 $APPLICATION->AddHeadString('<meta property="og:image" content="https://' .  $_SERVER["SERVER_NAME"] . CFile::GetPath(CIBlock::GetArrayByID($arResult["ID"], "PICTURE")) . '"/>', true);
-
 ?>
 
-<?/* $APPLICATION->IncludeComponent(
-	"bitrix:breadcrumb",
-	"breadcrumbs",
-	array(
-		"PATH" => "",
-		"SITE_ID" => "s1",
-		"START_FROM" => "0",
-		"COMPONENT_TEMPLATE" => "breadcrumbs"
-	),
-	false
-); */ ?>
 
 <section class="section news-section">
 	<div class="container">
-
 		<? $APPLICATION->IncludeFile(
 			SITE_TEMPLATE_PATH . '/include/section-header.php',
 			array(
 				"EYEBROW_TEXT" => $arParams["EYEBROW_TEXT"] ?? '',
 				"TITLE" => $arResult["NAME"],
-				"TEXT" => 'Передали бухгалтерию на аутсорсинг, когда внутренний специалист перестал справляться с объёмом задач. Команда быстро разобралась в учёте, навела порядок в документах и закрыла накопившиеся вопросы по отчётности».',
+				"TEXT" => $arResult["DESCRIPTION"] ?? '',
 				"USE_SWIPER_NAVIGATION" => $arParams["USE_SWIPER_NAVIGATION"] ??  "N"
 			),
 			array('MODE' => 'html', 'NAME' => 'шапку раздела', 'SHOW_BORDER' => true)
@@ -69,38 +45,7 @@ $APPLICATION->AddHeadString('<meta property="og:image" content="https://' .  $_S
 				?>
 
 					<li class="news-list__item" id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
-						<?/*<div class="info-card">
-							<a href="<?= $arItem["DETAIL_PAGE_URL"] ?>" class="info-card__header">
-								<img
-									src="<?= $resImage['src'] ?>"
-									alt="<?= $arItem["PREVIEW_PICTURE"]["ALT"] ?>"
-									title="<?= $arItem["PREVIEW_PICTURE"]["TITLE"] ?>"
-									width="540" height="360"
-									loading="lazy">
-								<? if ($arParams["DISPLAY_DATE"] != "N" && $arItem["DISPLAY_ACTIVE_FROM"]): ?>
-									<div class="info-card__header-date">
-										<span><?= $arItem["DISPLAY_ACTIVE_FROM"] ?></span>
-									</div>
-								<? endif ?>
 
-							</a>
-
-							<div class="info-card__body">
-								<a href="<?= $arItem["DETAIL_PAGE_URL"] ?>" class="info-card__body-title" title="<?= $arItem["NAME"] ?>"><?= $arItem["NAME"] ?></a>
-								<? if ($arItem["PROPERTIES"]["TAG_LIST"]["VALUE"]): ?>
-									<div class="info-card__tag-list">
-										<? foreach ($arItem["PROPERTIES"]["TAG_LIST"]["VALUE"] as $tag): ?>
-											<a href="<?= $arResult["LIST_PAGE_URL"] . '?tag=' . $tag ?>">
-												<?= '#' . $tag ?>
-											</a>
-										<? endforeach; ?>
-									</div>
-								<? endif; ?>
-								<p class="info-card__body-text"><?= $arItem["PREVIEW_TEXT"]; ?></p>
-							</div>
-
-							<a href="<?= $arItem["DETAIL_PAGE_URL"] ?>" class="info-card__footer"><span>Читать далее</span></a>
-						</div>*/ ?>
 						<div class="news-card">
 							<a href="<?= $arItem["DETAIL_PAGE_URL"] ?>" class="news-card__header">
 								<img src="<?= $image["SRC"] ?>" alt="<?= $alt ?>" width="120" height="80">
@@ -132,11 +77,10 @@ $APPLICATION->AddHeadString('<meta property="og:image" content="https://' .  $_S
 								</a>
 							</div>
 						</div>
+
 					</li>
 				<? endforeach; ?>
 			</ul>
-		<? else: ?>
-			<p>Раздел обновляется...</p>
 		<? endif; ?>
 
 		<? if ($arParams["DISPLAY_BOTTOM_PAGER"]): ?>

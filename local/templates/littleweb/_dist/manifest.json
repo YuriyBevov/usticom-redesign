@@ -58,15 +58,6 @@
       "template.css"
     ]
   },
-  "local/templates/littleweb/components/bitrix/catalog.section.list/services-main/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.section.list/services-main/style.CQbrpDh3.css",
-    "src": "local/templates/littleweb/components/bitrix/catalog.section.list/services-main/_src/scss/index.scss",
-    "isEntry": true,
-    "name": "bitrix_catalog_section_list_services-main_scss",
-    "names": [
-      "bitrix_catalog_section_list_services-main_scss.css"
-    ]
-  },
   "local/templates/littleweb/components/bitrix/menu/bottom/_src/scss/index.scss": {
     "file": "components/bitrix/menu/bottom/style.CDJ7wrhc.css",
     "src": "local/templates/littleweb/components/bitrix/menu/bottom/_src/scss/index.scss",
@@ -122,7 +113,7 @@
     ]
   },
   "local/templates/littleweb/components/bitrix/news.list/news-list/_src/scss/index.scss": {
-    "file": "components/bitrix/news.list/news/style.BIe_dztU.css",
+    "file": "components/bitrix/news.list/news/style.Ddd4oQ3s.css",
     "src": "local/templates/littleweb/components/bitrix/news.list/news-list/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_news_list_news-list_scss",
@@ -146,6 +137,15 @@
     "name": "bitrix_news_list_social-list_scss",
     "names": [
       "bitrix_news_list_social-list_scss.css"
+    ]
+  },
+  "local/templates/littleweb/components/bitrix/system.pagenavigation/lw-page-navigation/_src/scss/index.scss": {
+    "file": "components/bitrix/system.pagenavigation/lw-page-navigation/style.CJbgGbKN.css",
+    "src": "local/templates/littleweb/components/bitrix/system.pagenavigation/lw-page-navigation/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_system_pagenavigation_lw-page-navigation_scss",
+    "names": [
+      "bitrix_system_pagenavigation_lw-page-navigation_scss.css"
     ]
   }
 }
