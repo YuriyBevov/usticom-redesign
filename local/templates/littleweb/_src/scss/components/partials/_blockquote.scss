@@ -1,0 +1,35 @@
+.blockquote {
+	margin: 0;
+	padding-left: 16px;
+	border-left: 3px solid var(--color-primary);
+	font-style: italic;
+
+	&--iconed {
+		position: relative;
+		min-height: 72px;
+		padding: 16px 24px 16px 104px;
+		border-left: 0;
+		border-radius: var(--base-border-radius);
+		background-color: var(--color-info);
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 16px;
+			left: 24px;
+			width: 40px;
+			height: 40px;
+			background: url("@img/content-image/content-quote.svg") center / contain no-repeat;
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 16px;
+			bottom: 16px;
+			left: 88px;
+			width: 3px;
+			background-color: var(--color-primary);
+		}
+	}
+}

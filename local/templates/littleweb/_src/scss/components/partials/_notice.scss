@@ -1,0 +1,27 @@
+.notice {
+	--notice-icon: none;
+
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 16px;
+	border: 1px solid var(--color-light);
+	border-radius: var(--base-border-radius);
+	background-color: var(--color-light);
+
+	&::before {
+		content: "";
+		flex: 0 0 32px;
+		width: 32px;
+		height: 32px;
+		background: var(--notice-icon) center / contain no-repeat;
+	}
+
+	&--info {
+		--notice-icon: url("@img/content-image/content-info.svg");
+	}
+
+	&--warning {
+		--notice-icon: url("@img/content-image/content-warning.svg");
+	}
+}
