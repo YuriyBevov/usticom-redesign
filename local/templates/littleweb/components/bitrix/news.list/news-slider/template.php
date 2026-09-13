@@ -4,9 +4,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 }
 
 $this->setFrameMode(true);
+$showAllButtonUrl = trim((string)($arParams["SHOW_ALL_BUTTON_URL"] ?? "")) ?: ($arResult["LIST_PAGE_URL"] ?? "");
 ?>
 
-<section class="section news-slider-section">
+<section class="section news-slider-section <?= $arParams["SECTION_CLASS"] ?? '' ?>">
 	<div class="container">
 
 		<? $APPLICATION->IncludeFile(
@@ -68,6 +69,14 @@ $this->setFrameMode(true);
 				<div class="swiper-pagination"></div>
 			<? endif; ?>
 		</div>
+
+		<? if (($arParams["SHOW_ALL_BUTTON"] ?? "N") === "Y" && $showAllButtonUrl !== ""): ?>
+			<div class="news-slider-section__footer">
+				<a class="main-btn" href="<?= htmlspecialcharsbx($showAllButtonUrl) ?>">
+					<?= htmlspecialcharsbx(($arParams["SHOW_ALL_BUTTON_TEXT"] ?? "") ?: "Показать все") ?>
+				</a>
+			</div>
+		<? endif; ?>
 
 	</div>
 </section>

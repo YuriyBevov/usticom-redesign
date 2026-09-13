@@ -1,0 +1,113 @@
+@use "@scss/base/container-queries" as *;
+
+.tizzers {
+	container: tizzers / inline-size;
+
+	&__item {
+		display: grid;
+		grid-template-columns: 40px auto;
+		align-items: center;
+		gap: 8px;
+		max-width: 320px;
+		padding: 8px;
+		border-radius: var(--base-border-radius);
+		background: rgba(255, 255, 255, 0.7);
+		box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
+		backdrop-filter: blur(2px);
+		font-size: 14px;
+		font-weight: 400;
+
+		@include container-up("tizzers", 281px) {
+			gap: clamp(8px, 3vw, 20px);
+			padding: clamp(8px, 3vw, 20px);
+		}
+
+		svg {
+			fill: var(--color-primary);
+		}
+
+		strong {
+			color: var(--color-primary);
+			font-weight: 700;
+		}
+	}
+
+	&__text {
+		min-width: 0;
+
+		& > * {
+			margin: 0;
+		}
+	}
+}
+
+.hero__grid-item--features > .tizzers {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	gap: clamp(8px, 2.4vw, 24px);
+	width: 100%;
+	margin: -32px auto 0;
+	padding: 24px 0;
+	list-style: none;
+
+	.tizzers__item {
+		width: 100%;
+		max-width: none;
+	}
+
+	@include container-up("hero", 1240px) {
+		position: absolute;
+		top: 60%;
+		left: 20px;
+		margin: 0;
+		padding-block: 0;
+		transform: translateY(-60%);
+
+		.tizzers__item {
+			max-width: 320px;
+			margin-left: -48px;
+		}
+
+		.tizzers__item:nth-child(2) {
+			margin-left: -72px;
+		}
+	}
+}
+
+.inner-hero .tizzers {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 100%;
+	margin: -32px 0 0;
+	padding: 0 16px;
+	list-style: none;
+
+	.tizzers__item {
+		width: 100%;
+		max-width: none;
+		color: var(--color-secondary);
+		line-height: 1.4;
+	}
+
+	@include container-up("inner-hero", 640px) {
+		flex-flow: row wrap;
+		gap: 20px;
+		padding-inline: clamp(16px, 3vw, 60px);
+
+		.tizzers__item {
+			flex: 1 1 290px;
+			min-width: min(290px, 100%);
+		}
+	}
+
+	@include container-up("inner-hero", 1200px) {
+		gap: 30px;
+		min-height: 100px;
+		padding-inline: 60px;
+	}
+}

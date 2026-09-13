@@ -32,4 +32,22 @@ $arTemplateParameters = array(
 		"TYPE" => "CHECKBOX",
 		"DEFAULT" => "N",
 	),
+	"SHOW_ALL_BUTTON" => array(
+		"PARENT" => "BASE",
+		"NAME" => "Показывать кнопку «Показать все»",
+		"TYPE" => "CHECKBOX",
+		"DEFAULT" => "N",
+	),
+	"SHOW_ALL_BUTTON_TEXT" => array(
+		"PARENT" => "BASE",
+		"NAME" => "Текст кнопки",
+		"TYPE" => "STRING",
+		"DEFAULT" => "Показать все",
+	),
+	"SHOW_ALL_BUTTON_URL" => array(
+		"PARENT" => "BASE",
+		"NAME" => "Ссылка кнопки",
+		"TYPE" => "STRING",
+		"DEFAULT" => "",
+	),
 );

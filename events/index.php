@@ -1,13 +1,15 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetPageProperty("title", "Статьи по юридическим, бухгалтерским и налоговым вопросам от компании ЮСТИКОМ");
-$APPLICATION->SetPageProperty("description", "Полезные статьи на тему бухгалтерских, аудиторских и юридических услуг с примерами и реальным решением задач. Авторские материалы компании Юстиком помогут справиться с непростыми вопросами.");
-$APPLICATION->SetTitle("Публикации");
-?><?$APPLICATION->IncludeComponent(
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Полезные семинары для бизнеса от консалтинговой компании Юстиком");
+$APPLICATION->SetPageProperty("title", "Мероприятия Юстиком");
+$APPLICATION->SetTitle("Мероприятия");
+?>
+
+<? $APPLICATION->IncludeComponent(
 	"bitrix:news", 
-	"lw-news", 
-	array(
-		"ADD_ELEMENT_CHAIN" => "N",
+	"news", 
+	[
+		"ADD_ELEMENT_CHAIN" => "Y",
 		"ADD_SECTIONS_CHAIN" => "Y",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
@@ -15,28 +17,39 @@ $APPLICATION->SetTitle("Публикации");
 		"AJAX_OPTION_JUMP" => "Y",
 		"AJAX_OPTION_SHADOW" => "N",
 		"AJAX_OPTION_STYLE" => "Y",
+		"FILTER_NAME" => "",
 		"BROWSER_TITLE" => "-",
 		"CACHE_FILTER" => "N",
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "36000000",
 		"CACHE_TYPE" => "N",
+		"CATEGORY_CODE" => "DOP",
+		"CATEGORY_IBLOCK" => [
+		],
+		"CATEGORY_ITEMS_COUNT" => "4",
+		"CATEGORY_THEME_23" => "photo",
+		"CATEGORY_THEME_5" => "photo",
+		"CATEGORY_THEME_6" => "photo",
+		"CATEGORY_THEME_9" => "list",
 		"CHECK_DATES" => "Y",
+		"COMPONENT_TEMPLATE" => "news",
 		"DETAIL_ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
 		"DETAIL_DISPLAY_TOP_PAGER" => "N",
-		"DETAIL_FIELD_CODE" => array(
+		"DETAIL_FIELD_CODE" => [
 			0 => "",
 			1 => "",
-		),
+		],
 		"DETAIL_PAGER_SHOW_ALL" => "N",
 		"DETAIL_PAGER_TEMPLATE" => "arrows",
 		"DETAIL_PAGER_TITLE" => "Страница",
-		"DETAIL_PROPERTY_CODE" => array(
-			0 => "",
-			1 => "NEWS_AUTHOR",
-			2 => "NEWS_NOTES",
-			3 => "",
-		),
+		"DETAIL_PROPERTY_CODE" => [
+			0 => "TAG_LIST",
+			1 => "LINKED_SERVICES",
+			2 => "NEWS_AUTHOR",
+			3 => "NEWS_NOTES",
+			4 => "",
+		],
 		"DETAIL_SET_CANONICAL_URL" => "N",
 		"DISPLAY_BOTTOM_PAGER" => "Y",
 		"DISPLAY_DATE" => "Y",
@@ -46,20 +59,20 @@ $APPLICATION->SetTitle("Публикации");
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "Y",
-		"IBLOCK_ID" => "8",
+		"IBLOCK_ID" => "7",
 		"IBLOCK_TYPE" => "usticom_site_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
 		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"LIST_FIELD_CODE" => array(
+		"LIST_FIELD_CODE" => [
 			0 => "",
 			1 => "",
-		),
-		"LIST_PROPERTY_CODE" => array(
+		],
+		"LIST_PROPERTY_CODE" => [
 			0 => "",
 			1 => "NEWS_AUTHOR",
 			2 => "NEWS_NOTES",
 			3 => "",
-		),
+		],
 		"MESSAGE_404" => "",
 		"META_DESCRIPTION" => "-",
 		"META_KEYWORDS" => "-",
@@ -71,21 +84,21 @@ $APPLICATION->SetTitle("Публикации");
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000000",
 		"PAGER_SHOW_ALL" => "N",
 		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => "lw-pagenavigation",
+		"PAGER_TEMPLATE" => "lw-page-navigation",
 		"PAGER_TITLE" => "Новости",
 		"PREVIEW_TRUNCATE_LEN" => "",
-		"SEF_FOLDER" => "/publications/",
+		"SEF_FOLDER" => "/events/",
 		"SEF_MODE" => "Y",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_STATUS_404" => "Y",
 		"SET_TITLE" => "Y",
-		"SHOW_404" => "Y",
+		"SHOW_404" => "N",
 		"SORT_BY1" => "ACTIVE_FROM",
 		"SORT_BY2" => "SORT",
 		"SORT_ORDER1" => "DESC",
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N",
-		"USE_CATEGORIES" => "N",
+		"USE_CATEGORIES" => "Y",
 		"USE_FILTER" => "N",
 		"USE_PERMISSIONS" => "N",
 		"USE_RATING" => "N",
@@ -94,15 +107,20 @@ $APPLICATION->SetTitle("Публикации");
 		"USE_SEARCH" => "N",
 		"USE_SHARE" => "N",
 		"YANDEX" => "N",
-		"COMPONENT_TEMPLATE" => "lw-news",
-		"FILE_404" => "",
-		"SEF_URL_TEMPLATES" => array(
+		"EYEBROW_TEXT" => "",
+		"USE_SWIPER_NAVIGATION" => "Y",
+		"USE_SWIPER_PAGINATION" => "N",
+		"SHOW_ACTIVE_FROM" => "Y",
+		"SHOW_TAG_LIST" => "Y",
+		"SEF_URL_TEMPLATES" => [
 			"news" => "",
 			"section" => "#SECTION_CODE#/",
 			"detail" => "#ELEMENT_CODE#/",
 			"rss" => "rss/",
 			"rss_section" => "#SECTION_ID#/rss/",
-		)
-	),
+		]
+	],
 	false
-);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+); ?>
+
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

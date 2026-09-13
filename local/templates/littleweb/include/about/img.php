@@ -1,0 +1,1 @@
+<img width="1536" src="/local/templates/littleweb/_src/images/about-img.png" height="1024" alt="">

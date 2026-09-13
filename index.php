@@ -21,27 +21,44 @@ $APPLICATION->SetTitle("Услуги аутсорсинга в Москве, а�
 			</div>
 
 			<div class="hero__grid-item hero__grid-item--features">
+				<?
+				$indexHeroTizzersFilterName = "indexHeroTizzersFilter";
+				$GLOBALS[$indexHeroTizzersFilterName] = [
+					"PROPERTY_SHOW_ON_INDEX_PAGE_HERO_VALUE" => "Y",
+				];
 
-				<ul class="highlights">
-					<div class="highlights__item">
-						<svg width='40' height='40' role='img' aria-hidden='true' focusable='false'>
-							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-star'></use>
-						</svg>
-						<span>Занимаемся аутсорсингом кадровых услуг <strong>более 18 лет</strong></span>
-					</div>
-					<div class="highlights__item">
-						<svg width='40' height='40' role='img' aria-hidden='true' focusable='false'>
-							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-star'></use>
-						</svg>
-						<span>В нашей команде трудятся настоящие <strong>эксперты и фанаты</strong> своего дела.</span>
-					</div>
-					<div class="highlights__item">
-						<svg width='40' height='40' role='img' aria-hidden='true' focusable='false'>
-							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-star'></use>
-						</svg>
-						<span>В нашей команде трудятся настоящие <strong>эксперты и фанаты</strong> своего дела.</span>
-					</div>
-				</ul>
+				$APPLICATION->IncludeComponent(
+					"bitrix:news.list",
+					"tizzers",
+					[
+						"IBLOCK_TYPE" => "usticom_site_content",
+						"IBLOCK_ID" => "29",
+						"NEWS_COUNT" => "4",
+						"SORT_BY1" => "SORT",
+						"SORT_ORDER1" => "ASC",
+						"SORT_BY2" => "ID",
+						"SORT_ORDER2" => "ASC",
+						"FIELD_CODE" => ["NAME", "PREVIEW_TEXT"],
+						"PROPERTY_CODE" => [],
+						"DISPLAY_NAME" => "Y",
+						"DISPLAY_PREVIEW_TEXT" => "Y",
+						"DISPLAY_PICTURE" => "N",
+						"CHECK_DATES" => "Y",
+						"CACHE_TYPE" => "A",
+						"CACHE_TIME" => "36000000",
+						"CACHE_GROUPS" => "Y",
+						"CACHE_FILTER" => "Y",
+						"FILTER_NAME" => $indexHeroTizzersFilterName,
+						"SET_TITLE" => "N",
+						"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+						"ADD_SECTIONS_CHAIN" => "N",
+					],
+					false,
+					["HIDE_ICONS" => "Y"]
+				);
+
+				unset($GLOBALS[$indexHeroTizzersFilterName], $indexHeroTizzersFilterName);
+				?>
 
 				<div aria-hidden="true" class="hero__side-image-block">
 					<img src="<?= SITE_TEMPLATE_PATH . '/_src/images/hero-back-img.png' ?>" alt="" width="400" height="540">

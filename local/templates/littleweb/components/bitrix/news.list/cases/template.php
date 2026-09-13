@@ -6,7 +6,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 $this->setFrameMode(true);
 ?>
 
-<section class="section cases-slider-section">
+<section class="section cases-slider-section <?= $arParams["SECTION_CLASS"] ?? '' ?>">
 	<div class="container">
 		<? $APPLICATION->IncludeFile(
 			SITE_TEMPLATE_PATH . '/include/section-header.php',

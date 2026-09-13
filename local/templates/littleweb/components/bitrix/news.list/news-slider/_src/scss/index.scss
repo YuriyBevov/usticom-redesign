@@ -4,4 +4,10 @@
 		max-width: 360px;
 		height: auto;
 	}
+
+	&__footer {
+		display: flex;
+		justify-content: center;
+		margin-top: 32px;
+	}
 }
