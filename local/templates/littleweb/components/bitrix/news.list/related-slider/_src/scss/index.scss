@@ -1,0 +1,41 @@
+.related-slider-section {
+	.swiper-slide {
+		width: min(100%, 440px);
+		height: auto;
+	}
+
+	.related-slider-card {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 24px;
+		height: 100%;
+		padding: 20px;
+		border: 1px solid var(--color-light);
+		border-radius: var(--base-border-radius);
+		background: var(--color-white);
+		color: var(--color-dark);
+
+		&__title {
+			font-size: 14px;
+			font-weight: 600;
+			line-height: 1.4;
+		}
+
+		&__footer {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			padding-top: 12px;
+			border-top: 1px solid var(--color-light);
+			color: var(--color-primary);
+			font-size: 14px;
+			font-weight: 600;
+
+			svg {
+				fill: var(--color-primary);
+			}
+		}
+	}
+}

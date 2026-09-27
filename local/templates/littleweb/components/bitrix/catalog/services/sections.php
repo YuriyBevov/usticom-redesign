@@ -15,7 +15,7 @@ $APPLICATION->IncludeComponent(
 		"SECTION_CODE" => "",
 		"TOP_DEPTH" => 1,
 		"COUNT_ELEMENTS" => "N",
-		"SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
+		"SECTION_URL" => (string)CIBlock::GetArrayByID((int)$arParams["IBLOCK_ID"], "SECTION_PAGE_URL"),
 		"EYEBROW_TEXT" => $arParams["EYEBROW_TEXT"] ?? "наши услуги",
 		"CACHE_TYPE" => $arParams["CACHE_TYPE"],
 		"CACHE_TIME" => $arParams["CACHE_TIME"],

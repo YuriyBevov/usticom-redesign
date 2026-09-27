@@ -1,13 +1,11 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetPageProperty("description", "Услуги компании Юстиком. ✅ Аудит, бухгалтерское и юридическое сопровождение от компании Юстиком. Звоните: ☎ +7 (495) 287-92-68.");
-$APPLICATION->SetPageProperty("title", "Наши услуги — Услуги аутсорсинга в Москве");
-//$APPLICATION->SetTitle("Услуги");
-
 ?>
 
 <?if(CSite::InDir('/services/index.php')):?>
 	<?
+		$APPLICATION->SetPageProperty("description", "Услуги компании Юстиком. ✅ Аудит, бухгалтерское и юридическое сопровождение от компании Юстиком. Звоните: ☎ +7 (495) 287-92-68.");
+		$APPLICATION->SetPageProperty("title", "Наши услуги — Услуги аутсорсинга в Москве");
 		$APPLICATION->IncludeComponent(
 	"bitrix:catalog",
 	"services",
@@ -32,12 +30,56 @@ $APPLICATION->SetPageProperty("title", "Наши услуги — Услуги �
 );
 	?>
 <?else:?>
-	<?$APPLICATION->IncludeComponent(
+	<?
+	$catalogTemplate = "lw-catalog";
+	$serviceSectionId = 0;
+	$currentPath = parse_url($APPLICATION->GetCurPage(false), PHP_URL_PATH);
+	$pathParts = array_values(array_filter(explode("/", trim((string)$currentPath, "/"))));
+	$sectionCode = end($pathParts);
+	if ($sectionCode && \Bitrix\Main\Loader::includeModule("iblock")) {
+		$sections = CIBlockSection::GetList(
+			[],
+			["IBLOCK_ID" => 5, "ACTIVE" => "Y", "GLOBAL_ACTIVE" => "Y", "=CODE" => $sectionCode],
+			false,
+			["ID", "CODE", "IBLOCK_ID", "IBLOCK_SECTION_ID", "SECTION_PAGE_URL"]
+		);
+		$sections->SetUrlTemplates("", (string)CIBlock::GetArrayByID(5, "SECTION_PAGE_URL"));
+		while ($section = $sections->GetNext()) {
+			if (rtrim((string)parse_url($section["~SECTION_PAGE_URL"], PHP_URL_PATH), "/") === rtrim((string)$currentPath, "/")) {
+				$catalogTemplate = "services";
+				$serviceSectionId = (int)$section["ID"];
+				break;
+			}
+		}
+		if ($catalogTemplate === "lw-catalog") {
+			$elements = CIBlockElement::GetList(
+				[],
+				["IBLOCK_ID" => 5, "ACTIVE" => "Y", "=CODE" => $sectionCode],
+				false,
+				false,
+				["ID", "IBLOCK_ID", "IBLOCK_SECTION_ID", "DETAIL_PAGE_URL"]
+			);
+			$elements->SetUrlTemplates((string)CIBlock::GetArrayByID(5, "DETAIL_PAGE_URL"));
+			while ($element = $elements->GetNext()) {
+				if (rtrim((string)parse_url($element["~DETAIL_PAGE_URL"], PHP_URL_PATH), "/") === rtrim((string)$currentPath, "/")) {
+					$catalogTemplate = "services";
+					$serviceSectionId = (int)$element["IBLOCK_SECTION_ID"];
+					break;
+				}
+			}
+		}
+	}
+	if ($catalogTemplate === "lw-catalog") {
+		$APPLICATION->SetPageProperty("description", "Услуги компании Юстиком. ✅ Аудит, бухгалтерское и юридическое сопровождение от компании Юстиком. Звоните: ☎ +7 (495) 287-92-68.");
+		$APPLICATION->SetPageProperty("title", "Наши услуги — Услуги аутсорсинга в Москве");
+	}
+	$APPLICATION->IncludeComponent(
 	"bitrix:catalog", 
-	"lw-catalog", 
+	$catalogTemplate,
 	array(
 		"IBLOCK_TYPE" => "usticom_site_content",
 		"IBLOCK_ID" => "5",
+		"CURRENT_SECTION_ID" => $serviceSectionId,
 		"BASKET_URL" => "",
 		"ACTION_VARIABLE" => "action",
 		"PRODUCT_ID_VARIABLE" => "id",
@@ -188,7 +230,7 @@ $APPLICATION->SetPageProperty("title", "Наши услуги — Услуги �
 		"FILE_404" => "",
 		"SEF_URL_TEMPLATES" => array(
 			"sections" => "/",
-			"section" => "#SECTION_CODE#/",
+			"section" => $catalogTemplate === "services" ? "#SECTION_CODE_PATH#/" : "#SECTION_CODE#/",
 			"element" => "#SECTION_CODE#/#ELEMENT_CODE#/",
 			"compare" => "",
 			"smart_filter" => "#SECTION_CODE#/filter/#SMART_FILTER_PATH#/apply/",
