@@ -10,6 +10,9 @@ lerna-debug.log*
 /.osp/
 /bitrix
 /include
+!/include/
+/include/*
+!/include/worktime.php
 /upload
 /cache/
 /node_modules/

@@ -6,9 +6,10 @@
     </div>
   <? endif; ?>
 
-  <h2 class="section-title">
+  <? $headingTag = ($arParams["HEADING_TAG"] ?? "h2") === "h1" ? "h1" : "h2"; ?>
+  <<?= $headingTag ?> class="section-title">
     <?= $arParams["TITLE"] ?>
-  </h2>
+  </<?= $headingTag ?>>
 
   <? if (!empty($arParams["TEXT"])): ?>
     <p class="section-description">
