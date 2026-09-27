@@ -9,36 +9,25 @@ $APPLICATION->SetPageProperty("title", "Наши услуги — Услуги �
 <?if(CSite::InDir('/services/index.php')):?>
 	<?
 		$APPLICATION->IncludeComponent(
-	"bitrix:catalog.section.list", 
-	"services-main",
-	array(
+	"bitrix:catalog",
+	"services",
+	[
 		"IBLOCK_TYPE" => "usticom_site_content",
 		"IBLOCK_ID" => "5",
-		"CACHE_TYPE" => "N",
+		"SEF_MODE" => "Y",
+		"SEF_FOLDER" => "/services/",
+		"SEF_URL_TEMPLATES" => [
+			"sections" => "",
+			"section" => "#SECTION_CODE#/",
+			"element" => "#SECTION_CODE#/#ELEMENT_CODE#/",
+		],
+		"CACHE_TYPE" => "A",
 		"CACHE_TIME" => "36000000",
 		"CACHE_GROUPS" => "Y",
-		"COMPONENT_TEMPLATE" => "services-main",
 		"EYEBROW_TEXT" => "наши услуги",
-		"SECTION_ID" => $_REQUEST["SECTION_ID"],
-		"SECTION_CODE" => "",
-		"COUNT_ELEMENTS" => "Y",
-		"COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",
-		"ADDITIONAL_COUNT_ELEMENTS_FILTER" => "additionalCountFilter",
-		"HIDE_SECTIONS_WITH_ZERO_COUNT_ELEMENTS" => "N",
-		"TOP_DEPTH" => "2",
-		"SECTION_FIELDS" => array(
-			0 => "",
-			1 => "",
-		),
-		"SECTION_USER_FIELDS" => array(
-			0 => "",
-			1 => "",
-		),
-		"FILTER_NAME" => "sectionsFilter",
-		"SECTION_URL" => "",
-		"CACHE_FILTER" => "N",
-		"ADD_SECTIONS_CHAIN" => "Y"
-	),
+		"SET_TITLE" => "N",
+		"ADD_SECTIONS_CHAIN" => "N",
+	],
 	false
 );
 	?>

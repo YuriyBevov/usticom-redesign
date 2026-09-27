@@ -50,12 +50,21 @@
     "isEntry": true
   },
   "local/templates/littleweb/_src/scss/template.scss": {
-    "file": "template_styles.CRLnmEzE.css",
+    "file": "template_styles.a_3t42fP.css",
     "src": "local/templates/littleweb/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
     "names": [
       "template.css"
+    ]
+  },
+  "local/templates/littleweb/components/bitrix/catalog/services/_src/scss/index.scss": {
+    "file": "components/bitrix/catalog/services/style.DXymGNMw.css",
+    "src": "local/templates/littleweb/components/bitrix/catalog/services/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_catalog_services_scss",
+    "names": [
+      "bitrix_catalog_services_scss.css"
     ]
   },
   "local/templates/littleweb/components/bitrix/menu/bottom/_src/scss/index.scss": {
