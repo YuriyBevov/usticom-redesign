@@ -13,6 +13,8 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
-	)
+	),
+	Array("Налоговые услуги", "/services/", Array(), Array(), ""),
+	Array("Профессиональные бухгалтерские услуги", "/services/", Array(), Array(), "")
 );
 ?>

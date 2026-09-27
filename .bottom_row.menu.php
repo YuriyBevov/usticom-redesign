@@ -1,12 +1,13 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Все услуги", 
+		"Финансы",
 		"/services/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
+	Array("ВЭД", "/services/", Array(), Array(), ""),
 	Array(
 		"Аудит", 
 		"/services/", 

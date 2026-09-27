@@ -4,6 +4,17 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 }
 
 $this->setFrameMode(true);
+$listPageUrl = trim((string)($arResult["LIST_PAGE_URL"] ?? ""));
+if ($listPageUrl === "") {
+	$listPageUrl = $APPLICATION->GetCurDir();
+}
+
+$buildTagUrl = static function (string $baseUrl, string $tag): string {
+	$separator = strpos($baseUrl, "?") === false ? "?" : "&";
+
+	return $baseUrl . $separator . "tag=" . rawurlencode($tag);
+};
+
 $showAllButtonUrl = trim((string)($arParams["SHOW_ALL_BUTTON_URL"] ?? "")) ?: ($arResult["LIST_PAGE_URL"] ?? "");
 ?>
 
@@ -42,7 +53,7 @@ $showAllButtonUrl = trim((string)($arParams["SHOW_ALL_BUTTON_URL"] ?? "")) ?: ($
 									<ul class="tag-list">
 										<? foreach ($arItem["PROPERTIES"]["TAG_LIST"]["VALUE"] as $tag): ?>
 											<li>
-												<a href="<?= '/news/?tag=' . $tag ?>" class="tag">
+												<a href="<?= htmlspecialcharsbx($buildTagUrl($listPageUrl, (string)$tag)) ?>" class="tag">
 													#<?= $tag ?>
 												</a>
 											</li>

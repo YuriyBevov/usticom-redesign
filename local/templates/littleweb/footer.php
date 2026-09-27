@@ -17,9 +17,10 @@
 					array('MODE' => 'html', 'NAME' => 'логотип', 'SHOW_BORDER' => false)
 				); ?>
 
-				<small>© 2003—<?= Date("Y") ?> Юстиком.<br>Все права защищены.</small>
+				<small><span>© 2003—<?= Date("Y") ?> Юстиком.</span> <span>Все права защищены.</span></small>
 			</div>
 			<div class="footer__top-section footer__top-section--menu-block">
+				<div class="footer__menu-column footer__menu-column--categories">
 				<? $APPLICATION->IncludeComponent(
 					"bitrix:menu",
 					"bottom",
@@ -38,7 +39,9 @@
 					],
 					false
 				); ?>
+				</div>
 
+				<div class="footer__menu-column footer__menu-column--primary">
 				<? $APPLICATION->IncludeComponent(
 					"bitrix:menu",
 					"bottom",
@@ -57,7 +60,9 @@
 					],
 					false
 				); ?>
+				</div>
 
+				<div class="footer__menu-column footer__menu-column--services">
 				<? $APPLICATION->IncludeComponent(
 					"bitrix:menu",
 					"bottom",
@@ -76,7 +81,9 @@
 					],
 					false
 				); ?>
+				</div>
 
+				<div class="footer__menu-column footer__menu-column--services">
 				<? $APPLICATION->IncludeComponent(
 					"bitrix:menu",
 					"bottom",
@@ -95,6 +102,7 @@
 					],
 					false
 				); ?>
+				</div>
 			</div>
 			<div class="footer__top-section footer__top-section--contacts-block">
 				<button class="main-btn">Оставить заявку</button>
@@ -212,12 +220,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="footer__bottom">
-		<div class="container">
-			<a href="/policy-privacy/">Политика конфиденциальности</a>
-		</div>
-
 	</div>
 </footer>
 

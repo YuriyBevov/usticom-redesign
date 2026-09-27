@@ -1,6 +1,17 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
 $APPLICATION->AddHeadString('<meta property="og:image" content="https://' .  $_SERVER["SERVER_NAME"] . CFile::GetPath(CIBlock::GetArrayByID($arResult["ID"], "PICTURE")) . '"/>', true);
+
+$listPageUrl = trim((string)($arResult["LIST_PAGE_URL"] ?? ""));
+if ($listPageUrl === "") {
+	$listPageUrl = $APPLICATION->GetCurDir();
+}
+
+$buildTagUrl = static function (string $baseUrl, string $tag): string {
+	$separator = strpos($baseUrl, "?") === false ? "?" : "&";
+
+	return $baseUrl . $separator . "tag=" . rawurlencode($tag);
+};
 ?>
 
 
@@ -21,11 +32,11 @@ $APPLICATION->AddHeadString('<meta property="og:image" content="https://' .  $_S
 				<div class="swiper tag-slider">
 					<ul class="swiper-wrapper tag-list tag-list--slider">
 						<li class="swiper-slide tag-list__item">
-							<a <?= (empty($arResult["CURRENT_TAG"]) ? 'class="active"' : '') ?> href="<?= $arResult["LIST_PAGE_URL"] ?>">#<?= $arResult["LIST_PAGE_TITLE"] ?></a>
+							<a <?= (empty($arResult["CURRENT_TAG"]) ? 'class="active"' : '') ?> href="<?= htmlspecialcharsbx($listPageUrl) ?>">#<?= $arResult["LIST_PAGE_TITLE"] ?></a>
 						</li>
 						<? foreach ($arResult["TAG_LIST"] as $tag): ?>
 							<li class="swiper-slide tag-list__item">
-								<a <?= ($arResult["CURRENT_TAG"] === $tag ? 'class="active"' : '') ?> href="<?= $arResult["LIST_PAGE_URL"] ?><?= '?tag=' . $tag ?>"><?= '#' . $tag ?></a>
+								<a <?= ($arResult["CURRENT_TAG"] === $tag ? 'class="active"' : '') ?> href="<?= htmlspecialcharsbx($buildTagUrl($listPageUrl, (string)$tag)) ?>"><?= '#' . $tag ?></a>
 							</li>
 						<? endforeach; ?>
 					</ul>
@@ -60,7 +71,7 @@ $APPLICATION->AddHeadString('<meta property="og:image" content="https://' .  $_S
 									<ul class="tag-list">
 										<? foreach ($arItem["PROPERTIES"]["TAG_LIST"]["VALUE"] as $tag): ?>
 											<li>
-												<a href="<?= '/news/?tag=' . $tag ?>" class="tag">
+												<a href="<?= htmlspecialcharsbx($buildTagUrl($listPageUrl, (string)$tag)) ?>" class="tag">
 													#<?= $tag ?>
 												</a>
 											</li>

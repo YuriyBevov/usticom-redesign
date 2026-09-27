@@ -14,6 +14,7 @@ $aMenuLinks = Array(
 		Array(), 
 		"" 
 	),
+	Array("Юридические услуги", "/services/", Array(), Array(), ""),
 	Array(
 		"Сопровождение сделок и бизнеса", 
 		"/services/", 
