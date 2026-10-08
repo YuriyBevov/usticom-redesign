@@ -1,0 +1,75 @@
+:root {
+  --cookie-link-color: var(--accent);
+  --cookie-text-color: var(--black);
+  --cookie-bg-color: rgba(255, 255, 255, 0.85);
+  --cookie-offset-size: 24px 0;
+  --cookie-btn-offset-size: 8px 32px;
+}
+
+#cookie-consent-banner {
+  position: fixed;
+  max-width: 700px;
+  bottom: 10px;
+  left: 10px;
+  border-radius: var(--border-radius-sm);
+  width: calc(100% - 20px);
+  height: auto;
+  font-size: clamp(14px, 2vw, 16px);
+  background-color: var(--cookie-bg-color);
+  color: var(--cookie-text-color);
+  padding: var(--cookie-offset-size);
+  -webkit-box-shadow:
+    rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  box-shadow:
+    rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  z-index: 1000;
+}
+
+#cookie-consent-banner .lw-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 32px 160px;
+  grid-template-columns: auto 160px;
+  gap: 16px 32px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media (max-width: 534px) {
+  #cookie-consent-banner .lw-container {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+}
+
+#cookie-consent-banner .lw-container * {
+  margin: 0;
+}
+
+#cookie-consent-banner button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: var(--cookie-btn-offset-size);
+  width: 100%;
+  min-height: 44px;
+  background-color: var(--accent);
+  max-width: 100%;
+  font-size: 16px;
+}
+
+#cookie-consent-banner a {
+  color: var(--cookie-link-color);
+  text-decoration: underline;
+}

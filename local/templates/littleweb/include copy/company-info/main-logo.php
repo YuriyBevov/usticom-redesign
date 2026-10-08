@@ -1,0 +1,1 @@
+<img src="<?=SITE_TEMPLATE_PATH?>/assets/img/logo.svg" alt="Юстиком" title="Юстиком" width="178" height="50">

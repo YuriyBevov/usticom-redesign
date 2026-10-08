@@ -1,0 +1,1 @@
+<a class="lw-accent-color main-footer__partnership" href="#">Партнерская программа</a>

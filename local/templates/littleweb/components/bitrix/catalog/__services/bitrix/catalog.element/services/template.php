@@ -9,7 +9,7 @@ $name = (string)($arResult["~NAME"] ?? $arResult["NAME"] ?? "");
 $preview = trim((string)($arResult["PROPERTIES"]["SERVICE_PREVIEW_TEXT"]["~VALUE"]["TEXT"] ?? $arResult["PROPERTIES"]["SERVICE_PREVIEW_TEXT"]["~VALUE"]["TEXT"] ?? ""));
 $previewType = (string)($arResult["PREVIEW_TEXT_TYPE"] ?? "text");
 $picture = !empty($arResult["DETAIL_PICTURE"]) ? $arResult["DETAIL_PICTURE"] : ($arResult["PREVIEW_PICTURE"] ?? null);
-$imageBase = SITE_TEMPLATE_PATH . "/components/bitrix/catalog/services/_src/images/detail/";
+$imageBase = SITE_TEMPLATE_PATH . "/components/bitrix/catalog/__services/_src/images/detail/";
 
 $detail = trim((string)($arResult["~DETAIL_TEXT"] ?? $arResult["DETAIL_TEXT"] ?? ""));
 $detailType = (string)($arResult["DETAIL_TEXT_TYPE"] ?? "text");

@@ -19,6 +19,25 @@
 
 <body>
   <div id="panel"><? $APPLICATION->ShowPanel(); ?></div>
+  <div class="header">
+    <div class="container">
+      <a class="main-logo" href="/" aria-label="https://www.usticom.ru">
+        <? $APPLICATION->IncludeComponent(
+          "bitrix:main.include",
+          "",
+          array(
+            "AREA_FILE_SHOW" => "file",
+            "PATH" => SITE_TEMPLATE_PATH . "/include/company-info/main-logo.php"
+          ),
+          false,
+          array(
+            "ACTIVE_COMPONENT" => "Y" // отключение компонента
+          )
+        ); ?>
+      </a>
+    </div>
+  </div>
+
   <main class="workarea">
     <?php
     $currentPagePath = (string)parse_url($APPLICATION->GetCurPage(false), PHP_URL_PATH);

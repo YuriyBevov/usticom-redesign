@@ -1,5 +1,6 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
+$sectionTitle = trim((string)($arParams["SECTION_TITLE"] ?? ""));
 ?>
 
 <section class="section section--bg-initial features">
@@ -11,7 +12,7 @@ $this->setFrameMode(true);
 					SITE_TEMPLATE_PATH . '/include/section-header.php',
 					array(
 						"EYEBROW_TEXT" => 'какие есть',
-						"TITLE" => $arResult["NAME"],
+						"TITLE" => $sectionTitle !== "" ? htmlspecialcharsbx($sectionTitle) : $arResult["NAME"],
 						"USE_SWIPER_NAVIGATION" => $arParams["USE_SWIPER_NAVIGATION"] ??  "N"
 					),
 					array('MODE' => 'html', 'NAME' => 'шапку раздела', 'SHOW_BORDER' => true)
