@@ -47,7 +47,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		$sections->SetUrlTemplates("", (string)CIBlock::GetArrayByID(5, "SECTION_PAGE_URL"));
 		while ($section = $sections->GetNext()) {
 			if (rtrim((string)parse_url($section["~SECTION_PAGE_URL"], PHP_URL_PATH), "/") === rtrim((string)$currentPath, "/")) {
-				$catalogTemplate = "__services";
+				$catalogTemplate = "servises";
 				$serviceSectionId = (int)$section["ID"];
 				break;
 			}
@@ -231,7 +231,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"FILE_404" => "",
 		"SEF_URL_TEMPLATES" => array(
 			"sections" => "/",
-			"section" => $catalogTemplate === "__services" ? "#SECTION_CODE_PATH#/" : "#SECTION_CODE#/",
+			"section" => in_array($catalogTemplate, ["servises", "__services"], true) ? "#SECTION_CODE_PATH#/" : "#SECTION_CODE#/",
 			"element" => "#SECTION_CODE#/#ELEMENT_CODE#/",
 			"compare" => "",
 			"smart_filter" => "#SECTION_CODE#/filter/#SMART_FILTER_PATH#/apply/",
