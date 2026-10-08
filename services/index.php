@@ -23,6 +23,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"CACHE_TIME" => "36000000",
 		"CACHE_GROUPS" => "Y",
 		"EYEBROW_TEXT" => "наши услуги",
+		"TIZZERS_SECTION_ID" => 5156,
 		"SET_TITLE" => "N",
 		"ADD_SECTIONS_CHAIN" => "N",
 	],

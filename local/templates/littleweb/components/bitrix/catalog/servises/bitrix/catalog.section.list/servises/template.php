@@ -23,29 +23,37 @@ $sections = $arResult["SECTIONS"] ?? [];
 				<img src="<?= SITE_TEMPLATE_PATH ?>/components/bitrix/catalog/servises/_src/images/hero-team.png" width="510" height="681" alt="">
 			</div>
 		</div>
-		<?php $APPLICATION->IncludeComponent(
-			"bitrix:news.list",
-			"tizzers",
-			[
-				"IBLOCK_TYPE" => "usticom_site_content",
-				"IBLOCK_ID" => "29",
-				"NEWS_COUNT" => "4",
-				"SORT_BY1" => "SORT",
-				"SORT_ORDER1" => "ASC",
-				"SORT_BY2" => "ID",
-				"SORT_ORDER2" => "ASC",
-				"FIELD_CODE" => ["NAME", "PREVIEW_TEXT"],
-				"CHECK_DATES" => "Y",
-				"CACHE_TYPE" => "A",
-				"CACHE_TIME" => "36000000",
-				"CACHE_GROUPS" => "Y",
-				"SET_TITLE" => "N",
-				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-				"ADD_SECTIONS_CHAIN" => "N",
-			],
-			$component,
-			["HIDE_ICONS" => "Y"]
-		); ?>
+		<?php
+		$heroTizzersSectionId = getHeroTizzersSectionId((int)($arParams["TIZZERS_SECTION_ID"] ?? 0), 5158);
+		if ($heroTizzersSectionId > 0) {
+			$APPLICATION->IncludeComponent(
+				"bitrix:news.list",
+				"tizzers",
+				[
+					"IBLOCK_TYPE" => "usticom_site_content",
+					"IBLOCK_ID" => "29",
+					"PARENT_SECTION" => $heroTizzersSectionId,
+					"INCLUDE_SUBSECTIONS" => "N",
+					"STRICT_SECTION_CHECK" => "Y",
+					"NEWS_COUNT" => "4",
+					"SORT_BY1" => "SORT",
+					"SORT_ORDER1" => "ASC",
+					"SORT_BY2" => "ID",
+					"SORT_ORDER2" => "ASC",
+					"FIELD_CODE" => ["NAME", "PREVIEW_TEXT"],
+					"CHECK_DATES" => "Y",
+					"CACHE_TYPE" => "A",
+					"CACHE_TIME" => "36000000",
+					"CACHE_GROUPS" => "Y",
+					"SET_TITLE" => "N",
+					"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+					"ADD_SECTIONS_CHAIN" => "N",
+				],
+				$component,
+				["HIDE_ICONS" => "Y"]
+			);
+		}
+		?>
 	</div>
 </section>
 

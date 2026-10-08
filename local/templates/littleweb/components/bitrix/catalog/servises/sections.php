@@ -11,6 +11,7 @@ $APPLICATION->IncludeComponent(
 	[
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+		"TIZZERS_SECTION_ID" => (int)($arParams["TIZZERS_SECTION_ID"] ?? 0),
 		"SECTION_ID" => 0,
 		"SECTION_CODE" => "",
 		"TOP_DEPTH" => 1,

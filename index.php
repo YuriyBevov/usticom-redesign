@@ -22,42 +22,40 @@ $APPLICATION->SetTitle("Услуги аутсорсинга в Москве, а�
 
 			<div class="hero__grid-item hero__grid-item--features">
 				<?
-				$indexHeroTizzersFilterName = "indexHeroTizzersFilter";
-				$GLOBALS[$indexHeroTizzersFilterName] = [
-					"PROPERTY_SHOW_ON_INDEX_PAGE_HERO_VALUE" => "Y",
-				];
+				$indexHeroTizzersSectionId = getHeroTizzersSectionId(5157);
 
-				$APPLICATION->IncludeComponent(
-					"bitrix:news.list",
-					"tizzers",
-					[
-						"IBLOCK_TYPE" => "usticom_site_content",
-						"IBLOCK_ID" => "29",
-						"NEWS_COUNT" => "4",
-						"SORT_BY1" => "SORT",
-						"SORT_ORDER1" => "ASC",
-						"SORT_BY2" => "ID",
-						"SORT_ORDER2" => "ASC",
-						"FIELD_CODE" => ["NAME", "PREVIEW_TEXT"],
-						"PROPERTY_CODE" => [],
-						"DISPLAY_NAME" => "Y",
-						"DISPLAY_PREVIEW_TEXT" => "Y",
-						"DISPLAY_PICTURE" => "N",
-						"CHECK_DATES" => "Y",
-						"CACHE_TYPE" => "A",
-						"CACHE_TIME" => "36000000",
-						"CACHE_GROUPS" => "Y",
-						"CACHE_FILTER" => "Y",
-						"FILTER_NAME" => $indexHeroTizzersFilterName,
-						"SET_TITLE" => "N",
-						"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-						"ADD_SECTIONS_CHAIN" => "N",
-					],
-					false,
-					["HIDE_ICONS" => "Y"]
-				);
-
-				unset($GLOBALS[$indexHeroTizzersFilterName], $indexHeroTizzersFilterName);
+				if ($indexHeroTizzersSectionId > 0) {
+					$APPLICATION->IncludeComponent(
+						"bitrix:news.list",
+						"tizzers",
+						[
+							"IBLOCK_TYPE" => "usticom_site_content",
+							"IBLOCK_ID" => "29",
+							"PARENT_SECTION" => $indexHeroTizzersSectionId,
+							"INCLUDE_SUBSECTIONS" => "N",
+							"STRICT_SECTION_CHECK" => "Y",
+							"NEWS_COUNT" => "4",
+							"SORT_BY1" => "SORT",
+							"SORT_ORDER1" => "ASC",
+							"SORT_BY2" => "ID",
+							"SORT_ORDER2" => "ASC",
+							"FIELD_CODE" => ["NAME", "PREVIEW_TEXT"],
+							"PROPERTY_CODE" => [],
+							"DISPLAY_NAME" => "Y",
+							"DISPLAY_PREVIEW_TEXT" => "Y",
+							"DISPLAY_PICTURE" => "N",
+							"CHECK_DATES" => "Y",
+							"CACHE_TYPE" => "A",
+							"CACHE_TIME" => "36000000",
+							"CACHE_GROUPS" => "Y",
+							"SET_TITLE" => "N",
+							"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+							"ADD_SECTIONS_CHAIN" => "N",
+						],
+						false,
+						["HIDE_ICONS" => "Y"]
+					);
+				}
 				?>
 
 				<div aria-hidden="true" class="hero__side-image-block">
