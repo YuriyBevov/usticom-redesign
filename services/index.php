@@ -63,7 +63,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 			$elements->SetUrlTemplates((string)CIBlock::GetArrayByID(5, "DETAIL_PAGE_URL"));
 			while ($element = $elements->GetNext()) {
 				if (rtrim((string)parse_url($element["~DETAIL_PAGE_URL"], PHP_URL_PATH), "/") === rtrim((string)$currentPath, "/")) {
-					$catalogTemplate = "__services";
+					$catalogTemplate = "servises";
 					$serviceSectionId = (int)$element["IBLOCK_SECTION_ID"];
 					break;
 				}

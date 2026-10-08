@@ -22,11 +22,22 @@
 	&__comparison {
 		position: relative;
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns: minmax(0, 1fr);
 		min-width: 0;
 		min-height: 278px;
 		border-radius: var(--base-border-radius);
 		background: var(--color-light);
+
+		&::before {
+			position: absolute;
+			top: 1px;
+			bottom: 1px;
+			left: 50%;
+			display: none;
+			width: 1px;
+			background: var(--color-white);
+			content: "";
+		}
 	}
 
 	&__column {
@@ -51,35 +62,44 @@
 		}
 
 		li {
-			display: flex;
-			align-items: center;
-			gap: 16px;
+			position: relative;
 			min-height: 24px;
+			padding-left: 40px;
 			color: #545454;
 			font-size: 16px;
 			font-weight: 500;
 			line-height: 1.35;
-		}
+			overflow-wrap: anywhere;
 
-		li img {
-			display: block;
-			width: 24px;
-			height: 24px;
-			flex: none;
+			&::before {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				width: 24px;
+				height: 24px;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: contain;
+				transform: translateY(-50%);
+				content: "";
+			}
 		}
 
 		&--positive h3 {
 			color: var(--color-primary);
 		}
-	}
 
-	&__divider {
-		position: absolute;
-		top: 1px;
-		left: 50%;
-		width: 1px;
-		height: 276px;
-		transform: translateX(-50%);
+		&--positive li::before {
+			background-image: url("../images/detail/profit-check.svg");
+		}
+
+		&--negative {
+			border-top: 1px solid var(--color-white);
+
+			li::before {
+				background-image: url("../images/detail/profit-close.svg");
+			}
+		}
 	}
 
 	&__vs {
@@ -113,6 +133,20 @@
 		}
 	}
 
+	@media (min-width: 700px) {
+		&__comparison {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+
+			&::before {
+				display: block;
+			}
+		}
+
+		&__column--negative {
+			border-top: none;
+		}
+	}
+
 	@media (min-width: 1200px) {
 		&__layout--with-image {
 			grid-template-columns: minmax(0, 1fr) 420px;
@@ -127,17 +161,4 @@
 		}
 	}
 
-	@media (max-width: 699px) {
-		&__comparison {
-			grid-template-columns: 1fr;
-		}
-
-		&__column--negative {
-			border-top: 1px solid var(--color-white);
-		}
-
-		&__divider {
-			display: none;
-		}
-	}
 }

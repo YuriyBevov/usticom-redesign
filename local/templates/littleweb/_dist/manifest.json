@@ -77,7 +77,7 @@
     ]
   },
   "local/templates/littleweb/components/bitrix/catalog/servises/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog/servises/style.B6Cv-f6V.css",
+    "file": "components/bitrix/catalog/servises/style.CuiYDOSG.css",
     "src": "local/templates/littleweb/components/bitrix/catalog/servises/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_servises_scss",
@@ -226,13 +226,13 @@
       "bitrix_news_list_partnership_scss.css"
     ]
   },
-  "local/templates/littleweb/components/bitrix/news.list/profit/_src/scss/index.scss": {
-    "file": "components/bitrix/news.list/profit/style.BuN2nFRX.css",
-    "src": "local/templates/littleweb/components/bitrix/news.list/profit/_src/scss/index.scss",
+  "local/templates/littleweb/components/bitrix/news.list/pricelist/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/pricelist/style.D6DMd9XC.css",
+    "src": "local/templates/littleweb/components/bitrix/news.list/pricelist/_src/scss/index.scss",
     "isEntry": true,
-    "name": "bitrix_news_list_profit_scss",
+    "name": "bitrix_news_list_pricelist_scss",
     "names": [
-      "bitrix_news_list_profit_scss.css"
+      "bitrix_news_list_pricelist_scss.css"
     ]
   },
   "local/templates/littleweb/components/bitrix/news.list/reasons/_src/scss/index.scss": {

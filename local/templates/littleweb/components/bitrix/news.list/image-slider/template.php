@@ -19,7 +19,7 @@ $useAutoFillMode = $arParams["USE_AUTO_FILL_MODE"] && $arParams["USE_AUTO_FILL_M
 				"TITLE" => $arResult["NAME"],
 				"USE_SWIPER_NAVIGATION" => $arParams["USE_SWIPER_NAVIGATION"] ??  "N"
 			),
-			array('MODE' => 'html', 'NAME' => 'шапку раздела', 'SHOW_BORDER' => true)
+			array('MODE' => 'html', 'NAME' => 'шапку раздела', 'SHOW_BORDER' => false)
 		); ?>
 
 		<div class="swiper base-slider<?= $useAutoFillMode ? ' --autofill' : '' ?>">

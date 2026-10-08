@@ -13,7 +13,7 @@ if (!$arResult["ITEMS"]) {
 		<?php $APPLICATION->IncludeFile(
 			SITE_TEMPLATE_PATH . "/include/section-header.php",
 			["EYEBROW_TEXT" => "рекомендуем", "TITLE" => "Вам также могут быть интересны", "USE_SWIPER_NAVIGATION" => "Y"],
-			["MODE" => "html", "NAME" => "шапку раздела", "SHOW_BORDER" => true]
+			["MODE" => "html", "NAME" => "шапку раздела", "SHOW_BORDER" => false]
 		); ?>
 		<div class="swiper base-slider">
 			<div class="swiper-wrapper">

@@ -25,7 +25,7 @@ $buildTagUrl = static function (string $baseUrl, string $tag): string {
 				"TEXT" => $arResult["DESCRIPTION"] ?? '',
 				"USE_SWIPER_NAVIGATION" => $arParams["USE_SWIPER_NAVIGATION"] ??  "N"
 			),
-			array('MODE' => 'html', 'NAME' => 'шапку раздела', 'SHOW_BORDER' => true)
+			array('MODE' => 'html', 'NAME' => 'шапку раздела', 'SHOW_BORDER' => false)
 		); ?>
 		<? if ($arResult["ITEMS"]): ?>
 			<? if ($arResult["TAG_LIST"]): ?>

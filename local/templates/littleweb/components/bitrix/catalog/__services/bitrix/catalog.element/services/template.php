@@ -73,7 +73,6 @@ foreach (
 	[
 		"includes" => ["INCLUDES", "INCLUDES_MAIN_TITLE"],
 		"workflow" => ["WORKFLOW", "WORKFLOW_MAIN_TITLE"],
-		"profit" => ["PROFIT_SECTION_TITLE", "PROFIT_SECTION_IMG", "PROFIT", "PROFIT_TITLE", "UNPROFIT_TITLE", "PROFIT_TEXT", "UNPROFIT_TEXT", "UNPROFIT"],
 	] as $templateName => $properties
 ) {
 	$APPLICATION->IncludeComponent("bitrix:news.list", $templateName, [

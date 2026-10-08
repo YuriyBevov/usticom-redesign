@@ -28,7 +28,7 @@ $showAllButtonUrl = trim((string)($arParams["SHOW_ALL_BUTTON_URL"] ?? "")) ?: ($
 				"TITLE" => $arResult["NAME"],
 				"USE_SWIPER_NAVIGATION" => $arParams["USE_SWIPER_NAVIGATION"] ??  "N"
 			),
-			array('MODE' => 'html', 'NAME' => 'шапку раздела', 'SHOW_BORDER' => true)
+			array('MODE' => 'html', 'NAME' => 'шапку раздела', 'SHOW_BORDER' => false)
 		); ?>
 
 		<div class="swiper base-slider">
