@@ -1,12 +1,14 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 
-</main>
 
-<section class="callback section">
+
+<section class="callback section<?= in_array($APPLICATION->GetCurPage(false), [SITE_DIR, SITE_DIR . 'index.php'], true) ? ' section--bg-alternative' : '' ?>">
 	<div class="container">
 		callback
 	</div>
 </section>
+
+</main>
 
 <footer class="footer">
 	<div class="footer__top">

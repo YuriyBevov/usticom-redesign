@@ -2,6 +2,10 @@
 @use "@scss/extends/text-truncate" as *;
 
 .cases-slider-section {
+	&.section {
+		background: var(--section-bg-gradient);
+	}
+
 	.swiper-slide {
 		width: 100%;
 		max-width: 675px;

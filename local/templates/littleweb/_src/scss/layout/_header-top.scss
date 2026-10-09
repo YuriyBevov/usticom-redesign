@@ -1,0 +1,26 @@
+.header-top {
+    background: var(--color-white);
+    color: var(--color-dark);
+    border-bottom: 1px solid var(--color-light);
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: normal;
+
+    &__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 10px; }
+    &__nav { flex-shrink: 0; }
+    &__list { display: flex; flex-wrap: wrap; align-items: center; gap: 12px clamp(24px, 3.125vw, 60px); margin: 0; padding: 0; list-style: none; }
+    &__link { font-weight: 600; color: inherit; white-space: nowrap; }
+    &__link.is-current { color: var(--color-primary); }
+    &__contacts { display: flex; align-items: center; justify-content: flex-end; flex: 1; min-width: 0; gap: clamp(12px, 2.0833vw, 40px); font-weight: 500; }
+    &__address { width: 195px; min-width: 0; margin: 0; font-style: normal; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    &__mail { flex-shrink: 0; a { text-decoration: underline; text-underline-offset: 2px; } }
+    &__phone { flex-shrink: 0; font-size: 14px; font-weight: 700; }
+    &__mail a, &__phone a { color: inherit; white-space: nowrap; }
+    .social { flex-shrink: 0; }
+    .social__list { gap: 4px; flex-wrap: nowrap; }
+    .social__list-item a { width: 24px; height: 24px; padding: 3px; }
+    .social__list-item img { width: 14px; height: auto; object-fit: contain; }
+    a:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+}
+
+@media (max-width: 1199px) { .header-top { display: none; } }

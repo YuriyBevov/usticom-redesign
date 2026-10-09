@@ -19,6 +19,7 @@
 
 <body>
   <div id="panel"><? $APPLICATION->ShowPanel(); ?></div>
+  <?php include __DIR__ . '/include/header-top.php'; ?>
   <header class="header" data-site-header>
     <div class="container header__inner">
       <a class="main-logo header__logo" href="/" aria-label="Юстиком — главная">

@@ -10,7 +10,7 @@ $useAutoFillMode = $arParams["USE_AUTO_FILL_MODE"] && $arParams["USE_AUTO_FILL_M
 
 ?>
 
-<section class="section image-slider-section">
+<section class="section image-slider-section <?= htmlspecialcharsbx($arParams['SECTION_CLASS'] ?? '') ?>">
 	<div class="container">
 		<? $APPLICATION->IncludeFile(
 			SITE_TEMPLATE_PATH . '/include/section-header.php',

@@ -2,7 +2,7 @@
 $this->setFrameMode(true);
 ?>
 
-<section class="section section--bg-initial benefits">
+<section class="section section--bg-initial benefits <?= htmlspecialcharsbx($arParams['SECTION_CLASS'] ?? '') ?>">
 	<div class="container">
 		<h2 class="visually-hidden"><?= $arResult["NAME"] ?></h2>
 		<ul class="benefits-list">

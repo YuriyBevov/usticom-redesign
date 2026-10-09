@@ -1,6 +1,7 @@
 @use "@scss/base/container-queries" as *;
 
 @use "header-navigation";
+@use "header-top";
 
 .hero {
 	background: linear-gradient(85.1deg, #fdfdfd 0%, #e4e4e4 100%);
