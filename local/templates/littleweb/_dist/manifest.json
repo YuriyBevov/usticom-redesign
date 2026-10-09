@@ -44,13 +44,13 @@
     "src": "local/templates/littleweb/_src/images/callback-bg.png"
   },
   "local/templates/littleweb/_src/js/index.js": {
-    "file": "template_scripts.qJZPIl75.js",
+    "file": "template_scripts.YNm-QuEk.js",
     "name": "script",
     "src": "local/templates/littleweb/_src/js/index.js",
     "isEntry": true
   },
   "local/templates/littleweb/_src/scss/template.scss": {
-    "file": "template_styles.BpmsQhAV.css",
+    "file": "template_styles.DGlWHyRK.css",
     "src": "local/templates/littleweb/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
