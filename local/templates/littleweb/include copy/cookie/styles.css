@@ -30,20 +30,18 @@
 #cookie-consent-banner .lw-container {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto 32px 160px;
-  grid-template-columns: auto 160px;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: 1fr;
   gap: 16px 32px;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
 }
 
-@media (max-width: 534px) {
+@media (min-width: 535px) {
   #cookie-consent-banner .lw-container {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 1fr;
-    grid-template-columns: 1fr;
+    -ms-grid-columns: auto 32px 160px;
+    grid-template-columns: auto 160px;
   }
 }
 

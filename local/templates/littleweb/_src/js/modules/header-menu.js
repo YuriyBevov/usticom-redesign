@@ -13,7 +13,7 @@ const initHeaderMenu = () => {
         desktopOverlay.hidden = false;
         desktopOverlay.setAttribute("aria-hidden", "true");
         const desktopItems = [...header.querySelectorAll(".nav__list-item--parent")];
-        const mobileMedia = window.matchMedia("(max-width: 1199px)");
+        const desktopMedia = window.matchMedia("(min-width: 1200px)");
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
         const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex="0"]';
         let mobileOpen = false;
@@ -66,7 +66,7 @@ const initHeaderMenu = () => {
             desktopOverlay.setAttribute("aria-hidden", "true");
         };
         const openDesktop = (item) => {
-            if (mobileMedia.matches) return;
+            if (!desktopMedia.matches) return;
             clearTimeout(leaveTimer);
             closeDesktop();
             desktopOpen = item;
@@ -101,7 +101,7 @@ const initHeaderMenu = () => {
             // First tap opens the menu on large touch screens; a second tap follows the section link.
             let touchShouldOpen = false;
             link.addEventListener("pointerdown", (event) => {
-                touchShouldOpen = event.pointerType === "touch" && !mobileMedia.matches && desktopOpen !== item;
+                touchShouldOpen = event.pointerType === "touch" && desktopMedia.matches && desktopOpen !== item;
             });
             link.addEventListener("click", (event) => {
                 if (link.tagName === "BUTTON") {
@@ -128,7 +128,7 @@ const initHeaderMenu = () => {
             menu.inert = true;
             menu.setAttribute("aria-hidden", "true");
             unlockPage();
-            if (mobileMedia.matches) toggle.focus({ preventScroll: true });
+            if (!desktopMedia.matches) toggle.focus({ preventScroll: true });
             const callback = afterClose;
             afterClose = null;
             callback?.();
@@ -152,7 +152,7 @@ const initHeaderMenu = () => {
             } else timeline.reverse();
         };
         const openMobile = () => {
-            if (!mobileMedia.matches) return;
+            if (desktopMedia.matches) return;
             closeDesktop();
             afterClose = null;
             closing = false;
@@ -222,7 +222,7 @@ const initHeaderMenu = () => {
                 event.preventDefault(); first.focus();
             }
         });
-        mobileMedia.addEventListener("change", () => {
+        desktopMedia.addEventListener("change", () => {
             closeDesktop();
             if (mobileOpen || closing) {
                 timeline.pause(0);
