@@ -44,7 +44,7 @@
     "src": "local/templates/littleweb/_src/images/callback-bg.png"
   },
   "local/templates/littleweb/_src/js/index.js": {
-    "file": "template_scripts.BAm0GRte.js",
+    "file": "template_scripts.BP2tu-yX.js",
     "name": "script",
     "src": "local/templates/littleweb/_src/js/index.js",
     "isEntry": true
@@ -278,6 +278,21 @@
     "name": "bitrix_news_list_workflow_scss",
     "names": [
       "bitrix_news_list_workflow_scss.css"
+    ]
+  },
+  "local/templates/littleweb/components/bitrix/news/prices/_src/js/index.js": {
+    "file": "components/bitrix/news/prices/script.B0agkJs5.js",
+    "name": "bitrix_news_prices_js",
+    "src": "local/templates/littleweb/components/bitrix/news/prices/_src/js/index.js",
+    "isEntry": true
+  },
+  "local/templates/littleweb/components/bitrix/news/prices/_src/scss/index.scss": {
+    "file": "components/bitrix/news/prices/style.CEB7lRAU.css",
+    "src": "local/templates/littleweb/components/bitrix/news/prices/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_prices_scss",
+    "names": [
+      "bitrix_news_prices_scss.css"
     ]
   },
   "local/templates/littleweb/components/bitrix/system.pagenavigation/lw-page-navigation/_src/scss/index.scss": {

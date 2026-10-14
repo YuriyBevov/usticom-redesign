@@ -4,3 +4,5 @@ import "./modules/fancy";
 import "./modules/tag-slider";
 
 import "./modules/header-menu";
+
+import "./modules/prices-slider";

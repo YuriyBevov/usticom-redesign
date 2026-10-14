@@ -2,11 +2,13 @@
 
 
 
+<?php if ($APPLICATION->GetPageProperty("HIDE_CALLBACK") !== "Y"): ?>
 <section class="callback section<?= in_array($APPLICATION->GetCurPage(false), [SITE_DIR, SITE_DIR . 'index.php'], true) ? ' section--bg-alternative' : '' ?>">
 	<div class="container">
 		callback
 	</div>
 </section>
+<?php endif; ?>
 
 </main>
 
