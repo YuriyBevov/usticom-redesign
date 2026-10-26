@@ -16,3 +16,5 @@ require_once $includesPath . 'assets.php';
 require_once $includesPath . 'core.php';
 require_once $includesPath . 'tizzers.php';
 require_once $includesPath . 'debug.php';
+
+require_once $includesPath . 'form-inline-consent.php';

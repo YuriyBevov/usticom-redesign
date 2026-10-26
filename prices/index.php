@@ -37,7 +37,6 @@ $APPLICATION->IncludeComponent(
 			1 => "PRICE",
 			2 => "",
 		],
-		"REQUEST_FORM_ID" => "1",
 		"COMPONENT_TEMPLATE" => "prices",
 		"IBLOCK_TYPE" => "usticom_site_content",
 		"NEWS_COUNT" => "20",

@@ -2,12 +2,22 @@
 
 
 
-<?php if ($APPLICATION->GetPageProperty("HIDE_CALLBACK") !== "Y"): ?>
-<section class="callback section<?= in_array($APPLICATION->GetCurPage(false), [SITE_DIR, SITE_DIR . 'index.php'], true) ? ' section--bg-alternative' : '' ?>">
-	<div class="container">
-		callback
-	</div>
-</section>
+<?php if (!defined('ERROR_404') || ERROR_404 !== 'Y'): ?>
+	<?php $APPLICATION->IncludeComponent('bitrix:form.result.new', 'form-inline', [
+		'WEB_FORM_ID' => 5,
+		'IGNORE_CUSTOM_TEMPLATE' => 'Y',
+		'USE_EXTENDED_ERRORS' => 'Y',
+		'CACHE_TYPE' => 'N',
+		'CACHE_TIME' => 0,
+		'AJAX_MODE' => 'Y',
+		'AJAX_OPTION_JUMP' => 'N',
+		'AJAX_OPTION_STYLE' => 'Y',
+		'AJAX_OPTION_HISTORY' => 'N',
+		'SEF_MODE' => 'N',
+		'LIST_URL' => '',
+		'EDIT_URL' => '',
+		'SUCCESS_URL' => '',
+	], false, ['HIDE_ICONS' => 'Y']); ?>
 <?php endif; ?>
 
 </main>
