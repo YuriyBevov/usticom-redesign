@@ -27,15 +27,15 @@ $this->setFrameMode(true);
 					$image = $arItem["PREVIEW_PICTURE"] ? $arItem["PREVIEW_PICTURE"] : $arItem["DETAIL_PICTURE"];
 					$alt = $image["ALT"] ? $image["ALT"] : $image["NAME"];
 				?>
-					<div class="swiper-slide id=" <?= $this->GetEditAreaId($arItem["ID"]) ?>">
+					<div class="swiper-slide" id="<?= $this->GetEditAreaId($arItem["ID"]) ?>">
 						<div class="case-card">
 							<div class="case-card__eyebrow"><?= $arItem["PROPERTIES"]["TAG"]["VALUE"] ?></div>
 							<span class="case-card__title"><?= $arItem["NAME"] ?></span>
 							<p class="case-card__preview-text"><?= $arItem["PREVIEW_TEXT"] ?></p>
 
 							<div class="case-card__footer btn-row">
-								<a href="<?= $arItem["DETAIL_URL"] ?>" class="main-btn main-btn--outlined main-btn--size-sm">Читать полностью</a>
-								<button type="button" class="main-btn main-btn--size-sm case-card__consultation-btn">Получить консультацию</button>
+								<a href="<?= htmlspecialcharsbx($arItem["DETAIL_PAGE_URL"]) ?>" class="main-btn main-btn--outlined main-btn--size-sm">Читать полностью</a>
+								<button type="button" class="main-btn main-btn--size-sm case-card__consultation-btn" data-form-id="2" data-form-theme="<?= htmlspecialcharsbx('Получить консультацию по кейсу: ' . html_entity_decode(strip_tags($arItem['NAME']), ENT_QUOTES | ENT_HTML5, 'UTF-8')) ?>">Получить консультацию</button>
 							</div>
 						</div>
 					</div>

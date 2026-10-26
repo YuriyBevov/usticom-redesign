@@ -3,19 +3,20 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 	die();
 }
 includeComponentAssets('form.result.new/form-inline');
+$modalMode = ($arParams['MODAL_MODE'] ?? 'N') === 'Y';
 ?>
-<section class="callback section form-inline">
-	<div class="container">
+<section class="form-inline<?= $modalMode ? ' form-inline--modal' : ' callback section' ?>">
+	<div<?= $modalMode ? '' : ' class="container"' ?>>
 		<div class="form-inline__inner">
 			<?php if (!empty($arResult['FORM_TITLE']) || !empty($arResult['FORM_DESCRIPTION'])): ?>
 				<div class="section-header">
-					<div class="eyebrow">заявка</div>
+					<?php if (!$modalMode): ?><div class="eyebrow">заявка</div><?php endif; ?>
 					<?php if (!empty($arResult['FORM_TITLE'])): ?><h2 class="section-title"><?= $arResult['FORM_TITLE'] ?></h2><?php endif; ?>
 					<?php if (!empty($arResult['FORM_DESCRIPTION'])): ?><div class="form-inline__description"><?= $arResult['FORM_DESCRIPTION'] ?></div><?php endif; ?>
 				</div>
 			<?php endif; ?>
 			<?php if (!empty($arResult['FORM_NOTE']) && empty($arResult['FORM_ERRORS'])): ?>
-				<div class="form-inline__message" role="status" data-inline-feedback="success"><?= htmlspecialcharsbx(strip_tags($arResult['FORM_NOTE'])) ?></div>
+				<div class="form-inline__message" role="status" data-inline-feedback="success">В ближайшее время с Вами свяжется менеджер для уточнения деталей</div>
 			<?php elseif (!empty($arResult['ERROR'])): ?>
 				<p class="form-inline__message" role="alert">Форма временно недоступна. Попробуйте обратиться к нам позже.</p>
 			<?php else: ?>

@@ -1,7 +1,8 @@
 import customSelect from "custom-select";
 import IMask from "imask";
 
-const showInlineFeedback = (status, message) => {
+const showInlineFeedback = (status, message, modal = false) => {
+	if (modal && window.UsticomModalForms?.showFeedback(status, message)) return;
 	document.querySelector(".form-inline-result")?.close();
 	const dialog = document.createElement("dialog");
 	dialog.className = "form-inline-result";
@@ -41,7 +42,7 @@ const initInlineForms = () => {
 		feedback.dataset.feedbackShown = "true";
 		const message = feedback.tagName === "TEMPLATE" ? feedback.content.textContent : feedback.textContent;
 		finishInlineRequest();
-		showInlineFeedback(feedback.dataset.inlineFeedback, message.trim());
+		showInlineFeedback(feedback.dataset.inlineFeedback, message.trim(), !!feedback.closest('.usticom-form-popup'));
 	});
 	document.querySelectorAll("[data-inline-form]").forEach((form) => {
 		if (form.dataset.inlineInitialized === "true") return;
@@ -63,6 +64,8 @@ const initInlineForms = () => {
 		});
 
 		const validate = (field) => {
+			// Скрытые служебные поля reCAPTCHA проверяет её SDK и серверный модуль.
+			if (field.classList.contains('form-inline__captcha') && field.querySelector('.g-recaptcha-container')) return true;
 			const controls = [...field.querySelectorAll('input:not([type="hidden"]), textarea, select')].filter((control) => !control.disabled);
 			const control = controls[0];
 			const required = field.dataset.required === "true" || controls.some((input) => input.required);
@@ -102,9 +105,11 @@ const initInlineForms = () => {
 				form.setAttribute("aria-busy", "true");
 				controller.pending = {
 					form,
+					modal: !!form.closest('.usticom-form-popup'),
 					timer: setTimeout(() => {
+						const modal = controller.pending?.modal;
 						finishInlineRequest();
-						showInlineFeedback("error", "Сервер не подтвердил отправку. Проверьте соединение и попробуйте ещё раз.");
+						showInlineFeedback("error", "Сервер не подтвердил отправку. Проверьте соединение и попробуйте ещё раз.", modal);
 					}, 30000),
 				};
 				return;
@@ -118,7 +123,7 @@ const initInlineForms = () => {
 	const pending = window.UsticomInlineForm?.pending;
 	if (pending && !pending.form.isConnected) {
 		finishInlineRequest();
-		showInlineFeedback("error", "Не удалось получить подтверждение от сервера. Попробуйте отправить заявку ещё раз.");
+		showInlineFeedback("error", "Не удалось получить подтверждение от сервера. Попробуйте отправить заявку ещё раз.", pending.modal);
 	}
 };
 

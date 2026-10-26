@@ -42,6 +42,9 @@ switch ($arParams["IBLOCK_ID"]) {
   case '8':
     $arResult["LIST_PAGE_TITLE"] = 'Все публикации';
     break;
+  case '28':
+    $arResult["LIST_PAGE_TITLE"] = 'Все кейсы';
+    break;
 
   default:
     $arResult["LIST_PAGE_TITLE"] = 'Все теги';

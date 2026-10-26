@@ -137,6 +137,7 @@ $GLOBALS[$pricesFilterName] = [
 ];
 $APPLICATION->IncludeComponent("bitrix:news.list", "pricelist", [
 	"IBLOCK_ID" => 22,
+	"FORM_THEME" => 'Заказать услугу: ' . $name,
 	"NEWS_COUNT" => 1000,
 	"FILTER_NAME" => $pricesFilterName,
 	"INCLUDE_SUBSECTIONS" => "Y",
@@ -164,6 +165,7 @@ endif; ?>
 <?php $APPLICATION->IncludeComponent("bitrix:news.list", "cases", [
 	"IBLOCK_TYPE" => "usticom_site_content",
 	"IBLOCK_ID" => 28,
+	"DETAIL_URL" => "/cases/#ELEMENT_CODE#/",
 	"NEWS_COUNT" => 6,
 	"SORT_BY1" => "ACTIVE_FROM",
 	"SORT_ORDER1" => "DESC",

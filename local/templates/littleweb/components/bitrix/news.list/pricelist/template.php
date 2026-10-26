@@ -39,7 +39,7 @@ $buttonUrl = (string)($arParams["BUTTON_URL"] ?? "/contacts/");
 						<div class="price-card__price"><?= htmlspecialcharsbx($price["PRICE"]) ?></div>
 					<?php endif; ?>
 					<?php if ($buttonText !== "" && $buttonUrl !== ""): ?>
-						<a class="main-btn price-card__button" href="<?= htmlspecialcharsbx($buttonUrl) ?>"><?= htmlspecialcharsbx($buttonText) ?></a>
+						<a class="main-btn price-card__button"<?php if ($buttonUrl === "/contacts/"): ?> data-form-id="2" data-form-theme="<?= htmlspecialcharsbx(($arParams['~FORM_THEME'] ?? $arParams['FORM_THEME'] ?? 'Заказать услугу') . ($price['TITLE'] !== '' ? '. Тариф: ' . $price['TITLE'] : '')) ?>"<?php endif; ?> href="<?= htmlspecialcharsbx($buttonUrl) ?>"><?= htmlspecialcharsbx($buttonText) ?></a>
 					<?php endif; ?>
 				</article>
 			<?php endforeach; ?>

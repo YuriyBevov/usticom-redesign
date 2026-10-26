@@ -44,13 +44,13 @@
     "src": "local/templates/littleweb/_src/images/callback-bg.png"
   },
   "local/templates/littleweb/_src/js/index.js": {
-    "file": "template_scripts.BP2tu-yX.js",
+    "file": "template_scripts.-zoOx0Sp.js",
     "name": "script",
     "src": "local/templates/littleweb/_src/js/index.js",
     "isEntry": true
   },
   "local/templates/littleweb/_src/scss/template.scss": {
-    "file": "template_styles.XGZR3Jpu.css",
+    "file": "template_styles.BiyBRovp.css",
     "src": "local/templates/littleweb/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -86,13 +86,13 @@
     ]
   },
   "local/templates/littleweb/components/bitrix/form.result.new/form-inline/_src/js/index.js": {
-    "file": "components/bitrix/form.result.new/form-inline/script.LUCzNGKz.js",
+    "file": "components/bitrix/form.result.new/form-inline/script.Dl2ePlmX.js",
     "name": "bitrix_form_result_new_form-inline_js",
     "src": "local/templates/littleweb/components/bitrix/form.result.new/form-inline/_src/js/index.js",
     "isEntry": true
   },
   "local/templates/littleweb/components/bitrix/form.result.new/form-inline/_src/scss/index.scss": {
-    "file": "components/bitrix/form.result.new/form-inline/style.Bqw5ykKB.css",
+    "file": "components/bitrix/form.result.new/form-inline/style.DCXUbS5i.css",
     "src": "local/templates/littleweb/components/bitrix/form.result.new/form-inline/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_form_result_new_form-inline_scss",
@@ -101,7 +101,7 @@
     ]
   },
   "local/templates/littleweb/components/bitrix/menu/bottom/_src/scss/index.scss": {
-    "file": "components/bitrix/menu/bottom/style.CDJ7wrhc.css",
+    "file": "components/bitrix/menu/bottom/style.D-N8aeoJ.css",
     "src": "local/templates/littleweb/components/bitrix/menu/bottom/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_menu_bottom_scss",
@@ -287,7 +287,7 @@
     ]
   },
   "local/templates/littleweb/components/bitrix/news.list/workflow/_src/scss/index.scss": {
-    "file": "components/bitrix/news.list/workflow/style.CTvXH9Xb.css",
+    "file": "components/bitrix/news.list/workflow/style.DtGaQjHF.css",
     "src": "local/templates/littleweb/components/bitrix/news.list/workflow/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_news_list_workflow_scss",

@@ -50,7 +50,7 @@ include dirname(__DIR__, 3) . "/partials/hero.php";
 				<h3>Не знаете, какую услугу выбрать?</h3>
 				<p>Специалист бесплатно разберёт задачу и подберёт формат работы — ответим в течение рабочего дня.</p>
 			</div>
-			<a class="main-btn main-btn--size-lg" href="/contacts/">Получить консультацию</a>
+			<a class="main-btn main-btn--size-lg" href="/contacts/" data-form-id="2" data-form-theme="<?= htmlspecialcharsbx('Получить консультацию: ' . html_entity_decode(strip_tags($heroTitle), ENT_QUOTES | ENT_HTML5, 'UTF-8')) ?>">Получить консультацию</a>
 		</div>
 	</div>
 </section>

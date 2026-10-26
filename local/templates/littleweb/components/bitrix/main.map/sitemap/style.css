@@ -1,0 +1,146 @@
+.sitemap-page {
+    padding-top: 24px;
+}
+
+.sitemap-page__intro {
+    margin: 0;
+    color: var(--color-secondary);
+    font-size: 16px;
+}
+
+.sitemap {
+    color: var(--color-secondary);
+}
+
+.sitemap__overview {
+    padding: clamp(20px, 3vw, 40px);
+    border-radius: var(--base-border-radius);
+    background: var(--bg-inner-hero-gradient);
+}
+
+.sitemap-page .sitemap .sitemap__heading {
+    margin: 0 0 32px;
+    color: var(--color-dark);
+    font-size: clamp(20px, 2.5vw, 24px);
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.sitemap__pages,
+.sitemap__links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sitemap__pages {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 40px;
+}
+
+.sitemap__pages a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgb(31 31 31 / 12%);
+    color: var(--color-dark);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.sitemap__arrow {
+    flex-shrink: 0;
+    color: var(--color-primary);
+}
+
+.sitemap__services {
+    margin-top: clamp(32px, 4vw, 56px);
+}
+
+.sitemap__heading a {
+    color: inherit;
+}
+
+.sitemap__grid {
+    columns: 3;
+    column-gap: 24px;
+}
+
+.sitemap__group {
+    min-width: 0;
+    margin-bottom: 24px;
+    padding: clamp(20px, 2.5vw, 32px);
+    border: 1px solid var(--color-light);
+    border-radius: var(--base-border-radius);
+    background: var(--color-white);
+    break-inside: avoid;
+}
+
+.sitemap__group-title {
+    margin: 0 0 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.sitemap__group-title a {
+    color: inherit;
+}
+
+.sitemap__links a {
+    display: inline-block;
+    padding: 7px 0;
+    color: var(--color-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.sitemap__links .sitemap__links {
+    padding-left: 16px;
+    border-left: 1px solid var(--color-light);
+}
+
+.sitemap a {
+    overflow-wrap: anywhere;
+    transition: color var(--main-transition);
+}
+
+.sitemap a:hover {
+    color: var(--color-primary);
+}
+
+.sitemap a:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+@media (max-width: 1023px) {
+    .sitemap__pages {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sitemap__grid {
+        columns: 2;
+    }
+}
+
+@media (max-width: 639px) {
+    .sitemap__pages {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .sitemap__grid {
+        columns: 1;
+    }
+
+    .sitemap__group {
+        margin-bottom: 16px;
+    }
+}

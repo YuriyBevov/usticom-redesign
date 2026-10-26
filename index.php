@@ -15,7 +15,7 @@ $APPLICATION->SetTitle("Услуги аутсорсинга в Москве, а�
 				<p>Решаем юридические, аудиторские, бухгалтерские, налоговые и финансовые задачи в едином контуре. Формируем команду под конкретный проект, снижаем риски и сопровождаем бизнес — от ежедневных процессов до сложных сделок и управленческих решений.</p>
 
 				<div class="btn-row">
-					<button class="main-btn main-btn--size-lg">Оставить заявку</button>
+					<button class="main-btn main-btn--size-lg" type="button" data-form-id="2" data-form-theme="Оставить заявку">Оставить заявку</button>
 					<a href="/partnership/" class="main-btn main-btn--outlined main-btn--size-lg">Партнерская программа</a>
 				</div>
 			</div>
@@ -216,7 +216,7 @@ $APPLICATION->SetTitle("Услуги аутсорсинга в Москве, а�
 		"CACHE_TIME" => "36000000",
 		"CACHE_TYPE" => "A",
 		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
+		"DETAIL_URL" => "/cases/#ELEMENT_CODE#/",
 		"DISPLAY_BOTTOM_PAGER" => "Y",
 		"DISPLAY_DATE" => "N",
 		"DISPLAY_NAME" => "Y",

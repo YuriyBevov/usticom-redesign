@@ -28,7 +28,7 @@
       <?php $headerMenuView = 'desktop';
       include __DIR__ . '/include/header-services.php'; ?>
       <div class="header__actions">
-        <a class="main-btn header__request" data-fancybox data-type="iframe" data-header-request href="<?= SITE_TEMPLATE_PATH ?>/ajax/header-request.php">Оставить заявку</a>
+        <a class="main-btn header__request" data-form-id="2" data-form-theme="Оставить заявку" data-header-request href="/local/ajax/popup_form.php?form_id=2">Оставить заявку</a>
         <a class="header__phone" href="tel:+74952879268" aria-label="Позвонить в Юстиком">
           <svg width="24" height="24" aria-hidden="true">
             <use href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-header-phone"></use>
@@ -84,7 +84,7 @@
           </div>
           <?php $headerSocialFilter = [];
           include __DIR__ . '/include/header-socials.php'; ?>
-          <a class="main-btn mobile-menu__request" data-fancybox data-type="iframe" data-header-request href="<?= SITE_TEMPLATE_PATH ?>/ajax/header-request.php">Оставить заявку</a>
+          <a class="main-btn mobile-menu__request" data-form-id="2" data-form-theme="Оставить заявку" data-header-request href="/local/ajax/popup_form.php?form_id=2">Оставить заявку</a>
         </div>
       </div>
     </div>

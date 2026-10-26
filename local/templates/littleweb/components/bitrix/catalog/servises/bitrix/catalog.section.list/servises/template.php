@@ -16,7 +16,7 @@ $sections = $arResult["SECTIONS"] ?? [];
 				<p class="inner-hero__text">Аудит, бухгалтерия, налоги, право, кадры, ВЭД и сопровождение сделок — в одном окне. Аудиторы, бухгалтеры, налоговые консультанты и юристы работают вместе, поэтому задачи на стыке направлений решаются без поиска разных подрядчиков.</p>
 				<div class="btn-row">
 					<a class="main-btn main-btn--size-lg" href="#services-directions">Подобрать услугу</a>
-					<a class="main-btn main-btn--outlined main-btn--size-lg" href="/contacts/">Получить консультацию</a>
+					<a class="main-btn main-btn--outlined main-btn--size-lg" href="/contacts/" data-form-id="2" data-form-theme="Получить консультацию по услугам">Получить консультацию</a>
 				</div>
 			</div>
 			<div class="inner-hero__grid-item inner-hero__grid-item--picture" aria-hidden="true">

@@ -205,10 +205,9 @@
 
 		input {
 			flex: none;
-			width: 13px;
-			height: 13px;
-			margin: 2px 0 0;
-			accent-color: var(--color-primary);
+			width: 14px;
+			height: 14px;
+			margin: 0;
 		}
 	}
 
@@ -226,12 +225,6 @@
 		border-color: var(--color-primary);
 	}
 
-	.invalid-field input[type="checkbox"],
-	.invalid-field input[type="radio"] {
-		outline: 1px solid var(--color-primary);
-		outline-offset: 2px;
-	}
-
 	&__message {
 		padding: 16px;
 		border: 1px solid var(--color-light);
@@ -246,6 +239,15 @@
 		display: grid;
 		gap: 8px;
 		font-size: 14px;
+
+		// Установленный модуль заменяет обычную капчу на reCAPTCHA.
+		&:has(.g-recaptcha-container) > label { display: none; }
+		.grecaptcha-badge {
+			position: static !important;
+			width: 256px !important;
+			max-width: 100%;
+			margin-inline: auto;
+		}
 	}
 
 	input:focus-visible,
@@ -264,6 +266,17 @@
 		&__fields {
 			grid-template-columns: repeat(3, minmax(0, 1fr));
 		}
+	}
+
+	&--modal {
+		display: block;
+		padding: 0;
+		background: none;
+
+		> div { width: 100%; }
+		.form-inline__fields { grid-template-columns: minmax(0, 1fr); }
+		.section-title { font-size: 24px; }
+		.form-inline__consent { font-size: 12px; }
 	}
 }
 

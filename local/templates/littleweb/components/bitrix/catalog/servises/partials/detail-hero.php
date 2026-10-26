@@ -8,6 +8,7 @@ $heroPrimaryLabel = (string)($heroPrimaryLabel ?? "Оставить заявку
 $heroSecondaryLabel = (string)($heroSecondaryLabel ?? "Партнерская программа");
 $heroPrimaryUrl = (string)($heroPrimaryUrl ?? "");
 $heroSecondaryUrl = (string)($heroSecondaryUrl ?? "/partnership/");
+$heroFormTheme = 'Запросить расчёт стоимости: ' . html_entity_decode(strip_tags($heroTitle), ENT_QUOTES | ENT_HTML5, 'UTF-8');
 ?>
 <section class="section inner-hero">
 	<div class="container">
@@ -23,9 +24,9 @@ $heroSecondaryUrl = (string)($heroSecondaryUrl ?? "/partnership/");
 
 				<div class="btn-row">
 					<?php if ($heroPrimaryUrl !== ""): ?>
-						<a class="main-btn main-btn--size-lg" href="<?= htmlspecialcharsbx($heroPrimaryUrl) ?>"><?= htmlspecialcharsbx($heroPrimaryLabel) ?></a>
+						<a class="main-btn main-btn--size-lg" href="<?= htmlspecialcharsbx($heroPrimaryUrl) ?>" data-form-id="4" data-form-theme="<?= htmlspecialcharsbx($heroFormTheme) ?>"><?= htmlspecialcharsbx($heroPrimaryLabel) ?></a>
 					<?php else: ?>
-						<button class="main-btn main-btn--size-lg" type="button"><?= htmlspecialcharsbx($heroPrimaryLabel) ?></button>
+						<button class="main-btn main-btn--size-lg" type="button" data-form-id="4" data-form-theme="<?= htmlspecialcharsbx($heroFormTheme) ?>"><?= htmlspecialcharsbx($heroPrimaryLabel) ?></button>
 					<?php endif; ?>
 					<a class="main-btn main-btn--outlined main-btn--size-lg" href="<?= htmlspecialcharsbx($heroSecondaryUrl) ?>"><?= htmlspecialcharsbx($heroSecondaryLabel) ?></a>
 				</div>

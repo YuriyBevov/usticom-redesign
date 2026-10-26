@@ -26,6 +26,11 @@ namespace {
 	function check(bool $condition, string $message): void { if (!$condition) throw new \RuntimeException($message); }
 	function htmlspecialcharsbx($value): string { return htmlspecialchars((string)$value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
 	function includeComponentAssets($name): void {}
+	class CForm {
+		public static function GetHiddenField($id, $value = '', $params = ''): string {
+			return '<input type="hidden" ' . $params . ' name="form_hidden_' . $id . '" value="' . htmlspecialcharsbx($value) . '" />';
+		}
+	}
 	class InlineApplication {
 		public array $errors = [];
 		public function ThrowException($message): void { $this->errors[] = $message; }
@@ -39,9 +44,9 @@ namespace {
 		}
 	}
 	class InlineTemplate {
-		public function render(array $arResult): string {
+		public function render(array $arResult, array $params = []): string {
 			global $APPLICATION;
-			$arParams = ['WEB_FORM_ID' => 5];
+			$arParams = $params + ['WEB_FORM_ID' => 5];
 			$component = null;
 			include __DIR__ . '/../local/templates/littleweb/components/bitrix/form.result.new/form-inline/result_modifier.php';
 			ob_start();
@@ -114,6 +119,31 @@ namespace {
 	$success['FORM_NOTE'] = 'Спасибо! Ваша заявка принята.';
 	$successHtml = $template->render($success);
 	check(str_contains($successHtml, 'role="status"') && str_contains($successHtml, 'data-inline-feedback="success"') && !str_contains($successHtml, '<form '), 'После успеха должно выводиться подтверждение и открываться модальное окно');
+	$modalHtml = $template->render($fixture, ['MODAL_MODE' => 'Y']);
+	check(str_contains($modalHtml, 'form-inline--modal') && !str_contains($modalHtml, 'callback section'), 'В модальном окне не нужен сквозной блок с фоном');
+	check(str_contains($modalHtml, 'id="form-popup-5-NAME"') && !str_contains($modalHtml, 'id="form-inline-5-NAME"'), 'ID полей модальной и сквозной формы не должны совпадать');
+	$themeFixture = $fixture;
+	$themeFixture['QUESTIONS']['THEME'] = ['CAPTION' => 'Тема', 'REQUIRED' => 'N', 'STRUCTURE' => [['ID' => 907, 'FIELD_TYPE' => 'hidden']], 'HTML_CODE' => '<input type="hidden" name="form_hidden_907" value="">'];
+	$theme = 'Присоединиться к программе «Партнер» & "тест" <script>';
+	$themeHtml = $template->render($themeFixture, ['MODAL_MODE' => 'Y', 'FORM_THEME' => htmlspecialcharsbx($theme), '~FORM_THEME' => $theme]);
+	check(str_contains($themeHtml, 'name="form_hidden_907" value="' . htmlspecialcharsbx($theme) . '"'), 'Тема должна передаваться в штатное поле из структуры вопроса');
+	check(!str_contains($themeHtml, '<script>'), 'Тема должна безопасно экранироваться');
+	$themeFixture['arrVALUES']['form_hidden_907'] = 'Отправленная тема';
+	$themeFixture['QUESTIONS']['THEME']['HTML_CODE'] = '<input type="hidden" name="form_hidden_907" value="Отправленная тема">';
+	$postedThemeHtml = $template->render($themeFixture, ['MODAL_MODE' => 'Y', 'FORM_THEME' => 'Другая тема']);
+	check(str_contains($postedThemeHtml, 'value="Отправленная тема"') && !str_contains($postedThemeHtml, 'Другая тема'), 'После ошибки должна сохраняться отправленная тема');
+	$withoutThemeHtml = $template->render($fixture, ['MODAL_MODE' => 'Y', 'FORM_THEME' => $theme]);
+	check(!str_contains($withoutThemeHtml, 'form_hidden_907'), 'Нельзя создавать поле, которого нет в структуре формы');
+	define('USTICOM_MODAL_FORM_ID', 2);
+	$values = [];
+	$errorCount = count($APPLICATION->errors);
+	UsticomInlineFormConsent::beforeResultAdd(2, $fields, $values);
+	UsticomInlineFormConsent::afterResultAdd(2, 201);
+	check(count($APPLICATION->errors) === $errorCount + 1 && count(\Bitrix\Main\UserConsent\Consent::$records) === 1, 'Модальная форма должна отклоняться без согласия');
+	$values['form_inline_consent'] = 'Y';
+	UsticomInlineFormConsent::beforeResultAdd(2, $fields, $values);
+	UsticomInlineFormConsent::afterResultAdd(2, 202);
+	check(\Bitrix\Main\UserConsent\Consent::$records[1] === [1, 'form', '202'], 'Согласие модальной формы должно быть связано с её результатом');
 	if (in_array('--render', $argv, true)) echo $html;
 	else echo "OK: поля формы, ошибки, подтверждение, серверная проверка и сохранение согласия №1 после заявки №5\n";
 }

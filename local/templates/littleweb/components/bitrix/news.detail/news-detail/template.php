@@ -20,7 +20,7 @@ $APPLICATION->AddHeadString('<meta property="og:image" content="https://' .  $_S
 					</div>
 				<? endif; ?>
 				<h1><?= $arResult["NAME"] ?></h1>
-				<button class="main-btn">Получить консультацию</button>
+				<button class="main-btn" type="button" data-form-id="2" data-form-theme="<?= htmlspecialcharsbx('Получить консультацию: ' . html_entity_decode(strip_tags($arResult['NAME']), ENT_QUOTES | ENT_HTML5, 'UTF-8')) ?>">Получить консультацию</button>
 			</div>
 			<div class="news-detail__header-section">
 				<img src="<?= $arResult["DETAIL_PICTURE"]["SRC"] ?>" alt="<?= $arResult["NAME"] ?>" width="680" height="340">

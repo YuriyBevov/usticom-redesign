@@ -7,10 +7,14 @@ use Bitrix\Main\UserConsent\Consent;
 final class UsticomInlineFormConsent
 {
 	private static bool $accepted = false;
+	private static function handles($formId): bool
+	{
+		return (int)$formId === 5 || (defined('USTICOM_MODAL_FORM_ID') && (int)$formId === USTICOM_MODAL_FORM_ID);
+	}
 
 	public static function beforeResultAdd($formId, array &$fields, array &$values): void
 	{
-		if ((int)$formId !== 5 || (defined('ADMIN_SECTION') && ADMIN_SECTION === true)) {
+		if (!self::handles($formId) || (defined('ADMIN_SECTION') && ADMIN_SECTION === true)) {
 			return;
 		}
 
@@ -31,7 +35,7 @@ final class UsticomInlineFormConsent
 
 	public static function afterResultAdd($formId, $resultId): void
 	{
-		if ((int)$formId !== 5 || !self::$accepted) {
+		if (!self::handles($formId) || !self::$accepted) {
 			return;
 		}
 

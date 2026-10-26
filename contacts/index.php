@@ -21,7 +21,7 @@ $APPLICATION->SetTitle("Контакты");
 					['MODE' => 'html', 'NAME' => 'Шапка раздела', 'SHOW_BORDER' => false]
 				); ?>
 
-				<div class="contacts__cards">
+				<div class="contacts__cards" data-form-links="2" data-form-theme="Заявка со страницы «Контакты»">
 					<div class="contacts__card">
 						<div class="contacts__card-heading">
 							<svg width="24" height="24" aria-hidden="true">
@@ -35,7 +35,7 @@ $APPLICATION->SetTitle("Контакты");
 						<span class="contacts__card-note">
 							<? $APPLICATION->IncludeFile(SITE_DIR . 'include/worktime.php', [], ['MODE' => 'html', 'NAME' => 'Время работы', 'SHOW_BORDER' => true]); ?>
 						</span>
-						<a class="contacts__card-action" href="tel:+74952879268">
+						<a class="contacts__card-action" data-form-id="2" href="/local/ajax/popup_form.php?form_id=2">
 							<span>Заказать звонок</span>
 							<svg width="24" height="24" aria-hidden="true">
 								<use href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-arrow"></use>
@@ -54,7 +54,7 @@ $APPLICATION->SetTitle("Контакты");
 							<? $APPLICATION->IncludeFile(SITE_DIR . 'include/mail.php', [], ['MODE' => 'html', 'NAME' => 'Почта', 'SHOW_BORDER' => true]); ?>
 						</div>
 						<span class="contacts__card-note">Ответим в течение 1 часа</span>
-						<a class="contacts__card-action" href="tel:+74952879268">
+						<a class="contacts__card-action" data-form-id="2" href="/local/ajax/popup_form.php?form_id=2">
 							<span>Заказать звонок</span>
 							<svg width="24" height="24" aria-hidden="true">
 								<use href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-arrow"></use>
@@ -72,7 +72,7 @@ $APPLICATION->SetTitle("Контакты");
 						<address class="contacts__card-value" itemprop="streetAddress">
 							<? $APPLICATION->IncludeFile(SITE_DIR . 'include/address.php', [], ['MODE' => 'html', 'NAME' => 'Адрес', 'SHOW_BORDER' => true]); ?>
 						</address>
-						<a class="contacts__card-action" href="#contacts-map">
+						<a class="contacts__card-action" data-form-links-ignore href="https://yandex.ru/maps/?pt=37.617813271164,55.80501085104&amp;z=17&amp;l=map" target="_blank" rel="noopener noreferrer">
 							<span>Показать на карте</span>
 							<svg width="24" height="24" aria-hidden="true">
 								<use href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-arrow"></use>
@@ -104,7 +104,7 @@ $APPLICATION->SetTitle("Контакты");
 							false,
 							['HIDE_ICONS' => 'Y']
 						); ?>
-						<a class="contacts__card-action" href="mailto:call@usticom.ru">
+						<a class="contacts__card-action" data-form-id="2" href="/local/ajax/popup_form.php?form_id=2">
 							<span>Получить консультацию</span>
 							<svg width="24" height="24" aria-hidden="true">
 								<use href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-arrow"></use>

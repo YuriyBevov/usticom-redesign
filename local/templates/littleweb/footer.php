@@ -120,7 +120,7 @@
 				</div>
 			</div>
 			<div class="footer__top-section footer__top-section--contacts-block">
-				<button class="main-btn">Оставить заявку</button>
+				<button class="main-btn" type="button" data-form-id="2" data-form-theme="Оставить заявку">Оставить заявку</button>
 				<div class="footer__contacts">
 					<div class="footer__contacts-item">
 						<span class="footer__contacts-item-title">

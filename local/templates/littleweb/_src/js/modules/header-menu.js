@@ -184,12 +184,12 @@ const initHeaderMenu = () => {
         menu.addEventListener("click", (event) => {
             const link = event.target.closest("a[href]");
             if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-            if (link.hasAttribute("data-fancybox")) return;
+            if (link.hasAttribute("data-fancybox") || link.hasAttribute("data-form-id")) return;
             if (link.target === "_blank") { closeMobile(); return; }
             event.preventDefault();
             closeMobile(() => { window.location.href = link.href; });
         });
-        // Complete the drawer close before Fancybox takes over focus and scroll locking.
+        // Закрываем меню до открытия модального окна и блокировки прокрутки.
         document.addEventListener("click", (event) => {
             const request = event.target.closest('[data-header-request]');
             if (!request) return;

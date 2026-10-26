@@ -37,7 +37,7 @@ foreach ($moreSections as $section) {
                         <?php if (!$mobile): ?>
                             <div class="nav__promotion">
                                 <div><strong>Не знаете с чего начать? Мы поможем.</strong><span>Ответим за 15 мин.</span></div>
-                                <a class="main-btn header__request" data-fancybox data-type="iframe" data-header-request href="<?= SITE_TEMPLATE_PATH ?>/ajax/header-request.php">Оставить заявку</a>
+                                <a class="main-btn header__request" data-form-id="2" data-form-theme="Оставить заявку" data-header-request href="/local/ajax/popup_form.php?form_id=2">Оставить заявку</a>
                             </div>
                         <?php endif; ?>
                     </div>

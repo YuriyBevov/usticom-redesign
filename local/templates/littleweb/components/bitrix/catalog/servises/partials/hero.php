@@ -13,7 +13,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 					<div class="inner-hero__text"><?= $heroDescriptionType === "html" ? $heroDescription : nl2br(htmlspecialcharsbx($heroDescription)) ?></div>
 				<?php endif; ?>
 				<div class="btn-row">
-					<a class="main-btn main-btn--size-lg" href="/contacts/">Запросить расчёт стоимости</a>
+					<a class="main-btn main-btn--size-lg" href="/contacts/" data-form-id="4" data-form-theme="<?= htmlspecialcharsbx('Запросить расчёт стоимости: ' . html_entity_decode(strip_tags($heroTitle), ENT_QUOTES | ENT_HTML5, 'UTF-8')) ?>">Запросить расчёт стоимости</a>
 				</div>
 			</div>
 			<?php if ($heroPicture): ?>

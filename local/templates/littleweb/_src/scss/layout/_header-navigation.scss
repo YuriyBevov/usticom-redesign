@@ -194,19 +194,6 @@
     a:focus-visible, button:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
 }
 
-.header-request-page { min-height: 0; align-items: center; }
-.header-request {
-    width: min(100%, 560px);
-    border-radius: 16px;
-    padding: 32px;
-    .service-detail__form-fields { display: grid; gap: 16px; }
-    .service-detail__form-field { display: grid; gap: 6px; }
-    input:not([type="checkbox"]):not([type="hidden"]), textarea, select { width: 100%; padding: 12px; border: 1px solid var(--color-light); border-radius: 8px; font: inherit; }
-    textarea { min-height: 100px; resize: vertical; }
-    .service-detail__form-consent { margin-block: 16px; font-size: 12px; }
-    .service-detail__form-consent a { color: var(--color-primary); }
-}
-
 @media (min-width: 600px) {
     .header {
         &__inner { gap: 16px; }

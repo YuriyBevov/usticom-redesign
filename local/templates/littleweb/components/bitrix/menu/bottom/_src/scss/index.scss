@@ -20,7 +20,7 @@
 
 			&.selected-link {
 				pointer-events: none;
-				color: var(--color-darkgray);
+				opacity: 0.6;
 			}
 		}
 	}

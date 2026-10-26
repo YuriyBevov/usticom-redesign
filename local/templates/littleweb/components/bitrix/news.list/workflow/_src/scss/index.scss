@@ -77,11 +77,13 @@
 			min-width: 0;
 
 			h3,
+			.workflow-list__title,
 			p {
 				margin: 0;
 			}
 
-			h3 {
+			h3,
+			.workflow-list__title {
 				color: var(--color-dark);
 				font-size: 16px;
 				font-weight: 600;
