@@ -268,6 +268,16 @@
 		}
 	}
 
+	&--embedded {
+		display: block;
+		min-width: 0;
+		padding: 0;
+		background: none;
+
+		.form-inline__inner { max-width: none; }
+		.form-inline__submit { margin-inline: 0; }
+	}
+
 	&--modal {
 		display: block;
 		padding: 0;

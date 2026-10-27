@@ -1,7 +1,32 @@
-<?php
-$aMenuLinks = [
-    ['События', '/events/', [], [], ''],
-    ['О компании', '/about/', [], [], ''],
-    ['Контакты', '/contacts/', [], [], ''],
-    ['Кейсы', '/cases/', [], [], ''],
-];
+<?
+$aMenuLinks = Array(
+	Array(
+		"События",
+		"/experiences/",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
+		"О компании",
+		"/about/",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
+		"Контакты",
+		"/contacts/",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
+		"Кейсы",
+		"/cases/",
+		Array(),
+		Array(),
+		""
+	)
+);
+?>

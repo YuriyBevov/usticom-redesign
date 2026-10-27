@@ -32,77 +32,91 @@ $APPLICATION->AddHeadString('<meta property="og:image" content="https://' .  $_S
 	</div>
 </section>
 
-<?
-$relatedNewsTags = array_filter((array)($arResult["PROPERTIES"]["TAG_LIST"]["VALUE"] ?? []));
+<?php
+$linkedServices = $arResult['PROPERTIES']['LINKED_SERVICES'] ?? null;
+$linkedServiceIds = array_values(array_unique(array_filter(
+    array_map('intval', (array)($linkedServices['VALUE'] ?? [])),
+    static fn($id) => $id > 0
+)));
+$servicesIblockId = (int)($linkedServices['LINK_IBLOCK_ID'] ?? 0);
 
-if (!empty($relatedNewsTags)):
-	$relatedNewsFilterName = "arRelatedNewsFilter";
-	$GLOBALS[$relatedNewsFilterName] = [
-		"!ID" => (int)$arResult["ID"],
-		"PROPERTY_TAG_LIST_VALUE" => $relatedNewsTags,
-	];
-
-	$APPLICATION->IncludeComponent(
-		"bitrix:news.list",
-		"news-slider",
-		[
-			"ACTIVE_DATE_FORMAT" => "j F Y",
-			"ADD_SECTIONS_CHAIN" => "N",
-			"AJAX_MODE" => "N",
-			"CACHE_FILTER" => "Y",
-			"CACHE_GROUPS" => "Y",
-			"CACHE_TIME" => "36000000",
-			"CACHE_TYPE" => "A",
-			"CHECK_DATES" => "Y",
-			"DETAIL_URL" => $arParams["DETAIL_URL"],
-			"DISPLAY_BOTTOM_PAGER" => "N",
-			"DISPLAY_DATE" => "N",
-			"DISPLAY_NAME" => "Y",
-			"DISPLAY_PICTURE" => "Y",
-			"DISPLAY_PREVIEW_TEXT" => "Y",
-			"DISPLAY_TOP_PAGER" => "N",
-			"FIELD_CODE" => [
-				"NAME",
-				"PREVIEW_TEXT",
-				"PREVIEW_PICTURE",
-				"DETAIL_PICTURE",
-				"DATE_ACTIVE_FROM",
-			],
-			"FILTER_NAME" => $relatedNewsFilterName,
-			"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-			"IBLOCK_ID" => $arResult["IBLOCK_ID"],
-			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-			"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-			"INCLUDE_SUBSECTIONS" => "Y",
-			"NEWS_COUNT" => "6",
-			"PAGER_SHOW_ALWAYS" => "N",
-			"PARENT_SECTION" => "",
-			"PARENT_SECTION_CODE" => "",
-			"PROPERTY_CODE" => ["TAG_LIST"],
-			"SET_BROWSER_TITLE" => "N",
-			"SET_LAST_MODIFIED" => "N",
-			"SET_META_DESCRIPTION" => "N",
-			"SET_META_KEYWORDS" => "N",
-			"SET_STATUS_404" => "N",
-			"SET_TITLE" => "N",
-			"SHOW_404" => "N",
-			"SORT_BY1" => "ACTIVE_FROM",
-			"SORT_BY2" => "SORT",
-			"SORT_ORDER1" => "DESC",
-			"SORT_ORDER2" => "ASC",
-			"STRICT_SECTION_CHECK" => "N",
-			"EYEBROW_TEXT" => "похожие материалы",
-			"USE_SWIPER_NAVIGATION" => "Y",
-			"USE_SWIPER_PAGINATION" => "N",
-			"SHOW_ACTIVE_FROM" => "Y",
-			"SHOW_TAG_LIST" => "Y",
-		],
-		$component,
-		["HIDE_ICONS" => "Y"]
-	);
-
-	unset($GLOBALS[$relatedNewsFilterName]);
+if ($linkedServiceIds && $servicesIblockId > 0):
+    $linkedServicesFilterName = 'linkedServicesForMaterial' . (int)$arResult['ID'];
+    $GLOBALS[$linkedServicesFilterName] = ['ID' => $linkedServiceIds];
+    $APPLICATION->IncludeComponent('bitrix:news.list', 'related-slider', [
+        'IBLOCK_TYPE' => (string)CIBlock::GetArrayByID($servicesIblockId, 'IBLOCK_TYPE_ID'),
+        'IBLOCK_ID' => $servicesIblockId,
+        'NEWS_COUNT' => count($linkedServiceIds),
+        'SORT_BY1' => 'SORT',
+        'SORT_ORDER1' => 'ASC',
+        'SORT_BY2' => 'ID',
+        'SORT_ORDER2' => 'ASC',
+        'FILTER_NAME' => $linkedServicesFilterName,
+        'FIELD_CODE' => ['NAME'],
+        'DETAIL_URL' => (string)CIBlock::GetArrayByID($servicesIblockId, 'DETAIL_PAGE_URL'),
+        'CACHE_TYPE' => 'A',
+        'CACHE_TIME' => 36000000,
+        'CACHE_FILTER' => 'Y',
+        'CACHE_GROUPS' => 'Y',
+        'CHECK_DATES' => 'Y',
+        'DISPLAY_TOP_PAGER' => 'N',
+        'DISPLAY_BOTTOM_PAGER' => 'N',
+        'SET_TITLE' => 'N',
+        'SET_BROWSER_TITLE' => 'N',
+        'SET_META_DESCRIPTION' => 'N',
+        'SET_META_KEYWORDS' => 'N',
+        'SET_LAST_MODIFIED' => 'N',
+        'INCLUDE_IBLOCK_INTO_CHAIN' => 'N',
+        'ADD_SECTIONS_CHAIN' => 'N',
+        'SECTION_TITLE' => 'Услуги по теме',
+        'EYEBROW_TEXT' => 'услуги',
+    ], $component, ['HIDE_ICONS' => 'Y']);
+    unset($GLOBALS[$linkedServicesFilterName]);
 endif;
-?>
 
-linked-services
+$otherMaterialTitles = [
+    6 => 'Другие новости',
+    7 => 'Другие мероприятия',
+    8 => 'Другие публикации',
+    28 => 'Другие кейсы',
+];
+$otherMaterialsFilterName = 'otherMaterialsFor' . (int)$arResult['IBLOCK_ID'] . '_' . (int)$arResult['ID'];
+$GLOBALS[$otherMaterialsFilterName] = ['!ID' => (int)$arResult['ID']];
+$APPLICATION->IncludeComponent('bitrix:news.list', 'news-slider', [
+    'IBLOCK_TYPE' => $arParams['IBLOCK_TYPE'],
+    'IBLOCK_ID' => (int)$arResult['IBLOCK_ID'],
+    'NEWS_COUNT' => 12,
+    'SORT_BY1' => 'ACTIVE_FROM',
+    'SORT_ORDER1' => 'DESC',
+    'SORT_BY2' => 'ID',
+    'SORT_ORDER2' => 'DESC',
+    'FILTER_NAME' => $otherMaterialsFilterName,
+    'FIELD_CODE' => ['NAME', 'PREVIEW_TEXT', 'PREVIEW_PICTURE', 'DETAIL_PICTURE', 'DATE_ACTIVE_FROM'],
+    'PROPERTY_CODE' => ['TAG_LIST'],
+    'DETAIL_URL' => $arParams['DETAIL_URL'],
+    'LIST_PAGE_URL' => $arParams['IBLOCK_URL'] ?? $arResult['LIST_PAGE_URL'],
+    'ACTIVE_DATE_FORMAT' => 'd.m.Y',
+    'CACHE_TYPE' => 'A',
+    'CACHE_TIME' => 36000000,
+    'CACHE_FILTER' => 'Y',
+    'CACHE_GROUPS' => 'Y',
+    'CHECK_DATES' => 'Y',
+    'DISPLAY_TOP_PAGER' => 'N',
+    'DISPLAY_BOTTOM_PAGER' => 'N',
+    'SET_TITLE' => 'N',
+    'SET_BROWSER_TITLE' => 'N',
+    'SET_META_DESCRIPTION' => 'N',
+    'SET_META_KEYWORDS' => 'N',
+    'SET_LAST_MODIFIED' => 'N',
+    'SET_STATUS_404' => 'N',
+    'SHOW_404' => 'N',
+    'INCLUDE_IBLOCK_INTO_CHAIN' => 'N',
+    'ADD_SECTIONS_CHAIN' => 'N',
+    'SECTION_TITLE' => $otherMaterialTitles[(int)$arResult['IBLOCK_ID']] ?? 'Другие события',
+    'USE_SWIPER_NAVIGATION' => 'Y',
+    'USE_SWIPER_PAGINATION' => 'Y',
+    'SHOW_ACTIVE_FROM' => 'Y',
+    'SHOW_TAG_LIST' => 'Y',
+], $component, ['HIDE_ICONS' => 'Y']);
+unset($GLOBALS[$otherMaterialsFilterName]);
+?>

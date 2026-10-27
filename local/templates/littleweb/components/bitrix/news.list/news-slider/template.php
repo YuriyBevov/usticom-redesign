@@ -4,7 +4,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 }
 
 $this->setFrameMode(true);
-$listPageUrl = trim((string)($arResult["LIST_PAGE_URL"] ?? ""));
+if (empty($arResult["ITEMS"])) {
+	return;
+}
+$listPageUrl = trim((string)($arParams["LIST_PAGE_URL"] ?? $arResult["LIST_PAGE_URL"] ?? ""));
 if ($listPageUrl === "") {
 	$listPageUrl = $APPLICATION->GetCurDir();
 }
@@ -25,7 +28,7 @@ $showAllButtonUrl = trim((string)($arParams["SHOW_ALL_BUTTON_URL"] ?? "")) ?: ($
 			SITE_TEMPLATE_PATH . '/include/section-header.php',
 			array(
 				"EYEBROW_TEXT" => $arParams["EYEBROW_TEXT"] ?? '',
-				"TITLE" => $arResult["NAME"],
+				"TITLE" => htmlspecialcharsbx($arParams["SECTION_TITLE"] ?? $arResult["NAME"]),
 				"USE_SWIPER_NAVIGATION" => $arParams["USE_SWIPER_NAVIGATION"] ??  "N"
 			),
 			array('MODE' => 'html', 'NAME' => 'шапку раздела', 'SHOW_BORDER' => false)
@@ -37,13 +40,13 @@ $showAllButtonUrl = trim((string)($arParams["SHOW_ALL_BUTTON_URL"] ?? "")) ?: ($
 					$this->AddEditAction($arItem["ID"], $arItem["EDIT_LINK"], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
 					$this->AddDeleteAction($arItem["ID"], $arItem["DELETE_LINK"], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage("CT_BNL_ELEMENT_DELETE_CONFIRM"),));
 
-					$image = $arItem["PREVIEW_PICTURE"] ? $arItem["PREVIEW_PICTURE"] : $arItem["DETAIL_PICTURE"];
-					$alt = $image["ALT"] ? $image["ALT"] : $image["NAME"];
+					$image = $arItem["PREVIEW_PICTURE"] ?: ($arItem["DETAIL_PICTURE"] ?? null);
+					$alt = $image["ALT"] ?? $image["NAME"] ?? $arItem["NAME"];
 				?>
 					<div class="swiper-slide" id="<?= $this->GetEditAreaId($arItem["ID"]) ?>">
 						<div class="news-card">
 							<a href="<?= $arItem["DETAIL_PAGE_URL"] ?>" class="news-card__header">
-								<img src="<?= $image["SRC"] ?>" alt="<?= $alt ?>" width="120" height="80">
+								<? if (!empty($image["SRC"])): ?><img src="<?= htmlspecialcharsbx($image["SRC"]) ?>" alt="<?= htmlspecialcharsbx($alt) ?>" width="120" height="80"><? endif; ?>
 								<? if ($arParams["SHOW_ACTIVE_FROM"] === "Y"): ?>
 									<div class="label"><?= $arItem["DISPLAY_ACTIVE_FROM"] ?></div>
 								<? endif; ?>

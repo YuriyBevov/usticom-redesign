@@ -144,6 +144,44 @@ namespace {
 	UsticomInlineFormConsent::beforeResultAdd(2, $fields, $values);
 	UsticomInlineFormConsent::afterResultAdd(2, 202);
 	check(\Bitrix\Main\UserConsent\Consent::$records[1] === [1, 'form', '202'], 'Согласие модальной формы должно быть связано с её результатом');
+	$embeddedHtml = $template->render($fixture, ['WEB_FORM_ID' => 5, 'INSTANCE_ID' => 'reasons', 'EMBEDDED_MODE' => 'Y', 'SHOW_HEADER' => 'N']);
+	check(str_contains($embeddedHtml, 'form-inline--embedded') && !str_contains($embeddedHtml, 'callback section'), 'Встроенная форма должна выводиться без фоновой секции');
+	check(!str_contains($embeddedHtml, '<h2') && !str_contains($embeddedHtml, 'class="container"'), 'Встроенной форме не нужны повторный заголовок и контейнер');
+	check(str_contains($embeddedHtml, 'form-inline-reasons-5-NAME') && !str_contains($embeddedHtml, 'id="form-inline-5-NAME"'), 'ID встроенной и сквозной форм должны отличаться');
+	check(str_contains($embeddedHtml, 'name="form_inline_instance" value="reasons"'), 'POST должен содержать идентификатор экземпляра формы');
+	$existingIdFixture = $fixture;
+	$existingIdFixture['QUESTIONS']['SERVICE']['HTML_CODE'] = str_replace('<select ', '<select id="form_dropdown_SERVICE" ', $fixture['QUESTIONS']['SERVICE']['HTML_CODE']);
+	$existingIdHtml = $template->render($existingIdFixture, ['INSTANCE_ID' => 'reasons', 'EMBEDDED_MODE' => 'Y']);
+	check(str_contains($existingIdHtml, 'id="form-inline-reasons-5-SERVICE"') && str_contains($existingIdHtml, 'for="form-inline-reasons-5-SERVICE"') && !str_contains($existingIdHtml, 'id="form_dropdown_SERVICE"'), 'Штатный ID селекта должен заменяться уникальным ID экземпляра вместе с подписью');
+	$savedApplication = $APPLICATION;
+	$savedPost = $_POST;
+	$savedMethod = $_SERVER['REQUEST_METHOD'] ?? null;
+	$APPLICATION = new class {
+		public array $forms = [];
+		public function IncludeComponent($name, $template, $params, ...$args): void { $this->forms[] = $params; }
+	};
+	$reasonsTemplate = new class {
+		public function setFrameMode($mode): void {}
+		public function render(): void {
+			global $APPLICATION;
+			$arResult = ['REASONS_SECTION_TITLE' => 'Помощь', 'REASONS' => [['TITLE' => 'Задача', 'TEXT' => 'Описание', 'PICTURE' => null]]];
+			ob_start();
+			include __DIR__ . '/../local/templates/littleweb/components/bitrix/news.list/reasons/template.php';
+			ob_end_clean();
+		}
+	};
+	foreach ([['GET', [], 1], ['POST', ['WEB_FORM_ID' => 5], 0], ['POST', ['WEB_FORM_ID' => 5, 'form_inline_instance' => 'reasons'], 1]] as [$method, $post, $expected]) {
+		$_SERVER['REQUEST_METHOD'] = $method;
+		$_POST = $post;
+		$APPLICATION->forms = [];
+		$reasonsTemplate->render();
+		check(count($APPLICATION->forms) === $expected, 'Встроенная форма не должна обрабатывать отправку сквозной формы');
+		if ($expected) check($APPLICATION->forms[0]['WEB_FORM_ID'] === 5 && $APPLICATION->forms[0]['AJAX_MODE'] === 'Y', 'Встроенный блок должен использовать AJAX-форму №5');
+	}
+	$APPLICATION = $savedApplication;
+	$_POST = $savedPost;
+	if ($savedMethod === null) unset($_SERVER['REQUEST_METHOD']);
+	else $_SERVER['REQUEST_METHOD'] = $savedMethod;
 	if (in_array('--render', $argv, true)) echo $html;
 	else echo "OK: поля формы, ошибки, подтверждение, серверная проверка и сохранение согласия №1 после заявки №5\n";
 }

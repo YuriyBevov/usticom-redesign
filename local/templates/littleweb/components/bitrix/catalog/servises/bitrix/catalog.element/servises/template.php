@@ -53,8 +53,9 @@ $APPLICATION->IncludeComponent("bitrix:news.list", "reasons", [
 	"NEWS_COUNT" => 1,
 	"FILTER_NAME" => $reasonsFilterName,
 	"CACHE_FILTER" => "Y",
-	"CACHE_TYPE" => $arParams["CACHE_TYPE"],
-	"CACHE_TIME" => $arParams["CACHE_TIME"],
+	// This block contains a live AJAX form and must run on every request.
+	"CACHE_TYPE" => "N",
+	"CACHE_TIME" => 0,
 	"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
 	"FIELD_CODE" => ["ID"],
 	"PROPERTY_CODE" => ["REASONS", "REASONS_SECTION_TITLE"],

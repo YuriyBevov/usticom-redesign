@@ -40,15 +40,31 @@ if (!$arResult["REASONS"]) {
 			</div>
 			<?php
 			global $APPLICATION;
-			$APPLICATION->IncludeComponent("bitrix:form.result.new", "service-request", [
-				"WEB_FORM_ID" => 1,
+			// The footer also uses form 5. Only the submitted instance may process POST.
+			$otherFormSubmit = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST'
+				&& (int)($_POST['WEB_FORM_ID'] ?? 0) === 5
+				&& ($_POST['form_inline_instance'] ?? '') !== 'reasons';
+			if (!$otherFormSubmit):
+			$APPLICATION->IncludeComponent("bitrix:form.result.new", "form-inline", [
+				"WEB_FORM_ID" => 5,
+				"INSTANCE_ID" => "reasons",
+				"EMBEDDED_MODE" => "Y",
+				"SHOW_HEADER" => "N",
+				"IGNORE_CUSTOM_TEMPLATE" => "Y",
 				"CACHE_TYPE" => "N",
 				"CACHE_TIME" => 0,
-				"AJAX_MODE" => "N",
+				"AJAX_MODE" => "Y",
+				"AJAX_OPTION_JUMP" => "N",
+				"AJAX_OPTION_STYLE" => "Y",
+				"AJAX_OPTION_HISTORY" => "N",
+				"AJAX_OPTION_ADDITIONAL" => "reasons-request",
 				"USE_EXTENDED_ERRORS" => "Y",
 				"SEF_MODE" => "N",
-				"COMPACT_LAYOUT" => "Y",
+				"LIST_URL" => "",
+				"EDIT_URL" => "",
+				"SUCCESS_URL" => "",
 			], false, ["HIDE_ICONS" => "Y"]);
+			endif;
 			?>
 		</div>
 	</div>

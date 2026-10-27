@@ -4,11 +4,12 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 }
 
 $arResult['INLINE_FIELDS'] = [];
+$instanceId = preg_replace('/[^a-z0-9_-]/i', '-', (string)($arParams['INSTANCE_ID'] ?? ''));
 foreach ($arResult['QUESTIONS'] ?? [] as $sid => $question) {
 	$type = (string)($question['STRUCTURE'][0]['FIELD_TYPE'] ?? 'text');
 	$caption = trim(html_entity_decode(strip_tags((string)$question['CAPTION']), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
 	$html = (string)$question['HTML_CODE'];
-	$id = (($arParams['MODAL_MODE'] ?? 'N') === 'Y' ? 'form-popup-' : 'form-inline-') . (int)$arParams['WEB_FORM_ID'] . '-' . preg_replace('/[^a-z0-9_-]/i', '-', (string)$sid);
+	$id = (($arParams['MODAL_MODE'] ?? 'N') === 'Y' ? 'form-popup-' : 'form-inline-') . ($instanceId !== '' ? $instanceId . '-' : '') . (int)$arParams['WEB_FORM_ID'] . '-' . preg_replace('/[^a-z0-9_-]/i', '-', (string)$sid);
 	$comments = (string)($arResult['arQuestions'][$sid]['COMMENTS'] ?? '');
 	$isPhone = $type === 'tel' || preg_match('/телефон/iu', $caption) || preg_match('/phone|tel/i', (string)$sid) || strpos($comments, 'data-type="tel"') !== false;
 	$kind = $isPhone ? 'phone' : ($type === 'email' || preg_match('/e-?mail|почт/iu', $caption) ? 'email' : $type);
@@ -25,7 +26,11 @@ foreach ($arResult['QUESTIONS'] ?? [] as $sid => $question) {
 
 	if ($type !== 'hidden') {
 		if (preg_match('/<(?:input|textarea|select)\b[^>]*\bid\s*=\s*(["\'])(.*?)\1/is', $html, $matches)) {
-			$id = html_entity_decode($matches[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+			if ($instanceId !== '') {
+				$html = preg_replace_callback('/(<(?:input|textarea|select)\b[^>]*\bid\s*=\s*)(["\'])(.*?)\2/is', static fn($match) => $match[1] . $match[2] . htmlspecialcharsbx($id) . $match[2], $html, 1);
+			} else {
+				$id = html_entity_decode($matches[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+			}
 		}
 		if ($isPhone) {
 			$html = preg_replace('/\btype\s*=\s*(["\'])text\1/i', 'type="tel"', $html, 1);

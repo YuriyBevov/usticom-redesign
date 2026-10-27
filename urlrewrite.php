@@ -1,6 +1,6 @@
 <?php
 $arUrlRewrite=array (
-  30 => 
+  30 =>
   array (
     'CONDITION' => '#^/publications/#',
     'RULE' => '',
@@ -8,7 +8,7 @@ $arUrlRewrite=array (
     'PATH' => '/publications/index.php',
     'SORT' => 100,
   ),
-  1 => 
+  1 =>
   array (
     'CONDITION' => '#^/products/#',
     'RULE' => '',
@@ -32,7 +32,7 @@ $arUrlRewrite=array (
     'PATH' => '/prices/index.php',
     'SORT' => 100,
   ),
-  27 => 
+  27 =>
   array (
     'CONDITION' => '#^/cases/#',
     'RULE' => '',
@@ -40,7 +40,7 @@ $arUrlRewrite=array (
     'PATH' => '/cases/index.php',
     'SORT' => 100,
   ),
-  28 => 
+  28 =>
   array (
     'CONDITION' => '#^/news/#',
     'RULE' => '',
@@ -48,7 +48,7 @@ $arUrlRewrite=array (
     'PATH' => '/news/index.php',
     'SORT' => 100,
   ),
-  23 => 
+  23 =>
   array (
     'CONDITION' => '#^/#',
     'RULE' => '',

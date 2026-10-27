@@ -4,11 +4,12 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 }
 includeComponentAssets('form.result.new/form-inline');
 $modalMode = ($arParams['MODAL_MODE'] ?? 'N') === 'Y';
+$embeddedMode = ($arParams['EMBEDDED_MODE'] ?? 'N') === 'Y';
 ?>
-<section class="form-inline<?= $modalMode ? ' form-inline--modal' : ' callback section' ?>">
-	<div<?= $modalMode ? '' : ' class="container"' ?>>
+<section class="form-inline<?= $modalMode ? ' form-inline--modal' : ($embeddedMode ? ' form-inline--embedded' : ' callback section') ?>">
+	<div<?= $modalMode || $embeddedMode ? '' : ' class="container"' ?>>
 		<div class="form-inline__inner">
-			<?php if (!empty($arResult['FORM_TITLE']) || !empty($arResult['FORM_DESCRIPTION'])): ?>
+			<?php if (($arParams['SHOW_HEADER'] ?? 'Y') !== 'N' && (!empty($arResult['FORM_TITLE']) || !empty($arResult['FORM_DESCRIPTION']))): ?>
 				<div class="section-header">
 					<?php if (!$modalMode): ?><div class="eyebrow">заявка</div><?php endif; ?>
 					<?php if (!empty($arResult['FORM_TITLE'])): ?><h2 class="section-title"><?= $arResult['FORM_TITLE'] ?></h2><?php endif; ?>
@@ -27,6 +28,9 @@ $modalMode = ($arParams['MODAL_MODE'] ?? 'N') === 'Y';
 					<template data-inline-feedback="error"><?= htmlspecialcharsbx($errors ?: 'Не удалось отправить заявку. Попробуйте ещё раз.') ?></template>
 				<?php endif; ?>
 				<?= $arResult['INLINE_FORM_HEADER'] ?>
+				<?php if (!empty($arParams['INSTANCE_ID'])): ?>
+					<input type="hidden" name="form_inline_instance" value="<?= htmlspecialcharsbx($arParams['INSTANCE_ID']) ?>">
+				<?php endif; ?>
 				<div class="form-inline__fields">
 					<?php foreach ($arResult['INLINE_FIELDS'] as $field): ?>
 						<?php if ($field['TYPE'] === 'hidden'): ?>
