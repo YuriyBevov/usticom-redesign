@@ -171,6 +171,11 @@
 		line-height: 20px;
 		list-style: none;
 		cursor: pointer;
+		user-select: none;
+
+		> * {
+			pointer-events: none;
+		}
 
 		&::-webkit-details-marker {
 			display: none;
@@ -258,6 +263,14 @@
 
 	@media (min-width: 600px) {
 		padding: 24px;
+	}
+
+	.prices-catalog--section & {
+		padding-block: 6px;
+
+		@media (min-width: 600px) {
+			padding-block: 10px;
+		}
 	}
 }
 

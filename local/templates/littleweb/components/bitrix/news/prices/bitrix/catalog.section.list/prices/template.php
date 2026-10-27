@@ -60,11 +60,7 @@ $catalogId = "prices-" . $this->GetEditAreaId((int)$arParams["IBLOCK_ID"]);
 										?>
 											<li class="price-category__item" id="<?= $this->GetEditAreaId($editId) ?>">
 												<div class="price-category__row">
-													<?php if ($isSection): ?>
-														<a class="price-category__link" href="<?= htmlspecialcharsbx($item["URL"]) ?>"><?= htmlspecialcharsbx($item["NAME"]) ?></a>
-													<?php else: ?>
-														<span class="price-category__name"><?= htmlspecialcharsbx($item["NAME"]) ?></span>
-													<?php endif; ?>
+													<span class="price-category__name"><?= htmlspecialcharsbx($item["NAME"]) ?></span>
 													<span class="price-category__price<?= $item["HAS_PRICE"] ? "" : " price-category__price--individual" ?>"><?= htmlspecialcharsbx($item["PRICE"]) ?></span>
 												</div>
 												<?php if ($item["NOTE"] !== ""): ?><p class="price-category__note"><?= htmlspecialcharsbx($item["NOTE"]) ?></p><?php endif; ?>
