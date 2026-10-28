@@ -4,12 +4,14 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 }
 
 $arResult["PRICE_CATEGORIES"] = [];
+$arResult['SERVICE_SECTION_LINK'] = null;
 $subsections = [];
 $sections = $arResult["SECTIONS"];
 if (($arParams["IS_SECTION"] ?? "N") === "Y") {
 	if (empty($arResult["SECTION"]["ID"]) || (int)$arResult["SECTION"]["DEPTH_LEVEL"] !== 1) {
 		return;
 	}
+	$arResult['SERVICE_SECTION_LINK'] = getLinkedServicePriceSection((int)$arParams['IBLOCK_ID'], (int)$arResult['SECTION']['ID']);
 	array_unshift($sections, $arResult["SECTION"]);
 }
 foreach ($sections as $section) {

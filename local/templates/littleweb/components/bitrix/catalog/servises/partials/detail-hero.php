@@ -29,6 +29,9 @@ $heroFormTheme = 'Запросить расчёт стоимости: ' . html_e
 						<button class="main-btn main-btn--size-lg" type="button" data-form-id="4" data-form-theme="<?= htmlspecialcharsbx($heroFormTheme) ?>"><?= htmlspecialcharsbx($heroPrimaryLabel) ?></button>
 					<?php endif; ?>
 					<a class="main-btn main-btn--outlined main-btn--size-lg" href="<?= htmlspecialcharsbx($heroSecondaryUrl) ?>"><?= htmlspecialcharsbx($heroSecondaryLabel) ?></a>
+					<?php if (!empty($heroPriceLink)): ?>
+						<a class="main-btn main-btn--outlined main-btn--size-lg" data-linked-price-section href="<?= htmlspecialcharsbx($heroPriceLink['URL']) ?>">Стоимость услуг</a>
+					<?php endif; ?>
 				</div>
 			</div>
 			<?php if ($heroPicture): ?>

@@ -3,6 +3,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 	die();
 }
 
+$arResult['PRICE_SECTION_LINK'] = getLinkedServicePriceSection((int)$arParams['IBLOCK_ID'], (int)$arResult['ID']);
+
 $preview = $arResult["~UF_SERVICE_SECTION_PREVIEW_TEXT"] ?? $arResult["UF_SERVICE_SECTION_PREVIEW_TEXT"] ?? "";
 $arResult["HERO_PREVIEW_TEXT"] = trim(is_array($preview) ? (string)($preview["TEXT"] ?? "") : (string)$preview);
 $arResult["HERO_PREVIEW_TEXT_TYPE"] = is_array($preview) ? strtolower((string)($preview["TYPE"] ?? "html")) : "html";

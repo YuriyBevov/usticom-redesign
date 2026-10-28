@@ -15,6 +15,7 @@ $detail = trim((string)($arResult["~DETAIL_TEXT"] ?? $arResult["DETAIL_TEXT"] ??
 $detailType = (string)($arResult["DETAIL_TEXT_TYPE"] ?? "text");
 
 $heroEyebrow = (string)($arResult["SECTION"]["NAME"] ?? "Услуги");
+$heroPriceLink = $arResult['PRICE_SECTION_LINK'] ?? null;
 ?>
 
 

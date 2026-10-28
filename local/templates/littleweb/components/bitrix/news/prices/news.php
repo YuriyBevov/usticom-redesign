@@ -16,7 +16,7 @@ $APPLICATION->IncludeComponent("bitrix:catalog.section.list", "prices", [
 	"TOP_DEPTH" => 2,
 	"COUNT_ELEMENTS" => "N",
 	"SECTION_FIELDS" => ["ID", "NAME", "CODE", "IBLOCK_SECTION_ID", "DEPTH_LEVEL", "DESCRIPTION", "DESCRIPTION_TYPE"],
-	"SECTION_USER_FIELDS" => [],
+	"SECTION_USER_FIELDS" => ["UF_SERVICE_LINKED"],
 	"DETAIL_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["detail"],
 	"IBLOCK_URL" => $arResult["FOLDER"],
 	"SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],

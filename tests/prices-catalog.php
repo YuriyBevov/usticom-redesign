@@ -20,6 +20,11 @@ function htmlspecialcharsbx($value): string
 	return htmlspecialchars((string)$value, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
 }
 
+function getLinkedServicePriceSection(int $iblockId, int $sectionId): ?array
+{
+	return $GLOBALS['testLinkedServiceSections'][$sectionId] ?? null;
+}
+
 class PriceRows
 {
 	private array $rows;
@@ -178,6 +183,13 @@ check(!preg_match('/<details[^>]+\bname=/', $sectionHtml), "Пункты пол�
 check(str_contains($sectionHtml, $sections[0]["~DESCRIPTION"]), "HTML-описание должно сохранять разметку");
 check(strpos($sectionHtml, 'prices-catalog__section-description') > strrpos($sectionHtml, '</article>'), "Описание должно находиться ниже прайса");
 check(!str_contains($html, 'prices-catalog__section-description'), "Описание раздела не нужно на разводной странице");
+
+$GLOBALS['testLinkedServiceSections'][$sections[0]['ID']] = ['ID' => 666, 'NAME' => 'Юридические услуги', 'URL' => '/lawyer/'];
+$linkedResult = buildPrices(array_values(array_filter($sections, static fn($section) => ($section['IBLOCK_SECTION_ID'] ?? 0) === 10)), $sections[0]);
+$linkedHtml = (new PriceTemplate())->render($linkedResult, ['IBLOCK_ID' => 22, 'IS_SECTION' => 'Y', 'GROUPS_LIMIT' => 0]);
+check(str_contains($linkedHtml, 'data-linked-service-section href="/lawyer/"'), 'Страница прайса должна ссылаться на связанное направление услуг');
+check(!str_contains($sectionHtml, 'data-linked-service-section') && !str_contains($html, 'data-linked-service-section'), 'Без связи кнопка не должна выводиться');
+unset($GLOBALS['testLinkedServiceSections']);
 $textResult = $sectionResult;
 $textResult["SECTION"]["DESCRIPTION_TYPE"] = "text";
 $textResult["SECTION"]["~DESCRIPTION"] = "Стоимость <работ> & сроки.\nВторая строка.";

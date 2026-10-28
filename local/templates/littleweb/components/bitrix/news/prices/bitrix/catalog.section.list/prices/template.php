@@ -17,6 +17,9 @@ $catalogId = "prices-" . $this->GetEditAreaId((int)$arParams["IBLOCK_ID"]);
 		<div class="section-header">
 			<div class="eyebrow">прайс-лист</div>
 			<h1 class="section-title" id="<?= htmlspecialcharsbx($catalogId) ?>-title"><?= htmlspecialcharsbx($title) ?></h1>
+			<?php if (!empty($arResult['SERVICE_SECTION_LINK'])): ?>
+				<a class="main-btn main-btn--outlined" data-linked-service-section href="<?= htmlspecialcharsbx($arResult['SERVICE_SECTION_LINK']['URL']) ?>" aria-label="<?= htmlspecialcharsbx('Подробнее об услугах: ' . $arResult['SERVICE_SECTION_LINK']['NAME']) ?>">Подробнее об услугах</a>
+			<?php endif; ?>
 		</div>
 		<p class="prices-catalog__description">Ориентировочная стоимость услуг «Юстиком» для бизнеса и частных лиц. Точный перечень и стоимость работ закрепляются в договоре — цена зависит от срочности, сложности и объёма задачи.</p>
 		<?php if ($categories): ?>

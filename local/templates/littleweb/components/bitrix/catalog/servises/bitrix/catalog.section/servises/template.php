@@ -6,6 +6,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 $this->setFrameMode(true);
 $heroTitle = trim((string)($arResult["IPROPERTY_VALUES"]["SECTION_PAGE_TITLE"] ?? "")) ?: (string)($arResult["~NAME"] ?? $arResult["NAME"]);
 $heroEyebrow = (string)($arParams["EYEBROW_TEXT"] ?? "наши услуги");
+$heroPriceLink = $arResult['PRICE_SECTION_LINK'] ?? null;
 $heroDescription = $arResult["HERO_PREVIEW_TEXT"];
 $heroDescriptionType = $arResult["HERO_PREVIEW_TEXT_TYPE"];
 $heroPicture = $arResult["HERO_PICTURE"] ?: [

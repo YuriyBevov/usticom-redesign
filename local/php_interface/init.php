@@ -18,3 +18,4 @@ require_once $includesPath . 'tizzers.php';
 require_once $includesPath . 'debug.php';
 
 require_once $includesPath . 'form-inline-consent.php';
+require_once $includesPath . 'service-price-links.php';
