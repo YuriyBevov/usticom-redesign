@@ -2,9 +2,9 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
 $formId = filter_var($_GET['form_id'] ?? null, FILTER_VALIDATE_INT);
-if (!$formId || $formId < 1) {
+if (!$formId || $formId < 1 || (usticomIsEnglish() && $formId !== usticomFormId(2))) {
 	http_response_code(400);
-	echo 'Форма не найдена.';
+	echo usticomIsEnglish() ? 'Form not found.' : 'Форма не найдена.';
 	require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/epilog_after.php';
 	return;
 }

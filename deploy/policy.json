@@ -2,7 +2,8 @@
   "code_roots": [
     "local/ajax/",
     "local/php_interface/",
-    "local/templates/littleweb/"
+    "local/templates/littleweb/",
+    "local/migrations/"
   ],
   "code_files": [
     "index.php",
@@ -17,7 +18,11 @@
     "web-app-manifest-192x192.png",
     "web-app-manifest-512x512.png",
     "googleec11afadb3f0f130.html",
-    "yandex_80117ee37bc7e26e.html"
+    "yandex_80117ee37bc7e26e.html",
+    "local/tools/migrate.php",
+    "en/404.php",
+    "en/.header_services.menu_ext.php",
+    "en/local/ajax/popup_form.php"
   ],
   "page_roots": [
     "about",
@@ -31,7 +36,10 @@
     "privacy-policy",
     "publications",
     "services",
-    "sitemap"
+    "sitemap",
+    "en",
+    "en/services",
+    "en/contacts"
   ],
   "legacy_content": {
     "include/about/buttons.php": "local/templates/littleweb/include/about/buttons.php",

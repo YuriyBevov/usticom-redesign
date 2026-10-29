@@ -13,7 +13,7 @@ if (empty($arResult["WORKFLOW"])) {
 		<ul class="workflow-list">
 			<li class="workflow-list__heading">
 				<div class="section-header">
-					<div class="eyebrow">какие есть</div>
+					<div class="eyebrow"><?= usticomText('какие есть') ?></div>
 					<?php if ($arResult["WORKFLOW_MAIN_TITLE"] !== ""): ?>
 						<h2 class="section-title"><?= htmlspecialcharsbx($arResult["WORKFLOW_MAIN_TITLE"]) ?></h2>
 					<?php endif; ?>

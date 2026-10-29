@@ -1,3 +1,4 @@
+const uiText = (ru, en) => document.documentElement?.lang === "en" ? en : ru;
 // Как в проекте-примере: data-form-id → загрузка компонента → BX.PopupWindow.
 let activePopup = null;
 
@@ -11,19 +12,19 @@ const showFeedback = (status, message) => {
 	feedback.className = 'form-popup-feedback';
 	feedback.setAttribute('role', status === 'success' ? 'status' : 'alert');
 	const heading = document.createElement('h2');
-	heading.textContent = status === 'success' ? 'Заявка отправлена' : 'Не удалось отправить заявку';
+	heading.textContent = status === 'success' ? uiText('Заявка отправлена', "Request sent") : uiText('Не удалось отправить заявку', "Request could not be sent");
 	const text = document.createElement('p');
 	text.textContent = message;
 	const button = document.createElement('button');
 	button.className = 'main-btn main-btn--size-lg';
 	button.type = 'button';
-	button.textContent = status === 'error' && formContent?.querySelector('form') ? 'Вернуться к форме' : 'Закрыть';
+	button.textContent = status === 'error' && formContent?.querySelector('form') ? uiText('Вернуться к форме', "Return to the form") : uiText('Закрыть', "Close");
 	button.addEventListener('click', () => {
 		if (status === 'error' && formContent?.querySelector('form')) {
 			feedback.remove();
 			formContent.hidden = false;
 			const title = formContent.querySelector('.section-title');
-			popup.getPopupContainer().setAttribute('aria-label', title?.textContent.trim() || 'Форма заявки');
+			popup.getPopupContainer().setAttribute('aria-label', title?.textContent.trim() || uiText('Форма заявки', "Request form"));
 			formContent.querySelector('input:not([type="hidden"]), textarea, .custom-select-opener')?.focus({ preventScroll: true });
 		} else popup.close();
 	});
@@ -45,7 +46,7 @@ const openForm = (formId, trigger) => {
 	const loading = document.createElement('p');
 	loading.className = 'form-popup-loading';
 	loading.setAttribute('role', 'status');
-	loading.textContent = 'Загрузка формы…';
+	loading.textContent = uiText('Загрузка формы…', "Loading the form\u2026");
 	content.append(loading);
 	const previousOverflow = document.body.style.overflow;
 	const popup = new BX.PopupWindow(`usticom-form-${formId}`, null, {
@@ -80,12 +81,12 @@ const openForm = (formId, trigger) => {
 	});
 	activePopup = { popup, content };
 	trigger?.setAttribute('aria-busy', 'true');
-	popup.getPopupContainer().setAttribute('aria-label', 'Форма заявки');
-	popup.getPopupContainer().querySelector('.popup-window-close-icon')?.setAttribute('aria-label', 'Закрыть окно');
+	popup.getPopupContainer().setAttribute('aria-label', uiText('Форма заявки', "Request form"));
+	popup.getPopupContainer().querySelector('.popup-window-close-icon')?.setAttribute('aria-label', uiText('Закрыть окно', "Close window"));
 	popup.show();
 	document.body.style.overflow = 'hidden';
 	BX.ajax({
-		url: `/local/ajax/popup_form.php?${query}`,
+		url: `${document.documentElement?.lang === "en" ? "/en" : ""}/local/ajax/popup_form.php?${query}`,
 		method: 'GET',
 		dataType: 'html',
 		timeout: 30,
@@ -107,7 +108,7 @@ const openForm = (formId, trigger) => {
 			content.removeAttribute('aria-busy');
 			trigger?.removeAttribute('aria-busy');
 			content.replaceChildren();
-			showFeedback('error', 'Не удалось загрузить форму. Попробуйте открыть её ещё раз.');
+			showFeedback('error', uiText('Не удалось загрузить форму. Попробуйте открыть её ещё раз.', "The form could not be loaded. Please try opening it again."));
 		},
 	});
 };
@@ -121,7 +122,7 @@ const initFormLinks = () => {
 		container.querySelectorAll('a:not([data-form-links-ignore])').forEach((link) => {
 			link.dataset.formId = formId;
 			if (!link.hasAttribute('data-form-theme') && container.dataset.formTheme) link.dataset.formTheme = container.dataset.formTheme;
-			link.href = `/local/ajax/popup_form.php?form_id=${formId}`;
+			link.href = `${document.documentElement?.lang === "en" ? "/en" : ""}/local/ajax/popup_form.php?form_id=${formId}`;
 			link.setAttribute('aria-haspopup', 'dialog');
 			link.removeAttribute('target');
 		});

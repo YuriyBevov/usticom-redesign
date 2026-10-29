@@ -12,7 +12,7 @@ if (!$arResult["REASONS"]) {
 <section class="section section--bg-initial reasons">
 	<div class="container">
 		<div class="section-header">
-			<div class="eyebrow">помощь</div>
+			<div class="eyebrow"><?= usticomText('помощь') ?></div>
 			<?php if ($arResult["REASONS_SECTION_TITLE"] !== ""): ?>
 				<h2 class="section-title"><?= htmlspecialcharsbx($arResult["REASONS_SECTION_TITLE"]) ?></h2>
 			<?php endif; ?>
@@ -34,19 +34,19 @@ if (!$arResult["REASONS"]) {
 		</ul>
 		<div class="reasons__request">
 			<div class="reasons__request-intro">
-				<div class="eyebrow">заявка</div>
-				<h2 class="section-title">Получите консультацию эксперта</h2>
-				<p>Расскажите о вашей задаче — мы предложим лучшее решение.</p>
+				<div class="eyebrow"><?= usticomText('заявка') ?></div>
+				<h2 class="section-title"><?= usticomText('Получите консультацию эксперта') ?></h2>
+				<p><?= usticomText('Расскажите о вашей задаче — мы предложим лучшее решение.') ?></p>
 			</div>
 			<?php
 			global $APPLICATION;
 			// The footer also uses form 5. Only the submitted instance may process POST.
 			$otherFormSubmit = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST'
-				&& (int)($_POST['WEB_FORM_ID'] ?? 0) === 5
+				&& (int)($_POST['WEB_FORM_ID'] ?? 0) === usticomFormId(5)
 				&& ($_POST['form_inline_instance'] ?? '') !== 'reasons';
 			if (!$otherFormSubmit):
 			$APPLICATION->IncludeComponent("bitrix:form.result.new", "form-inline", [
-				"WEB_FORM_ID" => 5,
+				"WEB_FORM_ID" => usticomFormId(5),
 				"INSTANCE_ID" => "reasons",
 				"EMBEDDED_MODE" => "Y",
 				"SHOW_HEADER" => "N",

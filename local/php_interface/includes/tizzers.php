@@ -1,6 +1,6 @@
 <?php
 
-function getHeroTizzersSectionId(int $sectionId, int $fallbackSectionId = 0): int
+function getHeroTizzersSectionId(int $sectionId, int $fallbackSectionId = 0, int $iblockId = 29): int
 {
 	if (!\Bitrix\Main\Loader::includeModule("iblock")) {
 		return 0;
@@ -14,7 +14,7 @@ function getHeroTizzersSectionId(int $sectionId, int $fallbackSectionId = 0): in
 		$elements = CIBlockElement::GetList(
 			[],
 			[
-				"IBLOCK_ID" => 29,
+				"IBLOCK_ID" => $iblockId,
 				"SECTION_ID" => $candidateSectionId,
 				"INCLUDE_SUBSECTIONS" => "N",
 				"SECTION_GLOBAL_ACTIVE" => "Y",

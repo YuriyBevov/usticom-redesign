@@ -1,0 +1,157 @@
+{
+  "xml_id": "usticom:doc:1vvVo5ussHBPI6xM8nkwxuPAHoAHU8xZB:en",
+  "name": "HR Records Management Outsourcing from Scratch — Turnkey Service",
+  "code": "hr-records-management-from-scratch",
+  "active": "Y",
+  "hero_html": "<p>We will set up your HR records management to support the start of your work with employees and provide ongoing support for regular HR tasks. We prepare HR documents, employee files, timesheets, and local regulations. We establish a clear and structured process for managing HR documentation.</p>",
+  "short_html": "<p>The service is suitable for businesses that are starting to hire employees, changing their HR specialist, or transferring regular HR documentation to an external team. First, we collect the necessary initial information. We then prepare the required documents and establish a clear process for further HR administration.</p><p>We manage HR events, employee files, timesheets, and local regulations. If necessary, we assess the current state of HR records management and restore missing documents after analyzing the situation. We hand over the completed HR records base and continue providing ongoing support.</p><ul><li><strong>HR Documents</strong>: Hiring, transfers, termination, vacations, and sick leave</li><li><strong>Local Regulations</strong>: Staffing schedules, work schedules, and internal policies</li><li><strong>Ongoing HR Administration</strong>: Employee files, timesheets, and ongoing HR changes</li><li><strong>Consultations</strong>: HR records management and HR administration consultations</li></ul>",
+  "meta_title": "HR Records Management from Scratch in Moscow: Setup and Outsourced Management",
+  "meta_description": "We will set up your HR records management from scratch: prepare the necessary documents, onboard employees, and provide ongoing support. Submit your request.",
+  "source": "https://docs.google.com/document/d/1vvVo5ussHBPI6xM8nkwxuPAHoAHU8xZB/edit",
+  "reasons_title": "When You Need the Service",
+  "reasons": [
+    {
+      "title": "The company is hiring its first employees",
+      "text": "We prepare hiring documents, formalize employment relationships, and handle the basic set of HR documents."
+    },
+    {
+      "title": "No HR specialist on staff",
+      "text": "We provide ongoing support for regular personnel events and HR documentation."
+    },
+    {
+      "title": "Rapid workforce growth",
+      "text": "We support the management of orders, timesheets, vacations, and employee files."
+    },
+    {
+      "title": "Change of HR specialist",
+      "text": "We take over the existing documents, assess their current status, and continue HR records management."
+    },
+    {
+      "title": "HR records need to be restored",
+      "text": "After analyzing the situation, we prepare the missing documents and bring the HR records base into working order."
+    },
+    {
+      "title": "Local regulations are required",
+      "text": "We prepare staffing schedules, work schedules, policies, and other documents required for HR administration."
+    }
+  ],
+  "includes_title": "What Is Included in the Service",
+  "includes": [
+    {
+      "title": "",
+      "text": "We handle hiring, termination, transfers, vacations, and sick leave, and maintain documentation related to employee changes."
+    },
+    {
+      "title": "",
+      "text": "We prepare and maintain employee files, employment record books, and working time records."
+    },
+    {
+      "title": "",
+      "text": "We prepare staffing schedules, vacation schedules, internal work regulations, and job descriptions."
+    },
+    {
+      "title": "",
+      "text": "We assess the current state of HR records management and restore documents after analyzing the situation."
+    },
+    {
+      "title": "",
+      "text": "We provide consultations on HR records management and HR administration, and prepare documents for personnel-related matters."
+    }
+  ],
+  "workflow_title": "How the Work Is Carried Out",
+  "workflow": [
+    {
+      "title": "1. Discuss the task",
+      "text": "We clarify the number of employees, HR events, the current state of the documents, and the tasks to be transferred to our ongoing support."
+    },
+    {
+      "title": "2. Collect the necessary data",
+      "text": "We request the documents and information necessary to set up or continue HR records management."
+    },
+    {
+      "title": "3. Set up HR records management",
+      "text": "We organize the HR records base, local regulations, and documents related to ongoing personnel events."
+    },
+    {
+      "title": "4. Agree on the documents",
+      "text": "We submit the prepared documents for approval and clarify the employer’s decisions where necessary"
+    },
+    {
+      "title": "5. Provide ongoing support",
+      "text": "We continue handling personnel changes, timesheets, employee files, and consultations."
+    }
+  ],
+  "cost_intro": "The monthly cost of HR support depends on the number of employees. The page lists the rates for organizations with up to 15 employees.",
+  "prices": [
+    {
+      "name": "HR Records Management for up to 4 employees",
+      "note": "Monthly HR records management for the organization.",
+      "price": "RUB 5,000 per month"
+    },
+    {
+      "name": "HR Records Management for up to 10 employees",
+      "note": "Monthly HR records management for the organization.",
+      "price": "RUB 10,000 per month"
+    },
+    {
+      "name": "HR Records Management for up to 15 employees",
+      "note": "Monthly HR records management for the organization.",
+      "price": "RUB 18,000 per month"
+    }
+  ],
+  "price_from": "From RUB 5,000 per month",
+  "seo_badge": "HR Records Management Setup and Ongoing Support",
+  "seo_heading": "How to Prepare for Setting Up HR Records Management",
+  "detail_html": "<p>Setting up HR records management begins with the company&#x27;s actual situation. At the start, we determine the number of employees, the HR events that have already occurred, and the documents currently available. This information helps us build the HR records base and determine the appropriate course of action.</p><p>We prepare documents for hiring, transfers, vacations, termination, and other personnel changes. We prepare the staffing schedule, work schedules, internal work regulations, and job descriptions. Once the HR records management system is launched, we handle ongoing HR tasks.</p><p>If documents have already been prepared, we first review the existing archive. We then restore missing documents and records after analyzing the situation. The manager receives a clear and unified workflow, while the HR function is supported by a properly organized document base.</p>",
+  "faq_intro_html": "<p>We have collected the questions that arise before setting up HR records management. The answers help determine the initial data and the format for further work.</p>",
+  "faq": [
+    {
+      "question": "How does setting up HR records management begin?",
+      "answer": "<p>We start with the number of employees, HR events, and the current state of the documents. We then collect the information needed to assess the situation and prepare the HR records base. After that, we prepare the required documents and launch regular HR records management.</p>"
+    },
+    {
+      "question": "What is included in the initial set of HR documents?",
+      "answer": "<p>To start the process, we prepare the documents required to formalize employment relationships and organize the HR process: employment contracts, staffing schedules, internal work regulations, work schedules, and job descriptions. The exact set depends on the number of employees, working arrangements, and the company&#x27;s structure.</p>"
+    },
+    {
+      "question": "What should be done if HR documents were not maintained in full?",
+      "answer": "<p>First, we review the available documents and HR events. We then restore the missing documents and records after analyzing the situation. Once the documents have been restored, we establish a regular HR records management process.</p>"
+    },
+    {
+      "question": "Are documents from the employer required at the start?",
+      "answer": "<p>We need information about employees, HR events, and the company&#x27;s current documents. Based on this information, we prepare documents reflecting the actual working conditions. We determine the required initial data based on the specific task.</p>"
+    },
+    {
+      "question": "Can HR administration be transferred to ongoing support?",
+      "answer": "<p>Ongoing support is provided after HR records management has been set up. We handle personnel changes, employee files, timesheets, and local documents. The work is organized around the company&#x27;s current HR events.</p>"
+    },
+    {
+      "question": "How is setting up HR records management different from ongoing administration?",
+      "answer": "<p>Setting up HR records management creates an HR records base from scratch or brings existing documents into working order. Ongoing administration continues the process after launch: we document personnel changes and manage timesheets and employee files. These stages complement each other.</p>"
+    },
+    {
+      "question": "How is the cost of the service calculated?",
+      "answer": "<p>Monthly HR support rates are published for organizations with up to 15 employees. For setting up HR records management from scratch, we calculate the scope of work based on the required documents and HR events. The final service format is determined before the project begins.</p>"
+    }
+  ],
+  "hero_cards": [
+    {
+      "title": "Task",
+      "text": "Setting up and maintaining HR records on an ongoing basis"
+    },
+    {
+      "title": "Documents",
+      "text": "HR events, employee files, and timesheets"
+    },
+    {
+      "title": "Local Regulations",
+      "text": "Staffing schedule and internal policies"
+    },
+    {
+      "title": "Format",
+      "text": "HR documentation and personnel changes"
+    }
+  ],
+  "hero_cta_primary": "Submit a Request",
+  "hero_cta_secondary": "Discuss Your Needs"
+}

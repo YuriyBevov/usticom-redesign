@@ -14,21 +14,22 @@ $imageBase = SITE_TEMPLATE_PATH . "/components/bitrix/catalog/servises/_src/imag
 $detail = trim((string)($arResult["~DETAIL_TEXT"] ?? $arResult["DETAIL_TEXT"] ?? ""));
 $detailType = (string)($arResult["DETAIL_TEXT_TYPE"] ?? "text");
 
-$heroEyebrow = (string)($arResult["SECTION"]["NAME"] ?? "Услуги");
+$heroEyebrow = (string)($arResult["SECTION"]["NAME"] ?? usticomText("Услуги"));
 $heroPriceLink = $arResult['PRICE_SECTION_LINK'] ?? null;
 ?>
 
 
 <?php
-$heroTitle = $arResult["NAME"];
+$heroTitle = ($arResult["IPROPERTY_VALUES"]["ELEMENT_PAGE_TITLE"] ?? "") ?: $arResult["NAME"];
+$heroTizzersPreferredSectionId = (int)($arResult["PROPERTIES"]["HERO_TIZZERS"]["VALUE"] ?? 0);
 $heroDescription = $arResult["PREVIEW_TEXT"] ?? "";
 $heroDescriptionType = $arResult["PREVIEW_TEXT_TYPE"];
 
 $heroPicture = $picture ?: ["SRC" => $imageBase . "hero.png", "WIDTH" => 1086, "HEIGHT" => 1448];
-$heroPrimaryLabel = "Получить расчёт стоимости";
-$heroSecondaryLabel = "Контакты";
+$heroPrimaryLabel = ($arResult['PROPERTIES']['HERO_CTA_PRIMARY']['VALUE'] ?? '') ?: usticomText("Получить расчёт стоимости");
+$heroSecondaryLabel = ($arResult['PROPERTIES']['HERO_CTA_SECONDARY']['VALUE'] ?? '') ?: usticomText("Контакты");
 $heroPrimaryUrl = "#service-request";
-$heroSecondaryUrl = "/contacts/";
+$heroSecondaryUrl = SITE_DIR . "contacts/";
 
 include dirname(__DIR__, 3) . "/partials/detail-hero.php";
 ?>
@@ -37,8 +38,8 @@ include dirname(__DIR__, 3) . "/partials/detail-hero.php";
 	<section class="section section--bg-initial">
 		<div class="container">
 			<div class="section-header">
-				<div class="eyebrow">расскажем</div>
-				<h2 class="section-title">Коротко об услуге</h2>
+				<div class="eyebrow"><?= usticomText('расскажем') ?></div>
+				<h2 class="section-title"><?= usticomText('Коротко об услуге') ?></h2>
 			</div>
 			<div class="content-block"><?= $previewType === "html" ? $preview : nl2br(htmlspecialcharsbx($preview)) ?></div>
 		</div>
@@ -97,16 +98,17 @@ foreach (
 unset($GLOBALS[$compoundFilterName]);
 ?>
 
+<?php if (!usticomIsEnglish()): ?>
 <section class="section section--bg-initial profit">
 	<div class="container">
 		<div class="section-header">
-			<div class="eyebrow">плюсы и минусы</div>
-			<h2 class="section-title">Почему аутсорсинг — это выгодно</h2>
+			<div class="eyebrow"><?= usticomText('плюсы и минусы') ?></div>
+			<h2 class="section-title"><?= usticomText('Почему аутсорсинг — это выгодно') ?></h2>
 		</div>
 		<div class="profit__layout profit__layout--with-image">
 			<div class="profit__comparison">
 				<div class="profit__column profit__column--positive">
-					<h3>С аутсорсингом</h3>
+					<h3><?= usticomText('С аутсорсингом') ?></h3>
 					<?php $APPLICATION->IncludeFile(
 						SITE_TEMPLATE_PATH . "/components/bitrix/catalog/servises/partials/profit-positive.php",
 						[],
@@ -114,7 +116,7 @@ unset($GLOBALS[$compoundFilterName]);
 					); ?>
 				</div>
 				<div class="profit__column profit__column--negative">
-					<h3>Без аутсорсинга</h3>
+					<h3><?= usticomText('Без аутсорсинга') ?></h3>
 					<?php $APPLICATION->IncludeFile(
 						SITE_TEMPLATE_PATH . "/components/bitrix/catalog/servises/partials/profit-negative.php",
 						[],
@@ -130,6 +132,8 @@ unset($GLOBALS[$compoundFilterName]);
 	</div>
 </section>
 
+<?php endif; ?>
+
 <?php if ($arResult["PRICE_SECTION_IDS"]):
 $pricesFilterName = "servicePricesFilter_" . (int)$arResult["ID"];
 $GLOBALS[$pricesFilterName] = [
@@ -138,8 +142,9 @@ $GLOBALS[$pricesFilterName] = [
 	"SECTION_GLOBAL_ACTIVE" => "Y",
 ];
 $APPLICATION->IncludeComponent("bitrix:news.list", "pricelist", [
-	"IBLOCK_ID" => 22,
-	"FORM_THEME" => 'Заказать услугу: ' . $name,
+	"IBLOCK_ID" => usticomIblock('prices'),
+	"COST_INTRO" => $arResult['PROPERTIES']['COST_INTRO']['~VALUE']['TEXT'] ?? '',
+	"FORM_THEME" => usticomText('Заказать услугу: ') . $name,
 	"NEWS_COUNT" => 1000,
 	"FILTER_NAME" => $pricesFilterName,
 	"INCLUDE_SUBSECTIONS" => "Y",
@@ -164,6 +169,7 @@ $APPLICATION->IncludeComponent("bitrix:news.list", "pricelist", [
 unset($GLOBALS[$pricesFilterName]);
 endif; ?>
 
+<?php if (!usticomIsEnglish()): ?>
 <?php $APPLICATION->IncludeComponent("bitrix:news.list", "cases", [
 	"IBLOCK_TYPE" => "usticom_site_content",
 	"IBLOCK_ID" => 28,
@@ -242,12 +248,14 @@ endif; ?>
 ], $component, ["HIDE_ICONS" => "Y"]); ?>
 
 
+<?php endif; ?>
+
 <?php if ($detail !== ""): ?>
 	<section class="section">
 		<div class=" container">
 			<div class="section-header">
-				<div class="eyebrow">об услуге</div>
-				<h2 class="section-title">Подробно про услугу</h2>
+				<div class="eyebrow"><?= htmlspecialcharsbx(($arResult['PROPERTIES']['SEO_BADGE']['VALUE'] ?? '') ?: usticomText('об услуге')) ?></div>
+				<h2 class="section-title"><?= htmlspecialcharsbx(($arResult['PROPERTIES']['SEO_HEADING']['VALUE'] ?? '') ?: usticomText('Подробно про услугу')) ?></h2>
 			</div>
 			<div class="content-block"><?= $detailType === "html" ? $detail : nl2br(htmlspecialcharsbx($detail)) ?></div>
 		</div>
@@ -268,7 +276,7 @@ if ($faqIds):
 	$GLOBALS[$faqFilterName] = ["ID" => $faqIds];
 	$APPLICATION->IncludeComponent("bitrix:news.list", "faq", [
 		"IBLOCK_TYPE" => "usticom_site_content",
-		"IBLOCK_ID" => 26,
+		"IBLOCK_ID" => usticomIblock('faq'),
 		"NEWS_COUNT" => count($faqIds),
 		"FILTER_NAME" => $faqFilterName,
 		"CACHE_FILTER" => "Y",

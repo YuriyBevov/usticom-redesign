@@ -11,6 +11,9 @@ $label = preg_replace_callback(
 	$label,
 	1
 );
+if (usticomIsEnglish()) {
+    $label = 'By clicking the button, I accept the <a href="/privacy-policy/" target="_blank" rel="noopener">terms of the agreement (in Russian)</a>.';
+}
 ?>
 <label class="form-inline__consent">
 	<input type="checkbox" name="<?= htmlspecialcharsbx($arParams['INPUT_NAME']) ?>" value="Y" aria-required="true"<?= !empty($arParams['IS_INVALID']) ? ' aria-invalid="true"' : '' ?><?= $arParams['IS_CHECKED'] ? ' checked' : '' ?>>

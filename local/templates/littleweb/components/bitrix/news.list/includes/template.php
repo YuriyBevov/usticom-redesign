@@ -13,7 +13,7 @@ if (empty($arResult["INCLUDES"])) {
 		<ul class="includes-list">
 			<li class="includes-list__heading">
 				<div class="section-header">
-					<div class="eyebrow">узнайте о том</div>
+					<div class="eyebrow"><?= usticomText('узнайте о том') ?></div>
 					<?php if ($arResult["INCLUDES_MAIN_TITLE"] !== ""): ?>
 						<h2 class="section-title"><?= htmlspecialcharsbx($arResult["INCLUDES_MAIN_TITLE"]) ?></h2>
 					<?php endif; ?>

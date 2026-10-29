@@ -9,7 +9,7 @@ foreach ($moreSections as $section) {
     if ($section['SELECTED']) $moreSelected = true;
 }
 ?>
-<nav class="nav <?= $mobile ? 'mobile-menu__services' : 'header__nav' ?>" aria-label="Услуги">
+<nav class="nav <?= $mobile ? 'mobile-menu__services' : 'header__nav' ?>" aria-label="<?= usticomText('Услуги') ?>">
     <ul class="nav__list">
         <?php foreach ($visibleSections as $index => $section): ?>
             <?php $submenuId = $prefix . '-' . (int)$section['PARAMS']['SECTION_ID']; ?>
@@ -17,7 +17,7 @@ foreach ($moreSections as $section) {
                 <div class="nav__row">
                     <a class="nav__link" href="<?= htmlspecialcharsbx($section['LINK']) ?>"<?= $section['SELECTED'] ? ' aria-current="true"' : '' ?><?= !$mobile && $section['CHILDREN'] ? ' aria-expanded="false" aria-controls="' . $submenuId . '"' : '' ?>><?= htmlspecialcharsbx($section['TEXT']) ?></a>
                     <?php if ($mobile && $section['CHILDREN']): ?>
-                        <button class="nav__toggle" type="button" aria-label="<?= htmlspecialcharsbx('Услуги раздела «' . $section['TEXT'] . '»') ?>" aria-expanded="false" aria-controls="<?= $submenuId ?>">
+                        <button class="nav__toggle" type="button" aria-label="<?= htmlspecialcharsbx(usticomIsEnglish() ? 'Services: '.$section['TEXT'] : 'Услуги раздела «' . $section['TEXT'] . '»') ?>" aria-expanded="false" aria-controls="<?= $submenuId ?>">
                             <svg width="14" height="8" aria-hidden="true"><use href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-chevron-down"></use></svg>
                         </button>
                     <?php endif; ?>
@@ -36,8 +36,8 @@ foreach ($moreSections as $section) {
                         </div>
                         <?php if (!$mobile): ?>
                             <div class="nav__promotion">
-                                <div><strong>Не знаете с чего начать? Мы поможем.</strong><span>Ответим за 15 мин.</span></div>
-                                <a class="main-btn header__request" data-form-id="2" data-form-theme="Оставить заявку" data-header-request href="/local/ajax/popup_form.php?form_id=2">Оставить заявку</a>
+                                <div><strong><?= usticomText('Не знаете с чего начать? Мы поможем.') ?></strong><span><?= usticomText('Ответим за 15 мин.') ?></span></div>
+                                <a class="main-btn header__request" data-form-id="<?= usticomFormId(2) ?>" data-form-theme="<?= usticomText('Оставить заявку') ?>" data-header-request href="<?= usticomPopupUrl(2) ?>"><?= usticomText('Оставить заявку') ?></a>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -47,7 +47,7 @@ foreach ($moreSections as $section) {
         <?php if ($moreSections): ?>
             <li class="nav__list-item nav__list-item--parent nav__list-item--more<?= $moreSelected ? ' is-current' : '' ?>">
                 <div class="nav__row">
-                    <button class="nav__link nav__more-toggle" type="button" aria-expanded="false" aria-controls="desktop-services-more">Ещё...</button>
+                    <button class="nav__link nav__more-toggle" type="button" aria-expanded="false" aria-controls="desktop-services-more"><?= usticomText('Ещё...') ?></button>
                 </div>
                 <div class="nav__dropdown nav__dropdown--more" id="desktop-services-more">
                     <ul class="nav__sublist">

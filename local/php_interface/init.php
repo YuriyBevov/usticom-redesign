@@ -12,6 +12,7 @@ $vite = new ViteManifest('littleweb');
 
 // Подключаем все вспомогательные файлы
 $includesPath = $_SERVER['DOCUMENT_ROOT'] . '/local/php_interface/includes/';
+require_once $includesPath . 'language.php';
 require_once $includesPath . 'assets.php';
 require_once $includesPath . 'core.php';
 require_once $includesPath . 'tizzers.php';

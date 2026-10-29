@@ -4,7 +4,7 @@
 
 <?php if (!defined('ERROR_404') || ERROR_404 !== 'Y'): ?>
 	<?php $APPLICATION->IncludeComponent('bitrix:form.result.new', 'form-inline', [
-		'WEB_FORM_ID' => 5,
+		'WEB_FORM_ID' => usticomFormId(5),
 		'IGNORE_CUSTOM_TEMPLATE' => 'Y',
 		'USE_EXTENDED_ERRORS' => 'Y',
 		'CACHE_TYPE' => 'N',
@@ -32,7 +32,7 @@
 					array('MODE' => 'html', 'NAME' => 'логотип', 'SHOW_BORDER' => false)
 				); ?>
 
-				<small><span>© 2003—<?= Date("Y") ?> Юстиком.</span> <span>Все права защищены.</span></small>
+				<small><span>© 2003—<?= Date("Y") ?> <?= usticomText('Юстиком') ?>.</span> <span><?= usticomText('Все права защищены.') ?></span></small>
 			</div>
 			<div class="footer__top-section footer__top-section--menu-block">
 				<div class="footer__menu-column footer__menu-column--categories">
@@ -120,11 +120,11 @@
 				</div>
 			</div>
 			<div class="footer__top-section footer__top-section--contacts-block">
-				<button class="main-btn" type="button" data-form-id="2" data-form-theme="Оставить заявку">Оставить заявку</button>
+				<button class="main-btn" type="button" data-form-id="<?= usticomFormId(2) ?>" data-form-theme="<?= usticomText('Оставить заявку') ?>"><?= usticomText('Оставить заявку') ?></button>
 				<div class="footer__contacts">
 					<div class="footer__contacts-item">
 						<span class="footer__contacts-item-title">
-							Номер телефона
+							<?= usticomText('Номер телефона') ?>
 						</span>
 
 						<?
@@ -138,7 +138,7 @@
 
 					<div class="footer__contacts-item">
 						<span class="footer__contacts-item-title">
-							Почта
+							<?= usticomText('Почта') ?>
 						</span>
 
 						<?
@@ -152,7 +152,7 @@
 
 					<div class="footer__contacts-item">
 						<span class="footer__contacts-item-title">
-							Расположение
+							<?= usticomText('Расположение') ?>
 						</span>
 						<address>
 							<?

@@ -8,8 +8,8 @@ if (empty($arResult["PRICES"])) {
 	return;
 }
 $featuredIndex = (int)($arParams["FEATURED_INDEX"] ?? 2);
-$buttonText = (string)($arParams["BUTTON_TEXT"] ?? "Оставить заявку");
-$buttonUrl = (string)($arParams["BUTTON_URL"] ?? "/contacts/");
+$buttonText = (string)($arParams["BUTTON_TEXT"] ?? usticomText("Оставить заявку"));
+$buttonUrl = (string)($arParams["BUTTON_URL"] ?? (SITE_DIR . "contacts/"));
 ?>
 
 <section class="section section--bg-alternative pricelist">
@@ -17,13 +17,16 @@ $buttonUrl = (string)($arParams["BUTTON_URL"] ?? "/contacts/");
 		<?php $APPLICATION->IncludeFile(
 			SITE_TEMPLATE_PATH . "/include/section-header.php",
 			[
-				"EYEBROW_TEXT" => $arParams["EYEBROW_TEXT"] ?? "тарифы на услуги",
-				"TITLE" => htmlspecialcharsbx($arParams["SECTION_TITLE"] ?? "Стоимость"),
+				"EYEBROW_TEXT" => $arParams["EYEBROW_TEXT"] ?? usticomText("тарифы на услуги"),
+				"TITLE" => htmlspecialcharsbx($arParams["SECTION_TITLE"] ?? usticomText("Стоимость")),
 				"USE_SWIPER_NAVIGATION" => "N",
 			],
 			["MODE" => "html", "NAME" => "Шапка тарифов", "SHOW_BORDER" => true]
 		); ?>
-		<div class="pricelist__grid">
+		<?php if (!empty($arParams['~COST_INTRO'] ?? $arParams['COST_INTRO'] ?? '')): ?>
+        <div class="content-block"><?= $arParams['~COST_INTRO'] ?? $arParams['COST_INTRO'] ?></div>
+        <?php endif; ?>
+        <div class="pricelist__grid">
 			<?php foreach ($arResult["PRICES"] as $index => $price):
 				$this->AddEditAction($price["ID"], $price["EDIT_LINK"], CIBlock::GetArrayByID($price["IBLOCK_ID"], "ELEMENT_EDIT"));
 				$this->AddDeleteAction($price["ID"], $price["DELETE_LINK"], CIBlock::GetArrayByID($price["IBLOCK_ID"], "ELEMENT_DELETE"), ["CONFIRM" => "Удалить тариф?"]);
@@ -39,7 +42,7 @@ $buttonUrl = (string)($arParams["BUTTON_URL"] ?? "/contacts/");
 						<div class="price-card__price"><?= htmlspecialcharsbx($price["PRICE"]) ?></div>
 					<?php endif; ?>
 					<?php if ($buttonText !== "" && $buttonUrl !== ""): ?>
-						<a class="main-btn price-card__button"<?php if ($buttonUrl === "/contacts/"): ?> data-form-id="2" data-form-theme="<?= htmlspecialcharsbx(($arParams['~FORM_THEME'] ?? $arParams['FORM_THEME'] ?? 'Заказать услугу') . ($price['TITLE'] !== '' ? '. Тариф: ' . $price['TITLE'] : '')) ?>"<?php endif; ?> href="<?= htmlspecialcharsbx($buttonUrl) ?>"><?= htmlspecialcharsbx($buttonText) ?></a>
+						<a class="main-btn price-card__button"<?php if ($buttonUrl === SITE_DIR . "contacts/"): ?> data-form-id="<?= usticomFormId(2) ?>" data-form-theme="<?= htmlspecialcharsbx(($arParams['~FORM_THEME'] ?? $arParams['FORM_THEME'] ?? usticomText('Заказать услугу')) . ($price['TITLE'] !== '' ? usticomText('. Тариф: ') . $price['TITLE'] : '')) ?>"<?php endif; ?> href="<?= htmlspecialcharsbx($buttonUrl) ?>"><?= htmlspecialcharsbx($buttonText) ?></a>
 					<?php endif; ?>
 				</article>
 			<?php endforeach; ?>

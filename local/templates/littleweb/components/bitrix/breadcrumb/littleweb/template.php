@@ -9,17 +9,20 @@ if (defined("ERROR_404") && ERROR_404 === "Y") {
 	return "";
 }
 
+$siteRoot = defined('SITE_DIR') ? SITE_DIR : '/';
+$english = function_exists('usticomIsEnglish') && usticomIsEnglish();
 $currentPath = rtrim((string)parse_url($APPLICATION->GetCurPage(false), PHP_URL_PATH), "/");
 $items = [];
 foreach ($arResult as $item) {
 	$title = trim((string)($item["TITLE"] ?? ""));
+    if ($english && rtrim((string)($item["LINK"] ?? ""), "/") === "") continue;
 	if ($title !== "") {
 		$items[] = ["TITLE" => $title, "LINK" => (string)($item["LINK"] ?? "")];
 	}
 }
 
-if (!$items || rtrim((string)parse_url($items[0]["LINK"], PHP_URL_PATH), "/") !== "") {
-	array_unshift($items, ["TITLE" => "Главная", "LINK" => "/"]);
+if (!$items || rtrim((string)parse_url($items[0]["LINK"], PHP_URL_PATH), "/") !== rtrim($siteRoot, "/")) {
+	array_unshift($items, ["TITLE" => $english ? "Home" : "Главная", "LINK" => $siteRoot]);
 }
 
 $last = end($items);
@@ -31,7 +34,7 @@ if ($last["LINK"] !== "" && $lastPath !== $currentPath) {
 	}
 }
 
-$html = '<nav class="breadcrumbs" aria-label="Навигационная цепочка" itemscope itemtype="https://schema.org/BreadcrumbList"><div class="container"><ol class="breadcrumbs__list">';
+$html = '<nav class="breadcrumbs" aria-label="' . ($english ? 'Breadcrumbs' : 'Навигационная цепочка') . '" itemscope itemtype="https://schema.org/BreadcrumbList"><div class="container"><ol class="breadcrumbs__list">';
 $lastIndex = count($items) - 1;
 foreach ($items as $index => $item) {
 	$title = htmlspecialcharsbx($item["TITLE"]);

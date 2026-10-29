@@ -42,6 +42,7 @@ namespace {
             return new SectionRows(array_values($rows));
         }
     }
+    require_once __DIR__.'/../local/php_interface/includes/language.php';
     require __DIR__ . '/../local/php_interface/includes/service-price-links.php';
     $base = ['ACTIVE' => 'Y', 'GLOBAL_ACTIVE' => 'Y', 'READABLE' => true, 'DEPTH_LEVEL' => 1, 'LEFT_MARGIN' => 1, 'RIGHT_MARGIN' => 10];
     CIBlockSection::$rows = [

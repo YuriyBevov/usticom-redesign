@@ -1,6 +1,7 @@
 <?php
 if (PHP_SAPI !== 'cli') { http_response_code(404); exit; }
 define('B_PROLOG_INCLUDED', true);
+require_once __DIR__.'/../local/php_interface/includes/language.php';
 define('SITE_TEMPLATE_PATH', '/local/templates/littleweb');
 define('SITE_DIR', '/');
 if (in_array('--404', $argv, true)) define('ERROR_404', 'Y');

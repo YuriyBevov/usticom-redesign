@@ -131,6 +131,39 @@ class DeploymentTests(unittest.TestCase):
         self.assertFalse((self.root / 'include/title.php').exists())
         self.assertFalse((self.state / 'pending.json').exists())
 
+    def test_content_migrations_run_after_backup_and_code_installation(self):
+        original = self.subprocess
+        calls = []
+        def run(command, **kwargs):
+            if str(self.root / 'local/tools/migrate.php') in command:
+                self.assertTrue(self.called_backup)
+                self.assertEqual((self.root / 'index.php').read_text(), 'new code')
+                self.assertTrue((self.root / 'en/index.php').exists())
+                self.assertEqual(self.health_calls, 1)  # The pre-deployment check has already run.
+                self.assertIn('--apply', command)
+                calls.append(command)
+            return original(command, **kwargs)
+        remote.subprocess.run.side_effect = run
+        self.apply(self.artifact(code={'index.php': 'new code', 'en/index.php': '<?php',
+                                      'local/tools/migrate.php': '<?php'}))
+        self.assertEqual(len(calls), 1)
+
+    def test_failed_content_migration_restores_code_and_preserves_editor_content(self):
+        original = self.subprocess
+        def run(command, **kwargs):
+            if str(self.root / 'local/tools/migrate.php') in command:
+                self.assertTrue(self.called_backup)
+                self.put('en/include/address.php', 'manager edited address')
+                raise RuntimeError('Content migration failed')
+            return original(command, **kwargs)
+        remote.subprocess.run.side_effect = run
+        with self.assertRaisesRegex(RuntimeError, 'Content migration failed'):
+            self.apply(self.artifact(code={'index.php': 'new code', 'local/tools/migrate.php': '<?php'},
+                                     seeds={'en/include/address.php': 'initial address'}))
+        self.assertEqual((self.root / 'index.php').read_text(), 'old code')
+        self.assertEqual((self.root / 'en/include/address.php').read_text(), 'manager edited address')
+        self.assertFalse((self.state / 'pending.json').exists())
+
     def test_code_edited_during_first_backup_is_not_overwritten(self):
         original = self.subprocess
         def edit(command, **kwargs):
@@ -268,13 +301,16 @@ class PackagingPolicyTests(unittest.TestCase):
                      'services/index copy.php', 'local/templates/littleweb/include copy/logo.php',
                      '.top.menu.php', '.section.php', 'urlrewrite.php', 'robots.txt', 'sitemap.xml',
                      'local/tools/bind-service-price-sections.php', '.env', 'tests/prices-catalog.php',
-                     'local/templates/littleweb/include/about/title.php']:
+                     'local/templates/littleweb/include/about/title.php', 'en/.header_top.menu.php', 'en/include/address.php']:
             with self.subTest(name=name):
                 self.assertFalse(release.is_code(name, policy))
         for name in ['index.php', 'services/index.php', '.header_services.menu_ext.php',
                      'local/php_interface/init.php', 'local/ajax/popup_form.php',
                      'local/templates/littleweb/include/about/hero-section.php',
-                     'local/templates/littleweb/_src/images/inner-hero.png']:
+                     'local/templates/littleweb/_src/images/inner-hero.png', 'en/index.php', 'en/services/index.php',
+                     'en/contacts/index.php', 'en/.header_services.menu_ext.php', 'en/local/ajax/popup_form.php',
+                     'local/tools/migrate.php', 'local/migrations/20261029_01_services_en.php',
+                     'local/migrations/content/en-hr-outsourcing.json']:
             with self.subTest(name=name):
                 self.assertTrue(release.is_code(name, policy))
 

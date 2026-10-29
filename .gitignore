@@ -76,3 +76,6 @@ __pycache__/
 !/local/templates/littleweb/include/experiences/hero-section.php
 /local/templates/littleweb/include/company-info/main-logo.php
 /local/templates/littleweb/include/logo.php
+
+# English manager-editable fragments are initialized from deploy/defaults.
+/en/include/

@@ -89,7 +89,7 @@ def allowed_code(name):
         return False
     if path.name.endswith('.menu.php') or path.name == '.section.php' or name.startswith('include/'):
         return False
-    if name.startswith(('local/ajax/', 'local/php_interface/', 'local/templates/littleweb/')):
+    if name.startswith(('local/ajax/', 'local/php_interface/', 'local/templates/littleweb/', 'local/migrations/')):
         if name.startswith('local/templates/littleweb/include/'):
             relative = name[len('local/templates/littleweb/include/'):]
             if relative.startswith(('about/', 'experiences/')) and path.name not in ['hero-section.php', 'section.php']:
@@ -97,17 +97,17 @@ def allowed_code(name):
             if relative == 'logo.php' or relative.startswith('company-info/'):
                 return False
         return not any(' copy' in p.lower() for p in path.parts)
-    return name in ['index.php', '404.php', '.header_services.menu_ext.php', 'services/.left.menu_ext.php',
+    return name in ['index.php', '404.php', 'local/tools/migrate.php', 'en/404.php', 'en/.header_services.menu_ext.php', 'en/local/ajax/popup_form.php', '.header_services.menu_ext.php', 'services/.left.menu_ext.php',
                     'apple-touch-icon.png', 'favicon-96x96.png', 'favicon.ico', 'favicon.svg', 'site.webmanifest',
                     'web-app-manifest-192x192.png', 'web-app-manifest-512x512.png',
                     'googleec11afadb3f0f130.html', 'yandex_80117ee37bc7e26e.html'] or name in [
                         folder + '/index.php' for folder in ['about', 'cases', 'contacts', 'events', 'experiences',
-                        'news', 'partnership', 'prices', 'privacy-policy', 'publications', 'services', 'sitemap']]
+                        'news', 'partnership', 'prices', 'privacy-policy', 'publications', 'services', 'sitemap', 'en', 'en/services', 'en/contacts']]
 
 
 def allowed_seed(name):
     path = PurePosixPath(name)
-    return (name.startswith('include/') or path.name.endswith('.menu.php')
+    return (name.startswith(('include/', 'en/include/')) or path.name.endswith('.menu.php')
             or path.name == '.section.php' or name in ['urlrewrite.php', 'robots.txt'])
 
 
@@ -347,6 +347,9 @@ def apply(root, state, archive, plan=False):
                 atomic_bytes(path, (unpacked / 'code' / name).read_bytes(), 0o644)
             for name in deletes:
                 safe_path(root, name).unlink()
+            if 'local/tools/migrate.php' in incoming['code']:
+                subprocess.run([config.get('php', 'php'), '-d', 'short_open_tag=1',
+                                str(root / 'local/tools/migrate.php'), '--root=' + str(root), '--apply'], check=True)
             clear_cache(root, unpacked / 'ops', config)
             health(config, incoming['revision'])
             atomic_bytes(state / 'remote.py', (unpacked / 'ops/remote.py').read_bytes(), 0o600)

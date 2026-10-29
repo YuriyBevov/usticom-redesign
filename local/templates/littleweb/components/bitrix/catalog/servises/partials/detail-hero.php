@@ -4,11 +4,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 }
 
 $heroDescription = trim((string)$heroDescription);
-$heroPrimaryLabel = (string)($heroPrimaryLabel ?? "Оставить заявку");
+$heroPrimaryLabel = (string)($heroPrimaryLabel ?? usticomText("Оставить заявку"));
 $heroSecondaryLabel = (string)($heroSecondaryLabel ?? "Партнерская программа");
 $heroPrimaryUrl = (string)($heroPrimaryUrl ?? "");
 $heroSecondaryUrl = (string)($heroSecondaryUrl ?? "/partnership/");
-$heroFormTheme = 'Запросить расчёт стоимости: ' . html_entity_decode(strip_tags($heroTitle), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+$heroFormTheme = usticomText('Запросить расчёт стоимости: ') . html_entity_decode(strip_tags($heroTitle), ENT_QUOTES | ENT_HTML5, 'UTF-8');
 ?>
 <section class="section inner-hero">
 	<div class="container">
@@ -24,13 +24,13 @@ $heroFormTheme = 'Запросить расчёт стоимости: ' . html_e
 
 				<div class="btn-row">
 					<?php if ($heroPrimaryUrl !== ""): ?>
-						<a class="main-btn main-btn--size-lg" href="<?= htmlspecialcharsbx($heroPrimaryUrl) ?>" data-form-id="4" data-form-theme="<?= htmlspecialcharsbx($heroFormTheme) ?>"><?= htmlspecialcharsbx($heroPrimaryLabel) ?></a>
+						<a class="main-btn main-btn--size-lg" href="<?= htmlspecialcharsbx($heroPrimaryUrl) ?>" data-form-id="<?= usticomFormId(4) ?>" data-form-theme="<?= htmlspecialcharsbx($heroFormTheme) ?>"><?= htmlspecialcharsbx($heroPrimaryLabel) ?></a>
 					<?php else: ?>
-						<button class="main-btn main-btn--size-lg" type="button" data-form-id="4" data-form-theme="<?= htmlspecialcharsbx($heroFormTheme) ?>"><?= htmlspecialcharsbx($heroPrimaryLabel) ?></button>
+						<button class="main-btn main-btn--size-lg" type="button" data-form-id="<?= usticomFormId(4) ?>" data-form-theme="<?= htmlspecialcharsbx($heroFormTheme) ?>"><?= htmlspecialcharsbx($heroPrimaryLabel) ?></button>
 					<?php endif; ?>
 					<a class="main-btn main-btn--outlined main-btn--size-lg" href="<?= htmlspecialcharsbx($heroSecondaryUrl) ?>"><?= htmlspecialcharsbx($heroSecondaryLabel) ?></a>
 					<?php if (!empty($heroPriceLink)): ?>
-						<a class="main-btn main-btn--outlined main-btn--size-lg" data-linked-price-section href="<?= htmlspecialcharsbx($heroPriceLink['URL']) ?>">Стоимость услуг</a>
+						<a class="main-btn main-btn--outlined main-btn--size-lg" data-linked-price-section href="<?= htmlspecialcharsbx($heroPriceLink['URL']) ?>"><?= usticomText('Стоимость услуг') ?></a>
 					<?php endif; ?>
 				</div>
 			</div>
@@ -42,14 +42,14 @@ $heroFormTheme = 'Запросить расчёт стоимости: ' . html_e
 		</div>
 
 		<?php
-		$heroTizzersSectionId = getHeroTizzersSectionId((int)($heroTizzersPreferredSectionId ?? 0), 5158);
+		$heroTizzersSectionId = getHeroTizzersSectionId((int)($heroTizzersPreferredSectionId ?? 0), usticomIsEnglish() ? 0 : 5158, usticomIblock('tizzers'));
 		if ($heroTizzersSectionId > 0) {
 			$APPLICATION->IncludeComponent(
 				"bitrix:news.list",
 				"tizzers",
 				[
-					"IBLOCK_TYPE" => "usticom_site_content",
-					"IBLOCK_ID" => "29",
+					"IBLOCK_TYPE" => usticomIsEnglish() ? "usticom_site_content_en" : "usticom_site_content",
+					"IBLOCK_ID" => usticomIblock('tizzers'),
 					"PARENT_SECTION" => $heroTizzersSectionId,
 					"INCLUDE_SUBSECTIONS" => "N",
 					"STRICT_SECTION_CHECK" => "Y",

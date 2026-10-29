@@ -9,7 +9,7 @@ final class UsticomInlineFormConsent
 	private static bool $accepted = false;
 	private static function handles($formId): bool
 	{
-		return (int)$formId === 5 || (defined('USTICOM_MODAL_FORM_ID') && (int)$formId === USTICOM_MODAL_FORM_ID);
+		return (int)$formId === 5 || (usticomIsEnglish() && (int)$formId === usticomFormId(5)) || (defined('USTICOM_MODAL_FORM_ID') && (int)$formId === USTICOM_MODAL_FORM_ID);
 	}
 
 	public static function beforeResultAdd($formId, array &$fields, array &$values): void
@@ -20,13 +20,13 @@ final class UsticomInlineFormConsent
 
 		self::$accepted = false;
 		if (($values['form_inline_consent'] ?? '') !== 'Y') {
-			$GLOBALS['APPLICATION']->ThrowException('Необходимо принять условия соглашения.');
+			$GLOBALS['APPLICATION']->ThrowException(usticomText('Необходимо принять условия соглашения.'));
 			return;
 		}
 
 		$agreement = new Agreement(1);
 		if (!$agreement->isExist() || !$agreement->isActive()) {
-			$GLOBALS['APPLICATION']->ThrowException('Соглашение временно недоступно. Попробуйте отправить заявку позже.');
+			$GLOBALS['APPLICATION']->ThrowException(usticomText('Соглашение временно недоступно. Попробуйте отправить заявку позже.'));
 			return;
 		}
 

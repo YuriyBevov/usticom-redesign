@@ -1,3 +1,4 @@
+const uiText = (ru, en) => document.documentElement?.lang === "en" ? en : ru;
 import customSelect from "custom-select";
 import IMask from "imask";
 
@@ -6,7 +7,7 @@ const showInlineFeedback = (status, message, modal = false) => {
 	document.querySelector(".form-inline-result")?.close();
 	const dialog = document.createElement("dialog");
 	dialog.className = "form-inline-result";
-	const title = status === "success" ? "Заявка отправлена" : "Не удалось отправить заявку";
+	const title = status === "success" ? uiText("Заявка отправлена", "Request sent") : uiText("Не удалось отправить заявку", "Request could not be sent");
 	dialog.setAttribute("aria-label", title);
 	const heading = document.createElement("h2");
 	heading.textContent = title;
@@ -15,7 +16,7 @@ const showInlineFeedback = (status, message, modal = false) => {
 	const close = document.createElement("button");
 	close.className = "main-btn main-btn--size-lg";
 	close.type = "button";
-	close.textContent = "Закрыть";
+	close.textContent = uiText("Закрыть", "Close");
 	close.addEventListener("click", () => dialog.close());
 	dialog.addEventListener("close", () => dialog.remove(), { once: true });
 	dialog.addEventListener("click", (event) => {
@@ -60,7 +61,7 @@ const initInlineForms = () => {
 		});
 
 		form.querySelectorAll('[data-kind="phone"] input').forEach((input) => {
-			IMask(input, { mask: "+{7}(000)000-00-00" });
+			if (document.documentElement?.lang !== "en") IMask(input, { mask: "+{7}(000)000-00-00" });
 		});
 
 		const validate = (field) => {
@@ -74,7 +75,7 @@ const initInlineForms = () => {
 				const value = control.value.trim();
 				const empty = ["checkbox", "radio"].includes(control.type) ? !controls.some((input) => input.checked) : !value;
 				invalid = required && empty;
-				if (value && field.dataset.kind === "phone" && !/^7\d{10}$/.test(value.replace(/\D/g, ""))) invalid = true;
+				if (value && field.dataset.kind === "phone" && !(document.documentElement?.lang === "en" ? /^\d{7,15}$/ : /^7\d{10}$/).test(value.replace(/\D/g, ""))) invalid = true;
 				if (value && (control.type === "email" || field.dataset.kind === "email") && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) invalid = true;
 				if (control.validity && !control.validity.valid) invalid = true;
 			}
@@ -109,7 +110,7 @@ const initInlineForms = () => {
 					timer: setTimeout(() => {
 						const modal = controller.pending?.modal;
 						finishInlineRequest();
-						showInlineFeedback("error", "Сервер не подтвердил отправку. Проверьте соединение и попробуйте ещё раз.", modal);
+						showInlineFeedback("error", uiText("Сервер не подтвердил отправку. Проверьте соединение и попробуйте ещё раз.", "The server did not confirm your request. Check your connection and try again."), modal);
 					}, 30000),
 				};
 				return;
@@ -123,7 +124,7 @@ const initInlineForms = () => {
 	const pending = window.UsticomInlineForm?.pending;
 	if (pending && !pending.form.isConnected) {
 		finishInlineRequest();
-		showInlineFeedback("error", "Не удалось получить подтверждение от сервера. Попробуйте отправить заявку ещё раз.", pending.modal);
+		showInlineFeedback("error", uiText("Не удалось получить подтверждение от сервера. Попробуйте отправить заявку ещё раз.", "We could not get confirmation from the server. Please try sending your request again."), pending.modal);
 	}
 };
 

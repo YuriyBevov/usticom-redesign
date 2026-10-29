@@ -6,6 +6,7 @@ if (PHP_SAPI !== "cli") {
 }
 
 define("B_PROLOG_INCLUDED", true);
+require_once __DIR__.'/../local/php_interface/includes/language.php';
 define("SITE_TEMPLATE_PATH", "/local/templates/littleweb");
 
 function check(bool $condition, string $message): void

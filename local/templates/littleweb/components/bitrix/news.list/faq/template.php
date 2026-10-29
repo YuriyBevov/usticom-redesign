@@ -22,15 +22,15 @@ if (!$faqItems) {
 	return;
 }
 
-$description = trim((string)($arParams["FAQ_DESCRIPTION"] ?? ""));
-$descriptionType = (string)($arParams["FAQ_DESCRIPTION_TYPE"] ?? "text");
+$description = trim((string)($arParams["~FAQ_DESCRIPTION"] ?? $arParams["FAQ_DESCRIPTION"] ?? ""));
+$descriptionType = strtolower((string)($arParams["FAQ_DESCRIPTION_TYPE"] ?? "text"));
 ?>
 <section class="section section--bg-initial faq-section">
 	<div class="container faq-section__grid">
 		<div class="faq-section__intro">
 			<div class="section-header">
-				<div class="eyebrow">вопросы и ответы</div>
-				<h2 class="section-title">Частые вопросы</h2>
+				<div class="eyebrow"><?= usticomText('вопросы и ответы') ?></div>
+				<h2 class="section-title"><?= usticomText('Частые вопросы') ?></h2>
 			</div>
 			<?php if ($description !== ""): ?>
 				<div class="faq-section__description"><?= $descriptionType === "html" ? $description : nl2br(htmlspecialcharsbx($description)) ?></div>

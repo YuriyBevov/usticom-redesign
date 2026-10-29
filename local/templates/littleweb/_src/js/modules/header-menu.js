@@ -1,3 +1,4 @@
+const uiText = (ru, en) => document.documentElement?.lang === "en" ? en : ru;
 import { gsap } from "gsap";
 
 const initHeaderMenu = () => {
@@ -145,7 +146,7 @@ const initHeaderMenu = () => {
             closing = true;
             afterClose = callback;
             toggle.setAttribute("aria-expanded", "false");
-            toggle.setAttribute("aria-label", "Открыть меню");
+            toggle.setAttribute("aria-label", uiText("Открыть меню", "Open menu"));
             if (reducedMotion.matches || timeline.progress() === 0) {
                 timeline.pause(0);
                 finishClose();
@@ -163,7 +164,7 @@ const initHeaderMenu = () => {
             menu.inert = false;
             menu.setAttribute("aria-hidden", "false");
             toggle.setAttribute("aria-expanded", "true");
-            toggle.setAttribute("aria-label", "Закрыть меню");
+            toggle.setAttribute("aria-label", uiText("Закрыть меню", "Close menu"));
             lockPage();
             if (reducedMotion.matches) timeline.progress(1).pause();
             else timeline.play();
@@ -198,7 +199,7 @@ const initHeaderMenu = () => {
                 timeline.pause(0);
                 mobileOpen = false;
                 toggle.setAttribute("aria-expanded", "false");
-                toggle.setAttribute("aria-label", "Открыть меню");
+                toggle.setAttribute("aria-label", uiText("Открыть меню", "Open menu"));
                 finishClose();
             }
         }, true);
@@ -228,7 +229,7 @@ const initHeaderMenu = () => {
                 timeline.pause(0);
                 mobileOpen = false;
                 toggle.setAttribute("aria-expanded", "false");
-                toggle.setAttribute("aria-label", "Открыть меню");
+                toggle.setAttribute("aria-label", uiText("Открыть меню", "Open menu"));
                 afterClose = null;
                 finishClose();
             }
