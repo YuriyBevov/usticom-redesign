@@ -6,21 +6,21 @@
       <div class="inner-hero__grid-item inner-hero__grid-item--content">
         <div class="eyebrow">
           <? $APPLICATION->IncludeFile(
-            SITE_TEMPLATE_PATH . $arParams["EYEBROW_PATH"],
+            SITE_DIR . ltrim($arParams["EYEBROW_PATH"], "/"),
             array(),
             array('MODE' => 'html', 'NAME' => 'Надпись над заголовком', 'SHOW_BORDER' => true)
           ); ?>
         </div>
         <h1 class="inner-hero__title">
           <? $APPLICATION->IncludeFile(
-            SITE_TEMPLATE_PATH . $arParams["TITLE_PATH"],
+            SITE_DIR . ltrim($arParams["TITLE_PATH"], "/"),
             array(),
             array('MODE' => 'html', 'NAME' => 'Заголовок', 'SHOW_BORDER' => true)
           ); ?>
         </h1>
         <p class="inner-hero__text">
           <? $APPLICATION->IncludeFile(
-            SITE_TEMPLATE_PATH . $arParams["TEXT_PATH"],
+            SITE_DIR . ltrim($arParams["TEXT_PATH"], "/"),
             array(),
             array('MODE' => 'html', 'NAME' => 'Текст', 'SHOW_BORDER' => true)
           ); ?>
@@ -28,7 +28,7 @@
 
         <div class="btn-row">
           <? $APPLICATION->IncludeFile(
-            SITE_TEMPLATE_PATH . $arParams["BUTTONS_PATH"],
+            SITE_DIR . ltrim($arParams["BUTTONS_PATH"], "/"),
             array(),
             array('MODE' => 'html', 'NAME' => 'Кнопки', 'SHOW_BORDER' => true)
           ); ?>
@@ -38,7 +38,7 @@
       <div class="inner-hero__grid-item inner-hero__grid-item--picture" aria-hidden="true">
         <?
         $APPLICATION->IncludeFile(
-          SITE_TEMPLATE_PATH . $arParams["IMG_PATH"],
+          SITE_DIR . ltrim($arParams["IMG_PATH"], "/"),
           array(),
           array('MODE' => 'html', 'NAME' => 'Изображение', 'SHOW_BORDER' => true)
         ); ?>

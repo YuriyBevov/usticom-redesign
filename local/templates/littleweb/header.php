@@ -23,7 +23,7 @@
   <header class="header" data-site-header>
     <div class="container header__inner">
       <a class="main-logo header__logo" href="/" aria-label="Юстиком — главная">
-        <? $APPLICATION->IncludeFile(SITE_TEMPLATE_PATH . '/include/company-info/main-logo.php', [], ['MODE' => 'html', 'NAME' => 'Логотип', 'SHOW_BORDER' => false]); ?>
+        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/company-info/main-logo.php', [], ['MODE' => 'html', 'NAME' => 'Логотип', 'SHOW_BORDER' => false]); ?>
       </a>
       <?php $headerMenuView = 'desktop';
       include __DIR__ . '/include/header-services.php'; ?>
@@ -51,7 +51,7 @@
     <div class="mobile-menu__panel">
       <div class="mobile-menu__header">
         <a class="main-logo mobile-menu__logo" href="/" aria-label="Юстиком — главная">
-          <? $APPLICATION->IncludeFile(SITE_TEMPLATE_PATH . '/include/company-info/main-logo.php', [], ['MODE' => 'html', 'NAME' => 'Логотип', 'SHOW_BORDER' => false]); ?>
+          <? $APPLICATION->IncludeFile(SITE_DIR . 'include/company-info/main-logo.php', [], ['MODE' => 'html', 'NAME' => 'Логотип', 'SHOW_BORDER' => false]); ?>
         </a>
         <div class="mobile-menu__actions">
           <?php $headerSocialFilter = ['tg', 'max'];

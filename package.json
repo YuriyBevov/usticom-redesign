@@ -12,7 +12,8 @@
 		"build": "vite build",
 		"watch": "vite build --watch",
 		"create": "node create-project.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"setup:content": "python3 deploy/seed-local.py",
+		"test": "python3 deploy/check.py"
 	},
 	"dependencies": {
 		"@fancyapps/ui": "^5.0.36",

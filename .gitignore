@@ -12,7 +12,6 @@ lerna-debug.log*
 /include
 !/include/
 /include/*
-!/include/worktime.php
 /upload
 /cache/
 /node_modules/
@@ -37,3 +36,43 @@ create-project.js
 *.sln
 *.sw?
 *.tgz
+
+# Environment settings and backups
+.env
+.env.*
+!.env.example
+*.sql
+*.sql.gz
+*.sql.zip
+*.tar
+*.tar.gz
+*.zip
+/backups/
+/.deploy/
+/local/.settings.php
+/local/.settings_extra.php
+/local/php_interface/dbconn.php
+__pycache__/
+*.pyc
+
+# Built in CI, shipped in the release archive
+/local/templates/littleweb/_dist/
+
+# Mutable site content. Initial values live in deploy/defaults/.
+*.menu.php
+!deploy/defaults/**/*.menu.php
+.section.php
+!deploy/defaults/**/.section.php
+/urlrewrite.php
+/robots.txt
+/sitemap*.xml
+
+# Legacy editable fragments: retained on existing servers, never deployed.
+/local/templates/littleweb/include/about/*.php
+!/local/templates/littleweb/include/about/hero-section.php
+/local/templates/littleweb/include/about/company-experience/*.php
+!/local/templates/littleweb/include/about/company-experience/section.php
+/local/templates/littleweb/include/experiences/*.php
+!/local/templates/littleweb/include/experiences/hero-section.php
+/local/templates/littleweb/include/company-info/main-logo.php
+/local/templates/littleweb/include/logo.php
