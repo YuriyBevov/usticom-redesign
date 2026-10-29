@@ -48,12 +48,12 @@ def backup(root, destination, php='php'):
                                      '--', connection['database']], stdout=output, stderr=subprocess.PIPE)
         if result.returncode or not raw.stat().st_size:
             raise RuntimeError('Database dump failed; deployment stopped. Check DB backup privileges on server.')
-        with raw.open('rb') as source, gzip.open(destination / 'database.sql.gz', 'wb') as output:
+        with raw.open('rb') as source, gzip.open(destination / 'database.sql.gz', 'wb', compresslevel=1) as output:
             shutil.copyfileobj(source, output)
     # Back up CMS files as well as uploads: sufficient to restore the original site with code.tar.gz.
     # Existing cache trees can be regenerated and are intentionally omitted.
     skipped = {'cache', 'managed_cache', 'stack_cache', 'html_pages', 'tmp', 'backup'}
-    with tarfile.open(destination / 'content.tar.gz', 'w:gz', dereference=False) as archive:
+    with tarfile.open(destination / 'content.tar.gz', 'w:gz', dereference=False, compresslevel=1) as archive:
         for top in ['include', 'upload', 'bitrix', 'local/templates/littleweb/include',
                     'local/.settings.php', 'local/.settings_extra.php', 'local/php_interface/dbconn.php',
                     '.htaccess', '.access.php', 'urlrewrite.php', 'robots.txt']:

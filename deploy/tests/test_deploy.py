@@ -315,6 +315,18 @@ class BackupTests(unittest.TestCase):
 
 
 class HealthTests(unittest.TestCase):
+    def test_backup_progress_reports_and_stops_on_error(self):
+        import time
+        output=io.StringIO()
+        with contextlib.redirect_stdout(output), self.assertRaisesRegex(RuntimeError, 'fixture'):
+            with remote.backup_progress(interval=0.01):
+                time.sleep(0.04)
+                raise RuntimeError('fixture')
+        after=output.getvalue()
+        self.assertIn('application code has not been changed',after)
+        time.sleep(0.03)
+        self.assertEqual(output.getvalue(),after)
+
     def test_php_error_in_http_200_is_a_failed_health_check(self):
         import http.server
         import threading
