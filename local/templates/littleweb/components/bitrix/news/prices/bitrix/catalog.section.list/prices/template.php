@@ -3,6 +3,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 	die();
 }
 $this->setFrameMode(true);
+$this->getComponent()->setResultCacheKeys(['SERVICE_SECTION_LINK']);
 $categories = $arResult["PRICE_CATEGORIES"];
 $isSection = ($arParams["IS_SECTION"] ?? "N") === "Y";
 $groupsLimit = max(0, (int)($arParams["GROUPS_LIMIT"] ?? 4));

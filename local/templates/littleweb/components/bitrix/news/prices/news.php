@@ -23,5 +23,6 @@ $APPLICATION->IncludeComponent("bitrix:catalog.section.list", "prices", [
 	"CACHE_TYPE" => $arParams["CACHE_TYPE"],
 	"CACHE_TIME" => $arParams["CACHE_TIME"],
 	"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
-	"ADD_SECTIONS_CHAIN" => $isPriceSection ? "Y" : "N",
+	// The template epilog builds the price section's chain on cache hits too.
+	"ADD_SECTIONS_CHAIN" => "N",
 ], $component, ["HIDE_ICONS" => "Y"]);
