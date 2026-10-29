@@ -95,6 +95,9 @@ class CIBlock
 
 class PriceTemplate
 {
+	public array $cacheKeys = [];
+	public function getComponent(): self { return $this; }
+	public function setResultCacheKeys(array $keys): void { $this->cacheKeys = array_merge($this->cacheKeys, $keys); }
 	public function setFrameMode($value): void {}
 	public function AddEditAction(...$args): void {}
 	public function AddDeleteAction(...$args): void {}
@@ -186,7 +189,9 @@ check(!str_contains($html, 'prices-catalog__section-description'), "Описан
 
 $GLOBALS['testLinkedServiceSections'][$sections[0]['ID']] = ['ID' => 666, 'NAME' => 'Юридические услуги', 'URL' => '/lawyer/'];
 $linkedResult = buildPrices(array_values(array_filter($sections, static fn($section) => ($section['IBLOCK_SECTION_ID'] ?? 0) === 10)), $sections[0]);
-$linkedHtml = (new PriceTemplate())->render($linkedResult, ['IBLOCK_ID' => 22, 'IS_SECTION' => 'Y', 'GROUPS_LIMIT' => 0]);
+$linkedTemplate = new PriceTemplate();
+$linkedHtml = $linkedTemplate->render($linkedResult, ['IBLOCK_ID' => 22, 'IS_SECTION' => 'Y', 'GROUPS_LIMIT' => 0]);
+check(in_array('SERVICE_SECTION_LINK', $linkedTemplate->cacheKeys, true), 'Связанное направление должно сохраняться для эпилога при попадании в кеш');
 check(str_contains($linkedHtml, 'data-linked-service-section href="/lawyer/"'), 'Страница прайса должна ссылаться на связанное направление услуг');
 check(!str_contains($sectionHtml, 'data-linked-service-section') && !str_contains($html, 'data-linked-service-section'), 'Без связи кнопка не должна выводиться');
 unset($GLOBALS['testLinkedServiceSections']);

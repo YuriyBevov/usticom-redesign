@@ -9,4 +9,11 @@ if (($arParams["IS_SECTION"] ?? "N") === "Y") {
 		return;
 	}
 	$APPLICATION->SetTitle($arResult["SECTION"]["~NAME"] ?? $arResult["SECTION"]["NAME"]);
+	$service = $arResult['SERVICE_SECTION_LINK'] ?? null;
+	if ($service) {
+		$APPLICATION->AddChainItem($service['NAME'], $service['URL']);
+		$APPLICATION->AddChainItem('Стоимость', '');
+	} else {
+		$APPLICATION->AddChainItem($arResult['SECTION']['~NAME'] ?? $arResult['SECTION']['NAME'], '');
+	}
 }
