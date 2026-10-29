@@ -27,7 +27,7 @@
 		<div class="container">
 			<div class="footer__top-section footer__top-section--logo-block">
 				<? $APPLICATION->IncludeFile(
-					SITE_TEMPLATE_PATH . '/include/logo.php',
+					SITE_DIR . 'include/logo.php',
 					array(),
 					array('MODE' => 'html', 'NAME' => 'логотип', 'SHOW_BORDER' => false)
 				); ?>
