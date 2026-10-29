@@ -61,6 +61,14 @@ def load_json(path, default=None):
     return json.loads(path.read_text()) if path.exists() else default
 
 
+def unlink_if_exists(path):
+    # pathlib.unlink(missing_ok=True) requires Python 3.8; Timeweb also runs 3.6.
+    try:
+        path.unlink()
+    except FileNotFoundError:
+        pass
+
+
 def public_dirs(path, mode=0o755, group=None):
     missing = []
     current = path
@@ -82,7 +90,7 @@ def allowed_code(name):
         return False
     if name.startswith(('local/ajax/', 'local/php_interface/', 'local/templates/littleweb/')):
         if name.startswith('local/templates/littleweb/include/'):
-            relative = name.removeprefix('local/templates/littleweb/include/')
+            relative = name[len('local/templates/littleweb/include/'):]
             if relative.startswith(('about/', 'experiences/')) and path.name not in ['hero-section.php', 'section.php']:
                 return False
             if relative == 'logo.php' or relative.startswith('company-info/'):
@@ -197,7 +205,7 @@ def restore_code(root, state, backup):
     before = load_json(backup / 'before.json')
     for name in before['absent']:
         path = safe_path(root, name)
-        path.unlink(missing_ok=True)
+        unlink_if_exists(path)
     with tarfile.open(backup / 'code.tar.gz', 'r:gz') as archive:
         for member in archive:
             if not member.isfile() or member.name not in before['paths']:
@@ -218,7 +226,7 @@ def seed_content(root, unpacked, incoming, config):
             existing = safe_path(root, spec['legacy'])
             if existing.is_file():
                 source = existing
-        public_dirs(target.parent, 0o2775, group)
+        public_dirs(target.parent, 0o2775 if group is not None else 0o755, group)
         # Publish a complete file exclusively; preserve a concurrent editor's file.
         handle, temporary = tempfile.mkstemp(prefix='.deploy-content-', dir=target.parent)
         try:
@@ -228,7 +236,7 @@ def seed_content(root, unpacked, incoming, config):
                 os.fsync(output.fileno())
             if group is not None:
                 os.chown(temporary, -1, group)
-            os.chmod(temporary, 0o664)
+            os.chmod(temporary, 0o664 if group is not None else 0o644)
             os.link(temporary, target)
         except FileExistsError:
             pass
@@ -358,7 +366,7 @@ def recover(root, state, manual=False):
     config = load_json(state / 'config.json')
     clear_cache(root, backup / 'ops', config)
     health(config, 'rollback')
-    (state / 'pending.json').unlink(missing_ok=True)
+    unlink_if_exists(state / 'pending.json')
     if manual:
         (state / 'last-success.json').unlink()
     print('Previous code restored. Database and editor content preserved.')

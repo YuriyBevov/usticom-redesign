@@ -31,6 +31,12 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
+      - name: Test Timeweb Python 3.6 compatibility
+        run: |
+          docker run --rm --user "$(id -u):$(id -g)" \
+            --volume "$PWD:/workspace:ro" --workdir /workspace \
+            --env PYTHONDONTWRITEBYTECODE=1 python:3.6.15-slim \
+            python -m unittest discover -s deploy/tests -v
       - run: python3 deploy/release.py --output /tmp/usticom-release.tar.gz
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:

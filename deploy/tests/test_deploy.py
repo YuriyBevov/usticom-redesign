@@ -4,6 +4,7 @@ import gzip
 import io
 import json
 import os
+import shutil
 from pathlib import Path
 import stat
 import subprocess
@@ -241,6 +242,14 @@ class DeploymentTests(unittest.TestCase):
         finally:
             os.umask(previous)
         self.assertEqual(stat.S_IMODE((self.root / 'new/nested').stat().st_mode), 0o755)
+        self.assertEqual(stat.S_IMODE((self.root / 'include/about').stat().st_mode), 0o755)
+        self.assertEqual(stat.S_IMODE((self.root / 'include/about/title.php').stat().st_mode), 0o644)
+
+    def test_explicit_private_php_group_gets_content_write_permissions(self):
+        import grp
+        self.config['content_group'] = grp.getgrgid(os.getgid()).gr_name
+        remote.write_json(self.state / 'config.json', self.config)
+        self.apply(self.artifact(seeds={'include/about/title.php': 'title'}))
         self.assertEqual(stat.S_IMODE((self.root / 'include/about').stat().st_mode), 0o2775)
         self.assertEqual(stat.S_IMODE((self.root / 'include/about/title.php').stat().st_mode), 0o664)
 
@@ -274,6 +283,7 @@ class BackupTests(unittest.TestCase):
     def test_mysql_option_values_escape_quotes_and_newlines(self):
         self.assertEqual(backup.mysql_quote('a"b\nc\\d'), '"a\\"b\\nc\\\\d"')
 
+    @unittest.skipUnless(shutil.which('php'), 'PHP CLI is tested in the main CI job')
     def test_backup_contains_database_uploads_and_settings_but_no_cache_or_credentials_tempfile(self):
         with tempfile.TemporaryDirectory() as temporary:
             work = Path(temporary).resolve()

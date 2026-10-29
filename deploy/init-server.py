@@ -21,7 +21,8 @@ def initialize(root, state, url, group, php):
         raise RuntimeError('Provide the real HTTPS origin')
     if not shutil.which(php) or not (shutil.which('mariadb-dump') or shutil.which('mysqldump')):
         raise RuntimeError('PHP CLI and mariadb-dump/mysqldump are required')
-    grp.getgrnam(group)
+    if group:
+        grp.getgrnam(group)
     subprocess.run([php, '-r', 'exit(PHP_VERSION_ID >= 80200 ? 0 : 1);'], check=True)
     with locked(state):
         if (state / 'config.json').exists():
@@ -44,7 +45,7 @@ if __name__ == '__main__':
     parser.add_argument('--root', required=True)
     parser.add_argument('--state', required=True)
     parser.add_argument('--url', required=True)
-    parser.add_argument('--web-group', required=True)
+    parser.add_argument('--web-group', help='Dedicated PHP group; omit when PHP runs as the hosting account owner')
     parser.add_argument('--php', default='php')
     args = parser.parse_args()
     initialize(args.root, args.state, args.url, args.web_group, args.php)
