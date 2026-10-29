@@ -14,6 +14,7 @@ import shutil
 import subprocess
 import tarfile
 import tempfile
+import threading
 import time
 import urllib.parse
 import urllib.request
@@ -119,6 +120,21 @@ def locked(state):
         except BlockingIOError:
             raise RuntimeError('Another deployment is running')
         yield
+
+
+@contextmanager
+def backup_progress(interval=20):
+    stopped = threading.Event()
+    def report():
+        while not stopped.wait(interval):
+            print('Backup is still running; application code has not been changed.', flush=True)
+    thread = threading.Thread(target=report, daemon=True)
+    thread.start()
+    try:
+        yield
+    finally:
+        stopped.set()
+        thread.join()
 
 
 def unpack(archive, destination):
@@ -313,9 +329,10 @@ def apply(root, state, archive, plan=False):
         stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ') + '-' + incoming['revision'][:12]
         backup = state / 'backups' / stamp
         snapshot(root, backup, sorted(set(writes + deletes)), previous)
-        subprocess.run([config.get('python', 'python3'), str(unpacked / 'ops/backup.py'),
-                        '--root', str(root), '--destination', str(backup / 'data'),
-                        '--php', config.get('php', 'php')], check=True)
+        with backup_progress():
+            subprocess.run([config.get('python', 'python3'), str(unpacked / 'ops/backup.py'),
+                            '--root', str(root), '--destination', str(backup / 'data'),
+                            '--php', config.get('php', 'php')], check=True)
         # Refuse server edits that happened while the backup was running.
         check_drift(root, previous)
         check_snapshot(root, backup)

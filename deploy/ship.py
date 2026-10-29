@@ -19,7 +19,9 @@ def ship(archive, command):
     for path in [root, state]:
         if not re.fullmatch(r'/[A-Za-z0-9_./-]+', path) or '..' in Path(path).parts:
             raise RuntimeError('Use absolute server paths without spaces or shell characters')
-    ssh = ['ssh', '-p', port, '-o', 'BatchMode=yes', '-o', 'StrictHostKeyChecking=yes', user + '@' + host]
+    ssh = ['ssh', '-p', port, '-o', 'BatchMode=yes', '-o', 'StrictHostKeyChecking=yes',
+           '-o', 'ConnectTimeout=15', '-o', 'ServerAliveInterval=15', '-o', 'ServerAliveCountMax=4',
+           user + '@' + host]
     def run(*arguments):
         subprocess.run(ssh + [shlex.join(arguments)], check=True)
     if command in ['apply', 'plan']:
