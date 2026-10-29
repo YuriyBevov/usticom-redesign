@@ -33,7 +33,7 @@ jobs:
       - run: npm test
       - name: Test Timeweb Python 3.6 compatibility
         run: |
-          docker run --rm --user "$(id -u):$(id -g)" \
+          docker run --rm --user nobody:nogroup \
             --volume "$PWD:/workspace:ro" --workdir /workspace \
             --env PYTHONDONTWRITEBYTECODE=1 python:3.6.15-slim \
             python -m unittest discover -s deploy/tests -v
