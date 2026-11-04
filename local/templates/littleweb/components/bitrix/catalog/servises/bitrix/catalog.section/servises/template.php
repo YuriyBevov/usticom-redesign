@@ -17,10 +17,11 @@ $heroPicture = $arResult["HERO_PICTURE"] ?: [
 include dirname(__DIR__, 3) . "/partials/hero.php";
 ?>
 
+<?php if ($arResult["GRID_ITEMS"]): ?>
 <section class="section section--bg-initial service-section">
 	<div class="container">
 		<div class="service-section__grid">
-			<?php foreach ($arResult["ITEMS"] as $item):
+			<?php foreach ($arResult["GRID_ITEMS"] as $item):
 				$this->AddEditAction($item["ID"], $item["EDIT_LINK"] ?? "", CIBlock::GetArrayByID($item["IBLOCK_ID"], "ELEMENT_EDIT"));
 				$this->AddDeleteAction($item["ID"], $item["DELETE_LINK"] ?? "", CIBlock::GetArrayByID($item["IBLOCK_ID"], "ELEMENT_DELETE"), ["CONFIRM" => "Удалить услугу?"]);
 				$url = (string)($item["~DETAIL_PAGE_URL"] ?? $item["DETAIL_PAGE_URL"]);
@@ -43,6 +44,7 @@ include dirname(__DIR__, 3) . "/partials/hero.php";
 		</div>
 	</div>
 </section>
+<?php endif; ?>
 
 <section class="section section--bg-initial consultation">
 	<div class="container">
@@ -116,6 +118,39 @@ if ($description !== ""):
 		</div>
 	</section>
 <?php endif; ?>
+
+<?php if ($arResult["SLIDER_SERVICE_IDS"]):
+	$sliderFilterName = "serviceSectionSliderFilter_" . (int)$arResult["ID"];
+	$GLOBALS[$sliderFilterName] = ["ID" => $arResult["SLIDER_SERVICE_IDS"]];
+	$APPLICATION->IncludeComponent("bitrix:news.list", "related-slider", [
+		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+		"IBLOCK_ID" => (int)$arParams["IBLOCK_ID"],
+		"NEWS_COUNT" => count($arResult["SLIDER_SERVICE_IDS"]),
+		"FILTER_NAME" => $sliderFilterName,
+		"CACHE_FILTER" => "Y",
+		"CACHE_TYPE" => $arParams["CACHE_TYPE"],
+		"CACHE_TIME" => $arParams["CACHE_TIME"],
+		"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+		"SORT_BY1" => "SORT",
+		"SORT_ORDER1" => "ASC",
+		"SORT_BY2" => "ID",
+		"SORT_ORDER2" => "ASC",
+		"FIELD_CODE" => ["NAME"],
+		"PROPERTY_CODE" => [],
+		"CHECK_DATES" => "Y",
+		"INCLUDE_SUBSECTIONS" => "N",
+		"DETAIL_URL" => $arParams["DETAIL_URL"],
+		"SET_TITLE" => "N",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"DISPLAY_TOP_PAGER" => "N",
+		"DISPLAY_BOTTOM_PAGER" => "N",
+		"EYEBROW_TEXT" => "Больше услуг",
+		"SECTION_TITLE" => "Другие услуги раздела",
+		"SECTION_CLASS" => "section--bg-initial service-section-other-services",
+	], $component, ["HIDE_ICONS" => "Y"]);
+	unset($GLOBALS[$sliderFilterName]);
+endif; ?>
 
 <?php foreach ($arResult["FAQ_GROUPS"] as $group):
 	$faqFilterName = "serviceSectionFaqFilter_" . (int)$arResult["ID"] . "_" . $group["IBLOCK_ID"];

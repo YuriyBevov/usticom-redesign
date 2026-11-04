@@ -2,7 +2,7 @@
 if (PHP_SAPI !== 'cli') { http_response_code(404); exit; }
 define('SITE_DIR', '/');
 define('SITE_TEMPLATE_PATH', '/local/templates/littleweb');
-function getHeroTizzersSectionId(...$args): int { return 0; }
+function includeHeroTizzers(...$args): void {}
 class SharedContentApplication {
     public array $paths = [];
     public function IncludeFile(string $path, ...$args): void {

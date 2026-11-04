@@ -2,8 +2,11 @@
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 $mobile = ($arParams['VIEW_MODE'] ?? '') === 'mobile';
 $prefix = $mobile ? 'mobile-services' : 'desktop-services';
-$visibleSections = $mobile ? $arResult : array_slice($arResult, 0, 5);
-$moreSections = $mobile ? [] : array_slice($arResult, 5);
+if (!$mobile) {
+    $arResult = array_values(array_filter($arResult, static fn($section) => !empty($section['PARAMS']['SHOW_IN_DESKTOP_MENU'])));
+}
+$visibleSections = $mobile ? $arResult : array_slice($arResult, 0, 7);
+$moreSections = $mobile ? [] : array_slice($arResult, 7);
 $moreSelected = false;
 foreach ($moreSections as $section) {
     if ($section['SELECTED']) $moreSelected = true;
