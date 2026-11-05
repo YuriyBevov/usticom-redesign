@@ -17,7 +17,7 @@ $APPLICATION->IncludeComponent(
 		"SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"] ?? "",
 		"SECTION_URL" => (string)CIBlock::GetArrayByID((int)$arParams["IBLOCK_ID"], "SECTION_PAGE_URL"),
 		"DETAIL_URL" => (string)CIBlock::GetArrayByID((int)$arParams["IBLOCK_ID"], "DETAIL_PAGE_URL"),
-		"PROPERTY_CODE" => array_values(array_unique(array_merge((array)($arParams["DETAIL_PROPERTY_CODE"] ?? []), ["RELATED_SECTIONS", "FAQ_PREVIEW_TEXT", "FAQ_LINKED", "PRICES"]))),
+		"PROPERTY_CODE" => array_values(array_unique(array_merge((array)($arParams["DETAIL_PROPERTY_CODE"] ?? []), ["RELATED_SECTIONS", "FAQ_PREVIEW_TEXT", "FAQ_LINKED", "PRICES", "HERO_TIZZERS", "SEO_EYEBROW", "SEO_TITLE"]))),
 		"SET_TITLE" => "Y",
 		"SET_BROWSER_TITLE" => "Y",
 		"SET_META_DESCRIPTION" => "Y",

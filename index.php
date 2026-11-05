@@ -21,42 +21,7 @@ $APPLICATION->SetTitle("Услуги аутсорсинга в Москве, а�
 			</div>
 
 			<div class="hero__grid-item hero__grid-item--features">
-				<?
-				$indexHeroTizzersSectionId = getHeroTizzersSectionId(5157);
-
-				if ($indexHeroTizzersSectionId > 0) {
-					$APPLICATION->IncludeComponent(
-						"bitrix:news.list",
-						"tizzers",
-						[
-							"IBLOCK_TYPE" => "usticom_site_content",
-							"IBLOCK_ID" => "29",
-							"PARENT_SECTION" => $indexHeroTizzersSectionId,
-							"INCLUDE_SUBSECTIONS" => "N",
-							"STRICT_SECTION_CHECK" => "Y",
-							"NEWS_COUNT" => "4",
-							"SORT_BY1" => "SORT",
-							"SORT_ORDER1" => "ASC",
-							"SORT_BY2" => "ID",
-							"SORT_ORDER2" => "ASC",
-							"FIELD_CODE" => ["NAME", "PREVIEW_TEXT"],
-							"PROPERTY_CODE" => [],
-							"DISPLAY_NAME" => "Y",
-							"DISPLAY_PREVIEW_TEXT" => "Y",
-							"DISPLAY_PICTURE" => "N",
-							"CHECK_DATES" => "Y",
-							"CACHE_TYPE" => "A",
-							"CACHE_TIME" => "36000000",
-							"CACHE_GROUPS" => "Y",
-							"SET_TITLE" => "N",
-							"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-							"ADD_SECTIONS_CHAIN" => "N",
-						],
-						false,
-						["HIDE_ICONS" => "Y"]
-					);
-				}
-				?>
+				<?php includeHeroTizzers(); ?>
 
 				<div aria-hidden="true" class="hero__side-image-block">
 					<img src="<?= SITE_TEMPLATE_PATH . '/_src/images/hero-back-img.png' ?>" alt="" width="400" height="540">

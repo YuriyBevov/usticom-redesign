@@ -1,6 +1,11 @@
 @use "./detail";
 @use "./profit";
 
+// Temporarily hide the link to the price section while keeping its binding and markup.
+.inner-hero [data-linked-price-section] {
+	display: none;
+}
+
 .services-list {
 	scroll-margin-top: 24px;
 

@@ -13,6 +13,8 @@ $imageBase = SITE_TEMPLATE_PATH . "/components/bitrix/catalog/servises/_src/imag
 
 $detail = trim((string)($arResult["~DETAIL_TEXT"] ?? $arResult["DETAIL_TEXT"] ?? ""));
 $detailType = (string)($arResult["DETAIL_TEXT_TYPE"] ?? "text");
+$seoEyebrow = trim((string)($arResult["PROPERTIES"]["SEO_EYEBROW"]["~VALUE"] ?? $arResult["PROPERTIES"]["SEO_EYEBROW"]["VALUE"] ?? "")) ?: "об услуге";
+$seoTitle = trim((string)($arResult["PROPERTIES"]["SEO_TITLE"]["~VALUE"] ?? $arResult["PROPERTIES"]["SEO_TITLE"]["VALUE"] ?? "")) ?: "Подробно про услугу";
 
 $heroEyebrow = (string)($arResult["SECTION"]["NAME"] ?? "Услуги");
 $heroPriceLink = $arResult['PRICE_SECTION_LINK'] ?? null;
@@ -69,31 +71,24 @@ unset($GLOBALS[$reasonsFilterName]);
 ?>
 
 <?php
-$compoundFilterName = "serviceCompoundFilter";
+$compoundFilterName = "serviceIncludesFilter";
 $GLOBALS[$compoundFilterName] = ["ID" => (int)$arResult["ID"]];
-foreach (
-	[
-		"includes" => ["INCLUDES", "INCLUDES_MAIN_TITLE"],
-		"workflow" => ["WORKFLOW", "WORKFLOW_MAIN_TITLE"],
-	] as $templateName => $properties
-) {
-	$APPLICATION->IncludeComponent("bitrix:news.list", $templateName, [
-		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-		"IBLOCK_ID" => (int)$arResult["IBLOCK_ID"],
-		"NEWS_COUNT" => 1,
-		"FILTER_NAME" => $compoundFilterName,
-		"CACHE_FILTER" => "Y",
-		"CACHE_TYPE" => $arParams["CACHE_TYPE"],
-		"CACHE_TIME" => $arParams["CACHE_TIME"],
-		"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
-		"FIELD_CODE" => ["ID"],
-		"PROPERTY_CODE" => $properties,
-		"CHECK_DATES" => "Y",
-		"SET_TITLE" => "N",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"ADD_SECTIONS_CHAIN" => "N",
-	], $component, ["HIDE_ICONS" => "Y"]);
-}
+$APPLICATION->IncludeComponent("bitrix:news.list", "includes", [
+	"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+	"IBLOCK_ID" => (int)$arResult["IBLOCK_ID"],
+	"NEWS_COUNT" => 1,
+	"FILTER_NAME" => $compoundFilterName,
+	"CACHE_FILTER" => "Y",
+	"CACHE_TYPE" => $arParams["CACHE_TYPE"],
+	"CACHE_TIME" => $arParams["CACHE_TIME"],
+	"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+	"FIELD_CODE" => ["ID"],
+	"PROPERTY_CODE" => ["INCLUDES", "INCLUDES_MAIN_TITLE"],
+	"CHECK_DATES" => "Y",
+	"SET_TITLE" => "N",
+	"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+	"ADD_SECTIONS_CHAIN" => "N",
+], $component, ["HIDE_ICONS" => "Y"]);
 unset($GLOBALS[$compoundFilterName]);
 ?>
 
@@ -129,6 +124,28 @@ unset($GLOBALS[$compoundFilterName]);
 		</div>
 	</div>
 </section>
+
+<?php
+$compoundFilterName = "serviceWorkflowFilter";
+$GLOBALS[$compoundFilterName] = ["ID" => (int)$arResult["ID"]];
+$APPLICATION->IncludeComponent("bitrix:news.list", "workflow", [
+	"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+	"IBLOCK_ID" => (int)$arResult["IBLOCK_ID"],
+	"NEWS_COUNT" => 1,
+	"FILTER_NAME" => $compoundFilterName,
+	"CACHE_FILTER" => "Y",
+	"CACHE_TYPE" => $arParams["CACHE_TYPE"],
+	"CACHE_TIME" => $arParams["CACHE_TIME"],
+	"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+	"FIELD_CODE" => ["ID"],
+	"PROPERTY_CODE" => ["WORKFLOW", "WORKFLOW_MAIN_TITLE"],
+	"CHECK_DATES" => "Y",
+	"SET_TITLE" => "N",
+	"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+	"ADD_SECTIONS_CHAIN" => "N",
+], $component, ["HIDE_ICONS" => "Y"]);
+unset($GLOBALS[$compoundFilterName]);
+?>
 
 <?php if ($arResult["PRICE_SECTION_IDS"]):
 $pricesFilterName = "servicePricesFilter_" . (int)$arResult["ID"];
@@ -246,8 +263,8 @@ endif; ?>
 	<section class="section">
 		<div class=" container">
 			<div class="section-header">
-				<div class="eyebrow">об услуге</div>
-				<h2 class="section-title">Подробно про услугу</h2>
+				<div class="eyebrow"><?= htmlspecialcharsbx($seoEyebrow) ?></div>
+				<h2 class="section-title"><?= htmlspecialcharsbx($seoTitle) ?></h2>
 			</div>
 			<div class="content-block"><?= $detailType === "html" ? $detail : nl2br(htmlspecialcharsbx($detail)) ?></div>
 		</div>

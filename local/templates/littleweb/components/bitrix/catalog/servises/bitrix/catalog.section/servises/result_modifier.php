@@ -16,6 +16,8 @@ $arResult["FAQ_DESCRIPTION_TYPE"] = is_array($faqText) ? strtolower((string)($fa
 $picture = $arResult["PICTURE"] ?? false;
 $arResult["HERO_PICTURE"] = is_array($picture) ? $picture : ($picture ? CFile::GetFileArray((int)$picture) : false);
 
+$arResult["GRID_ITEMS"] = [];
+$arResult["SLIDER_SERVICE_IDS"] = [];
 foreach ($arResult["ITEMS"] as &$item) {
 	$price = $item["PROPERTIES"]["SERVICE_PRICE_FROM"]["~VALUE"] ?? $item["PROPERTIES"]["SERVICE_PRICE_FROM"]["VALUE"] ?? "";
 	if (is_array($price)) {
@@ -33,8 +35,16 @@ foreach ($arResult["ITEMS"] as &$item) {
 		}
 		$item["PRICE_TEXT"] = "от " . $price . " ₽";
 	}
+
+	$sliderValues = (array)($item["PROPERTIES"]["SHOW_IN_SLIDER_ON_LISTING_PAGE"]["VALUE_XML_ID"] ?? []);
+	if (in_array("Y", $sliderValues, true)) {
+		$arResult["SLIDER_SERVICE_IDS"][] = (int)$item["ID"];
+	} else {
+		$arResult["GRID_ITEMS"][] = $item;
+	}
 }
 unset($item);
+$arResult["SLIDER_SERVICE_IDS"] = array_values(array_unique($arResult["SLIDER_SERVICE_IDS"]));
 
 $linkedDocsIds = array_values(array_unique(array_filter(
 	array_map("intval", (array)($arResult["UF_LINKED_DOCS"] ?? [])),
