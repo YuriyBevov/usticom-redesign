@@ -1,6 +1,10 @@
 @use "@scss/base/container-queries" as *;
 
 .news-detail {
+	&__content {
+		text-align: justify;
+	}
+
 	&__tag-slider {
 		width: 100%;
 		max-width: 100%;
