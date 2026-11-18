@@ -98,7 +98,7 @@ unset($GLOBALS[$compoundFilterName]);
 			<div class="eyebrow">плюсы и минусы</div>
 			<h2 class="section-title">Почему аутсорсинг — это выгодно</h2>
 		</div>
-		<div class="profit__layout profit__layout--with-image">
+		<div class="profit__layout">
 			<div class="profit__comparison">
 				<div class="profit__column profit__column--positive">
 					<h3>С аутсорсингом</h3>
@@ -118,8 +118,17 @@ unset($GLOBALS[$compoundFilterName]);
 				</div>
 				<span class="profit__vs" aria-hidden="true">VS</span>
 			</div>
-			<div class="profit__image">
-				<img src="<?= SITE_TEMPLATE_PATH ?>/_src/images/content-image/profit-img.png" width="420" height="278" alt="До 30% снижения операционных затрат и до 40% повышения эффективности" loading="lazy">
+			<div class="profit__benefits">
+				<ul class="profit__metrics">
+					<li class="profit__metric">
+						<p class="profit__value"><span>до</span> <strong>30%</strong></p>
+						<p class="profit__caption">снижение<br>операционных затрат</p>
+					</li>
+					<li class="profit__metric">
+						<p class="profit__value"><span>до</span> <strong>40%</strong></p>
+						<p class="profit__caption">повышение<br>эффективности</p>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
