@@ -120,7 +120,8 @@
 	}
 
 	&__image {
-		display: none;
+		display: block;
+		justify-self: center;
 		width: min(420px, 100%);
 		min-width: 0;
 		overflow: hidden;
@@ -154,10 +155,6 @@
 
 		&__column--negative {
 			padding-left: 69px;
-		}
-
-		&__image {
-			display: block;
 		}
 	}
 

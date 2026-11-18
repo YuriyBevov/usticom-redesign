@@ -58,9 +58,9 @@ if ($description === "") {
 				$this->AddEditAction($item["ID"], $item["EDIT_LINK"], CIBlock::GetArrayByID($item["IBLOCK_ID"], "ELEMENT_EDIT"));
 				$this->AddDeleteAction($item["ID"], $item["DELETE_LINK"], CIBlock::GetArrayByID($item["IBLOCK_ID"], "ELEMENT_DELETE"), ["CONFIRM" => GetMessage("CT_BNL_ELEMENT_DELETE_CONFIRM")]);
 			?>
-				<li class="partnership__country" id="<?= $this->GetEditAreaId($item["ID"]) ?>">
+				<li class="partnership__country<?= $flag === "" ? " partnership__country--without-flag" : "" ?>" id="<?= $this->GetEditAreaId($item["ID"]) ?>">
 					<?php if ($flag !== ""): ?><img src="<?= htmlspecialcharsbx($flag) ?>" width="40" height="40" alt="" loading="lazy"><?php endif; ?>
-					<span><?= htmlspecialcharsbx($name) ?></span>
+					<span class="partnership__country-name"><?= htmlspecialcharsbx($name) ?></span>
 				</li>
 			<?php endforeach; ?>
 		</ul>
